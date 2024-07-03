@@ -7,7 +7,6 @@ export default function BlobAnimation() {
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
         version="1.1"
-        preserveAspectRatio="slice"
         className="w-[100%] h-auto md:scale-[1.3] lg:scale-[1.1]"
       >
         <g transform="translate(130.92430436440475 156.27216058863814)">
