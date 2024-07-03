@@ -44,19 +44,17 @@ const defaultUrl = process.env.NEXT_PUBLIC_BASE_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "UniClass",
-  // description:
-  //   "De beste tentamen trainingen om gegarandeerd je tentamen te halen",
+  description: "Hoge kwaliteit tentamentraining voor een eerlijke prijs",
   openGraph: {
     title: "UniClass",
-    description: "The React Framework for the Web",
+    description: "Hoge kwaliteit tentamentraining voor een eerlijke prijs",
     url: "https://uniclass.nl",
     siteName: "UniClass",
     images: [
       {
-        url: "/illustrations/logo.png",
-        width: 1834,
-        height: 475,
+        url: "/testimg.jpeg",
+        width: 325,
+        height: 325,
       },
     ],
     locale: "nl_NL",
