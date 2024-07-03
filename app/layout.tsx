@@ -38,8 +38,8 @@ const poppins = localFont({
   display: "swap",
 });
 
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
+const defaultUrl = process.env.NEXT_PUBLIC_BASE_URL
+  ? `https://${process.env.NEXT_PUBLIC_BASE_URL}`
   : "http://localhost:3000";
 
 export const metadata = {
@@ -47,6 +47,21 @@ export const metadata = {
   title: "UniClass",
   // description:
   //   "De beste tentamen trainingen om gegarandeerd je tentamen te halen",
+  openGraph: {
+    title: "UniClass",
+    description: "The React Framework for the Web",
+    url: "https://uniclass.nl",
+    siteName: "UniClass",
+    images: [
+      {
+        url: "/illustrations/logo.png",
+        width: 1834,
+        height: 475,
+      },
+    ],
+    locale: "nl_NL",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
