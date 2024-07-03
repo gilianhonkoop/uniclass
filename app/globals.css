@@ -1,0 +1,257 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 200 20% 98%;
+    --btn-background: 200 10% 91%;
+    --btn-background-hover: 200 10% 89%;
+    --foreground: 200 50% 3%;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: 200 50% 3%;
+      --btn-background: 200 10% 9%;
+      --btn-background-hover: 200 10% 12%;
+      --foreground: 200 20% 96%;
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-foreground/20;
+  }
+}
+
+.animate-in {
+  animation: animateIn 0.3s ease 0.15s both;
+}
+
+@keyframes animateIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+/* h1 {
+  font-size: 68.66px;
+  letter-spacing: -1.6px;
+  line-height: 1.2;
+} */
+
+h1 {
+  font-size: max(44px, 3.5vw);
+  letter-spacing: -1.6px;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 54.93px;
+  /* letter-spacing: 1.6px; */
+}
+
+h3 {
+  font-size: 43.95px;
+}
+
+h4 {
+  font-size: 35.16px;
+}
+
+h5 {
+  font-size: 28.12px;
+}
+
+h6 {
+  font-size: 22.5px;
+}
+
+p {
+  font-size: 18px;
+}
+
+.spacer {
+  aspect-ratio: 960/200;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.layer1 {
+  background-image: url("../waves/wave1.svg");
+}
+
+.layer2 {
+  background-image: url("../waves/wave2.svg");
+}
+
+.bluegr {
+  background: linear-gradient(
+    to top right,
+    rgba(122, 167, 255, 0.32),
+    rgba(245, 246, 247, 1) 25%,
+    rgba(245, 246, 247, 1) 75%,
+    rgba(122, 167, 255, 0.32)
+  );
+}
+
+.spantext {
+  position: relative;
+  height: 96px;
+}
+
+.spantext::before {
+  content: "Economics";
+  /* color: #e141b9; */
+  color: #ff9412;
+  animation: words 20s infinite;
+}
+
+.spantext::after {
+  content: "";
+  position: absolute;
+  width: calc(100% + 8px);
+  height: 90%;
+  /* background-color: #4169e1; */
+  background-color: #fbfbfa;
+  border-left: 2px solid #ff9412;
+  right: -8px;
+  top: 10px;
+  animation:
+    cursor 0.8s infinite,
+    typing 20s steps(14) infinite;
+}
+
+@keyframes cursor {
+  to {
+    border-left: 2px solid #fbfbfa;
+  }
+}
+
+@keyframes words {
+  0%,
+  20% {
+    content: "Statistics";
+  }
+  21%,
+  40% {
+    content: "Accounting";
+  }
+  41%,
+  60% {
+    content: "Economics";
+  }
+  61%,
+  80% {
+    content: "Finance";
+  }
+  81%,
+  100% {
+    content: "Business";
+  }
+}
+
+@keyframes typing {
+  10%,
+  15%,
+  30%,
+  35%,
+  50%,
+  55%,
+  70%,
+  75%,
+  90%,
+  95% {
+    width: 0;
+  }
+  5%,
+  20%,
+  25%,
+  40%,
+  45%,
+  60%,
+  65%,
+  80%,
+  85% {
+    width: calc(100% + 8px);
+  }
+}
+
+.waves {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  margin-bottom: -7px;
+}
+
+.parralax > use {
+  animation: move-wave 40s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
+
+.parralax > use:nth-child(1) {
+  animation-delay: -4s;
+  animation-duration: 9s;
+}
+.parralax > use:nth-child(2) {
+  animation-delay: -5s;
+  animation-duration: 17s;
+}
+.parralax > use:nth-child(3) {
+  animation-delay: -15s;
+  animation-duration: 25s;
+}
+.parralax > use:nth-child(4) {
+  animation-delay: -20s;
+  animation-duration: 35s;
+}
+
+@keyframes move-wave {
+  0% {
+    transform: translate3d(-90px, 0, 0);
+  }
+  100% {
+    transform: translate3d(85px, 0, 0);
+  }
+}
+
+.bracket-arrow {
+  animation: opasc 3s ease-in-out infinite;
+  opacity: 70%;
+  transform: scaleY(1.5);
+  /* scale: 0.5; */
+}
+
+@keyframes opasc {
+  0% {
+    /* scale: 0.7; */
+    opacity: 0%;
+    /* transform: scaleY(1.5); */
+  }
+  50% {
+    /* scale: 0.75; */
+    opacity: 80%;
+    /* transform: scaleY(1.7); */
+  }
+  100% {
+    /* scale: 0.7; */
+    /* transform: scaleY(1.5); */
+    opacity: 0%;
+  }
+}
