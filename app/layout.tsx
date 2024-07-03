@@ -52,9 +52,9 @@ export const metadata = {
     siteName: "UniClass",
     images: [
       {
-        url: "/testimg.jpeg",
-        width: 325,
-        height: 325,
+        url: "/logo.png",
+        width: 1834,
+        height: 475,
       },
     ],
     locale: "nl_NL",
