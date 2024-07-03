@@ -18,6 +18,8 @@ export default function Page() {
     language = lan.value;
   }
 
+  console.log("test");
+
   return (
     <div className="w-full bg-white flex flex-col">
       <Navbar setLanguage={setLanguage} />
