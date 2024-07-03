@@ -44,8 +44,9 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "ZwoeleNaam - bijles",
-  description: "De beste trainingen om gegarandeerd je tentamen te halen",
+  title: "UniClass",
+  // description:
+  //   "De beste tentamen trainingen om gegarandeerd je tentamen te halen",
 };
 
 export default function RootLayout({
