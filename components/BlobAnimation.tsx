@@ -1,5 +1,4 @@
 "use client";
-import KUTE from "kute.js";
 import { useEffect } from "react";
 
 export default function BlobAnimation() {
