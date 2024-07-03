@@ -44,7 +44,7 @@ export default async function Index() {
   }
 
   return (
-    <div className="snap-start animate-in flex-1 w-full flex flex-col h-screen relative items-center bg-white">
+    <div className="animate-in flex-1 w-full flex flex-col h-screen relative items-center bg-white">
       <Navbar setLanguage={setLanguage} />
       <div className=" flex-1 flex flex-col items-center relative w-full sm:mt-[0rem] mt-[5rem]">
         <section className="bg-test-bg w-full h-full min-h-[calc(100vh-80px)] drop-shadow-md flex flex-col">
@@ -158,7 +158,7 @@ export default async function Index() {
           </div>
         </section>
 
-        <section className="snap-start z-0 w-full h-full min-h-[calc(100vh-120px)] lg:py-0 py-20 flex-col lg:flex-row flex justify-center items-center">
+        <section className="z-0 w-full h-full min-h-[calc(100vh-120px)] lg:py-0 py-20 flex-col lg:flex-row flex justify-center items-center">
           <div className="max-w-[40rem] w-full h-full flex justify-center items-center mx-5 lg:mt-5">
             <div className="min-h-[30rem] w-full max-w-[25rem] flex flex-col">
               <div className="flex flex-1 relative">

@@ -1,6 +1,3 @@
-"use client";
-import { useEffect } from "react";
-
 export default function BlobAnimation() {
   return (
     <div className="h-500px">

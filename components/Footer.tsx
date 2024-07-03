@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Page({ language }: { language: any }) {
   return (
-    <footer className="snap-start w-full p-8 flex flex-col items-center justify-center text-center bg-test2-orange gap-[3vh]">
+    <footer className="w-full p-8 flex flex-col items-center justify-center text-center bg-test2-orange gap-[3vh]">
       <div className="max-w-2xl w-full h-[10rem] pt-[4rem] flex items-start justify-evenly">
         <ul className="flex flex-col max-w-[251px] w-full font-light">
           {language == "nl" && (

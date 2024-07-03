@@ -15,7 +15,7 @@ export default function Page() {
   return (
     <div className="bg-white">
       <Navbar setLanguage={setLanguage} />
-      <section className="snap-end px-[2rem] md:px-[5rem] xl:px-[15rem] w-full min-h-full flex items-center justify-center">
+      <section className="px-[2rem] md:px-[5rem] xl:px-[15rem] w-full min-h-full flex items-center justify-center">
         <div className="py-8 px-4 mx-auto max-w-screen sm:py-16 xl:px-6">
           <h2 className="mb-8 text-4xl tracking-tight font-normal text-gray-900">
             Frequently asked questions
