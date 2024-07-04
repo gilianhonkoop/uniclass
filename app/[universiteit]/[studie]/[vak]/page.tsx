@@ -185,7 +185,7 @@ export default async function Page({
   const trainingen = await getTrainingen(vakId);
 
   return (
-    <div className="animate-in flex-1 w-full flex flex-col items-center bg-white">
+    <div className="animate-in flex-1 w-full flex flex-col items-center justify-center bg-white">
       <Navbar setLanguage={setLanguage} />
       <div className="flex-1 flex flex-col items-center opacity-0z-0 z-0 w-full mt-[3rem]">
         <div className="mb-[5rem]">
@@ -210,32 +210,20 @@ export default async function Page({
             const lessen = await getLessen(training.lessen);
 
             return (
-              <div className="flex flex-row items-start mb-20" key={index}>
+              <div
+                className="flex flex-row items-start mb-20 text-black"
+                key={index}
+              >
                 <div className="flex flex-col text-left mb-10 max-w-[50rem]">
                   <div className="flex flex-row items-start mx-5">
-                    <div className="w-[6rem] min-w-[6rem] relative mr-5"></div>
                     <h4 className="text-primary mb-2">{training.naam}</h4>
                   </div>
                   <div className="flex flex-row items-start mx-5 mb-10">
-                    <div className="w-[6rem] h-[6rem] min-w-[6rem] min-h-[6rem]  mr-5">
-                      <div className="w-full h-full relative rounded-full overflow-hidden bg-red-300 mt-2">
-                        <Image
-                          sizes="50, 50"
-                          src={user}
-                          fill={true}
-                          alt="Picture of the lecturer"
-                        />
-                      </div>
-                      <p className="text-center text-[14px] mt-1">
-                        {training.docent.split(" ")[0]}
-                      </p>
-                    </div>
                     <p className="whitespace-pre-wrap">
                       {training.omschrijving}
                     </p>
                   </div>
-                  <div className="flex flex-row items-start mx-5 mb-10">
-                    <div className="w-[6rem] min-w-[6rem] relative mr-5"></div>
+                  <div className="flex flex-row items-start justify-center mx-5 mb-10">
                     <div className="flex flex-row max-w-full flex-wrap justify-center gap-6">
                       <p className="hidden">a</p>
                       {lessen.map(async (les, index) => {
@@ -287,24 +275,38 @@ export default async function Page({
                     </div>
                   </div>
                   <div className="flex flex-row items-start mx-5">
-                    <div className="w-[6rem] min-w-[6rem] relative mr-5"></div>
-                    <div className="flex flex-col gap-1 justify-start w-full items-center md:items-start">
-                      <h4 className="text-center text-primary mr-4%">
-                        <span className="text-[18px] mr-1 opacity-60 text-black">
-                          Totaal:
-                        </span>
-                        {"€" + training.prijs.toFixed(2)}
-                      </h4>
-                      <Link
-                        href={training.betaallink}
-                        target="_blank"
-                        className="hover:cursor-pointer flex justify-center items-center mt-[1rem] h-[4rem] min-w-[12rem] 
+                    <div className="flex flex-row gap-1 justify-evenly w-full items-center md:items-start">
+                      <div>
+                        <h4 className="text-center text-primary mr-4%">
+                          <span className="text-[18px] mr-1 opacity-60 text-black">
+                            Totaal:
+                          </span>
+                          {"€" + training.prijs.toFixed(2)}
+                        </h4>
+                        <Link
+                          href={training.betaallink}
+                          target="_blank"
+                          className="hover:cursor-pointer flex justify-center items-center mt-[1rem] h-[4rem] min-w-[12rem] 
                           rounded-md shadow-sm hover:shadow-md text-white bg-primary hover:scale-[101%]"
-                      >
-                        <p className="text-[15px] uppercase font-bold">
-                          Bestel training {">"}
+                        >
+                          <p className="text-[15px] uppercase font-bold">
+                            Bestel training {">"}
+                          </p>
+                        </Link>
+                      </div>
+                      {/* <div className="w-[6rem] h-[6rem] min-w-[6rem] min-h-[6rem] mr-5">
+                        <div className="w-full h-full relative rounded-full overflow-hidden bg-red-300 mt-2 ">
+                          <Image
+                            sizes="50, 50"
+                            src={user}
+                            fill={true}
+                            alt="Picture of the lecturer"
+                          />
+                        </div>
+                        <p className="text-center text-[14px] mt-1">
+                          {training.docent.split(" ")[0]}
                         </p>
-                      </Link>
+                      </div> */}
                     </div>
                   </div>
                 </div>
