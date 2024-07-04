@@ -130,7 +130,7 @@ export default async function Index() {
           >
             <div
               id="search"
-              className="scroll-mt-[27.5rem] h-[15rem] sm:h-[10rem] flex justify-center items-center mx-[5rem]"
+              className="scroll-mt-[17.5rem] h-[15rem] sm:h-[10rem] flex justify-center items-center mx-[5rem]"
             >
               <SearchBox
                 language={language}
