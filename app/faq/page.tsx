@@ -4,6 +4,8 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 
 export default function Page() {
+  document.body.style.overflowY = "auto";
+
   var language = "nl";
 
   async function setLanguage(language: string) {

@@ -121,6 +121,8 @@ export default async function Page({
 }: {
   params: { universiteit: string; studie: string; vak: string; vakId: string };
 }) {
+  document.body.style.overflowY = "auto";
+
   var language = "nl";
 
   async function setLanguage(language: string) {
