@@ -19,7 +19,7 @@ export default function Page() {
   }
 
   return (
-    <div className="w-full bg-white flex flex-col">
+    <div className="w-full bg-white flex flex-col text-black">
       <Navbar setLanguage={setLanguage} />
       <section className="mt-[6rem] sm:mt-[0rem] px-[2rem] md:px-[5rem] lg:px-[15rem] w-full h-full flex items-start justify-start items-start bg-white">
         <div className="py-8 px-4 max-w-screen sm:py-16 lg:px-6 w-screen">

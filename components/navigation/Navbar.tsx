@@ -73,8 +73,6 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
     },
   };
 
-  const router = useRouter();
-
   return (
     <>
       <nav className="w-full flex flex-row shadow-md justify-center min-h-20 fixed sm:sticky top-0 z-50 bg-test-bg">
@@ -85,7 +83,7 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
           className="sm:hidden flex justify-end items-center flex-row w-full bg-dark pr-4"
           onClick={() => {
             toggleMenu();
-            document.body.style.overflow = "hidden";
+            // document.body.style.overflow = "hidden";
           }}
         >
           <div className="h-full w-fit flex justify-center items-center mr-2">
@@ -225,12 +223,22 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
 }
 
 const MobileNavLink = ({ title, href }: { title: string; href: string }) => {
+  const router = useRouter();
+
   return (
     <motion.div
       variants={mobileLinkVars}
       className="text-4xl uppercase text-white m-2"
     >
-      <Link href={href}>{title}</Link>
+      <div
+        onClick={() => {
+          document.body.style.overflow = "visible";
+          router.push(href);
+          // toggleMenu();
+        }}
+      >
+        {title}
+      </div>
     </motion.div>
   );
 };
