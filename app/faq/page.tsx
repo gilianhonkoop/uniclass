@@ -13,7 +13,7 @@ export default function Page() {
   }
 
   return (
-    <div className="bg-white">
+    <div className="bg-white min-h-[screen]">
       <Navbar setLanguage={setLanguage} />
       <section className="px-[2rem] md:px-[5rem] xl:px-[15rem] w-full mt-[6rem] sm:mt-[0rem] flex items-center justify-center">
         <div className="py-8 px-4 mx-auto max-w-screen sm:py-16 xl:px-6">
