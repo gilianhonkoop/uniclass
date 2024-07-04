@@ -81,8 +81,9 @@ export default function SearchBox({
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
-      <div className="w-full flex flex-col lg:flex-row justify-center items-center gap-8">
+      <div className="w-full flex flex-col lg:flex-row justify-center items-center gap-8 text-black">
         <Autocomplete
+          className="text-black"
           defaultItems={inputUniversiteiten}
           variant="bordered"
           label={unilabel}
@@ -115,13 +116,18 @@ export default function SearchBox({
           }}
         >
           {(uni) => (
-            <AutocompleteItem key={uni.id} value={uni.id}>
+            <AutocompleteItem
+              className="text-black"
+              key={uni.id}
+              value={uni.id}
+            >
               {uni.naam}
             </AutocompleteItem>
           )}
         </Autocomplete>
         {universiteit != "" && (
           <Autocomplete
+            className="text-black"
             defaultItems={studies}
             variant="bordered"
             label={opleidinglabel}
@@ -153,7 +159,11 @@ export default function SearchBox({
             }}
           >
             {(studie) => (
-              <AutocompleteItem key={studie.id} value={studie.id}>
+              <AutocompleteItem
+                className="text-black"
+                key={studie.id}
+                value={studie.id}
+              >
                 {studie.naam}
               </AutocompleteItem>
             )}
@@ -161,6 +171,7 @@ export default function SearchBox({
         )}
         {universiteit == "" && (
           <Autocomplete
+            className="text-black"
             defaultItems={studies}
             isDisabled
             variant="bordered"
@@ -183,11 +194,14 @@ export default function SearchBox({
               setStudie(value);
             }}
           >
-            <AutocompleteItem key={0}>b</AutocompleteItem>
+            <AutocompleteItem key={0} className="text-black">
+              b
+            </AutocompleteItem>
           </Autocomplete>
         )}
         {studie != "" && (
           <Autocomplete
+            className="text-black"
             defaultItems={vakken}
             variant="bordered"
             label={vaklabel}
@@ -211,7 +225,11 @@ export default function SearchBox({
             }}
           >
             {(vak) => (
-              <AutocompleteItem key={vak.id} value={vak.id}>
+              <AutocompleteItem
+                className="text-black"
+                key={vak.id}
+                value={vak.id}
+              >
                 {vak.naam}
               </AutocompleteItem>
             )}
@@ -219,6 +237,7 @@ export default function SearchBox({
         )}
         {studie == "" && (
           <Autocomplete
+            className="text-black"
             defaultItems={vakken}
             variant="bordered"
             label={vaklabel}
@@ -238,7 +257,9 @@ export default function SearchBox({
             }}
             isDisabled
           >
-            <AutocompleteItem key={0}>a</AutocompleteItem>
+            <AutocompleteItem className="text-black" key={0}>
+              a
+            </AutocompleteItem>
           </Autocomplete>
         )}
         <Link
