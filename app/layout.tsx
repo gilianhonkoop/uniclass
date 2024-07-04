@@ -71,7 +71,7 @@ export default function RootLayout({
     // lg:snap-mandatory
     // lg:snap-y
     <html lang="en" className={`${poppins.className}`}>
-      <body className="w-full text-foreground h-screen absolute">
+      <body className="w-full text-foreground h-screen absolute overflow-x-hidden">
         <Providers>
           <main className="min-h-screen flex flex-col items-center">
             {children}

@@ -50,11 +50,11 @@ export default async function Index() {
         <section className="bg-test-bg w-full h-full min-h-[calc(100vh-80px)] drop-shadow-md flex flex-col">
           <div
             className=" h-fit z-10 relative flex flex-1 w-full 
-          lg:mb-[4vh] lg:mb-0 mb-[3rem] items-center justify-center mt-[4rem]"
+          lg:mb-[4vh] lg:mb-0 mb-0 sm:mb-[3rem] items-center justify-center mt-[4rem]"
           >
             <div
               className="mx-[5rem] flex flex-col lg:flex-row items-center w-full 
-            max-h-[fit] max-w-6xl gap-[5rem] lg:gap-8"
+            max-h-[fit] max-w-6xl gap-[2rem] sm:gap-[5rem] lg:gap-8"
             >
               <div className="flex w-[100%] h-full flex-col items-center lg:items-start justify-evenly">
                 {language == "nl" && (

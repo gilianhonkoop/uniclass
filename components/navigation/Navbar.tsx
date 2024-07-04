@@ -77,13 +77,16 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
     <>
       <nav className="w-full flex flex-row shadow-md justify-center min-h-20 fixed sm:sticky top-0 z-50 bg-test-bg">
         <div className="sm:hidden flex text-white justify-start items-center flex-row w-full bg-dark">
-          <h4 className="text-white font-extralight ml-4">UniClass</h4>
+          <h4 className="text-white font-extralight ml-4">
+            <span className="">Uni</span>
+            <span className="text-test2-orange">Class</span>
+          </h4>
         </div>
         <div
           className="sm:hidden flex justify-end items-center flex-row w-full bg-dark pr-4"
           onClick={() => {
             toggleMenu();
-            // document.body.style.overflow = "hidden";
+            document.body.style.overflowY = "hidden";
           }}
         >
           <div className="h-full w-fit flex justify-center items-center mr-2">
@@ -101,7 +104,7 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
         <div className="flex-1 max-sm:hidden w-full flex min-h-16 bg-inherit sticky top-0 z-50 justify-center mt-[0rem]">
           <div className="flex flex-1 flex-row justify-between items-center max-w-6xl sm:mx-[2rem] md:mx-[5rem]">
             <h3 className="text-black font-normal">
-              <span className="text-test2-orang">Uni</span>
+              <span className="">Uni</span>
               <span className="text-test2-orange">Class</span>
             </h3>
             <ul className="w-fit flex justify-start items-center text-[18px] tracking-[1.6px] text-black">
@@ -153,7 +156,7 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
                   className="cursor-pointer text-white text-md"
                   onClick={() => {
                     toggleMenu();
-                    document.body.style.overflow = "visible";
+                    document.body.style.overflowY = "scroll";
                   }}
                 >
                   Close
@@ -185,7 +188,7 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
                   >
                     <button
                       onClick={() => {
-                        document.body.style.overflow = "visible";
+                        document.body.style.overflowY = "scroll";
                         toggleMenu();
                       }}
                     >
@@ -205,7 +208,7 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
                   >
                     <button
                       onClick={() => {
-                        document.body.style.overflow = "visible";
+                        document.body.style.overflowY = "scroll";
                         toggleMenu();
                       }}
                     >
@@ -232,9 +235,8 @@ const MobileNavLink = ({ title, href }: { title: string; href: string }) => {
     >
       <div
         onClick={() => {
-          document.body.style.overflow = "visible";
+          document.body.style.overflowY = "scroll";
           router.push(href);
-          // toggleMenu();
         }}
       >
         {title}
