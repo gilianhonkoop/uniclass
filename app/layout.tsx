@@ -1,6 +1,8 @@
 import "./globals.css";
 import Providers from "./providers";
 import localFont from "next/font/local";
+import { NavigationEvents } from "../components/navigationEvents";
+import { Suspense } from "react";
 
 const poppins = localFont({
   src: [
@@ -75,6 +77,10 @@ export default function RootLayout({
         <Providers>
           <main className="min-h-screen flex flex-col items-center">
             {children}
+
+            <Suspense fallback={null}>
+              <NavigationEvents />
+            </Suspense>
           </main>
         </Providers>
       </body>

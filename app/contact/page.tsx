@@ -4,8 +4,6 @@ import Footer from "@/components/Footer";
 import { cookies } from "next/headers";
 
 export default function Page() {
-  document.body.style.overflowY = "auto";
-
   var language = "nl";
 
   async function setLanguage(language: string) {

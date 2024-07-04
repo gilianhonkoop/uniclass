@@ -232,7 +232,7 @@ const MobileNavLink = ({ title, href }: { title: string; href: string }) => {
   return (
     <motion.div
       variants={mobileLinkVars}
-      className="text-4xl uppercase text-white m-2"
+      className="text-4xl uppercase text-white m-2 hover:cursor-pointer"
     >
       <div
         onClick={() => {
