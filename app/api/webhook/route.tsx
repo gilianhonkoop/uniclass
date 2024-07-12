@@ -18,6 +18,8 @@ const addPayment = async (
   let deelnemers;
   let user_id;
 
+  console.log("checkpoint 1");
+
   // fetch training information and check if
   // price matches
   try {
@@ -27,10 +29,12 @@ const addPayment = async (
       .eq("id", training_id);
 
     if (data == null) {
+      console.log("training not found");
       return;
     }
 
     if (data[0].prijs != amount) {
+      console.log("price mismatch");
       return;
     }
 
@@ -39,6 +43,8 @@ const addPayment = async (
     console.log(error);
     return;
   }
+
+  console.log("checkpoint 2");
 
   // insert order into orders table
   try {
@@ -66,6 +72,8 @@ const addPayment = async (
       .eq("achternaam", last_name)
       .eq("email", email)
       .eq("telefoon", phone);
+
+    console.log("checkpoint 3");
 
     // insert if user doesnt exist
     if (data?.length == 0) {
@@ -104,6 +112,8 @@ const addPayment = async (
     return;
   }
 
+  console.log("checkpoint 4");
+
   // update training participants
   try {
     deelnemers.push(user_id);
@@ -135,7 +145,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       process.env.STRIPE_WEBHOOK_SECRET_KEY as string,
     );
 
-    // console.log("event", event.type);
+    console.log("event", event.type);
     if (event.type == "checkout.session.completed") {
       if (response.data.object.payment_status == "paid") {
         let training_id = parseFloat(response.data.object.client_reference_id);
