@@ -18,6 +18,8 @@ const addPayment = async (
   let deelnemers;
   let user_id;
 
+  // fetch training information and check if
+  // price matches
   try {
     const { data, error } = await supabase
       .from("trainingen")
@@ -38,6 +40,7 @@ const addPayment = async (
     return;
   }
 
+  // insert order into orders table
   try {
     const { data, error } = await supabase.from("orders").insert({
       price: amount,
@@ -55,6 +58,7 @@ const addPayment = async (
   }
 
   try {
+    // fetch user data
     const { data, error } = await supabase
       .from("gebruikers")
       .select()
@@ -63,16 +67,28 @@ const addPayment = async (
       .eq("email", email)
       .eq("telefoon", phone);
 
+    // insert if user doesnt exist
     if (data?.length == 0) {
-      const { error } = await supabase.from("gebruikers").insert({
+      await supabase.from("gebruikers").insert({
         email: email,
         telefoon: phone,
         voornaam: first_name,
         achternaam: last_name,
         trainingen: [training_id],
       });
+
+      const { data, error } = await supabase
+        .from("gebruikers")
+        .select("id")
+        .eq("voornaam", first_name)
+        .eq("achternaam", last_name)
+        .eq("email", email)
+        .eq("telefoon", phone);
+
+      user_id = data![0].id;
     }
 
+    // update if user already exists
     if (data?.length == 1) {
       user_id = data[0].id;
       let trainingen = data[0].trainingen;
@@ -88,9 +104,12 @@ const addPayment = async (
     return;
   }
 
+  // update training participants
   try {
+    deelnemers.push(user_id);
+
     const { error } = await supabase
-      .from("gebruikers")
+      .from("training")
       .update({ deelnemers: deelnemers })
       .eq("id", training_id);
   } catch (error) {
