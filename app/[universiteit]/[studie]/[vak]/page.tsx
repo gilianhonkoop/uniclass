@@ -284,7 +284,7 @@ export default async function Page({
                           {"€" + training.prijs.toFixed(2)}
                         </h4>
                         <Link
-                          href={training.betaallink}
+                          href={`${training.betaallink}?client_reference_id=${training.id}`}
                           target="_blank"
                           className="hover:cursor-pointer flex justify-center items-center mt-[1rem] h-[4rem] min-w-[12rem] 
                           rounded-md shadow-sm hover:shadow-md text-white bg-primary hover:scale-[101%]"
