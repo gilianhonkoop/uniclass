@@ -28,7 +28,9 @@ async function getUniversiteiten() {
 }
 
 export default async function Index() {
-  const universiteiten = await getUniversiteiten();
+  var universiteiten: any[] = [];
+  universiteiten = await getUniversiteiten();
+
   var language = "nl";
 
   async function setLanguage(language: string) {

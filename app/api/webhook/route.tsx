@@ -24,7 +24,7 @@ const addPayment = async (
   try {
     const { data, error } = await supabase
       .from("trainingen")
-      .select("prijs, deelnemers")
+      .select("prijs, deelnemers, naam")
       .eq("id", training_id);
 
     if (data == null) {
@@ -44,7 +44,7 @@ const addPayment = async (
   // insert order into orders table
   try {
     const { data, error } = await supabase.from("orders").insert({
-      price: amount,
+      prijs: amount,
       email: email,
       telefoon: phone,
       voornaam: first_name,

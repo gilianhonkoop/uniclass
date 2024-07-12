@@ -49,12 +49,6 @@ html {
   font-weight: bold;
 }
 
-/* h1 {
-  font-size: 68.66px;
-  letter-spacing: -1.6px;
-  line-height: 1.2;
-} */
-
 h1 {
   font-size: max(44px, 3.5vw);
   letter-spacing: -1.6px;
@@ -235,23 +229,16 @@ p {
   animation: opasc 3s ease-in-out infinite;
   opacity: 70%;
   transform: scaleY(1.5);
-  /* scale: 0.5; */
 }
 
 @keyframes opasc {
   0% {
-    /* scale: 0.7; */
     opacity: 0%;
-    /* transform: scaleY(1.5); */
   }
   50% {
-    /* scale: 0.75; */
     opacity: 80%;
-    /* transform: scaleY(1.7); */
   }
   100% {
-    /* scale: 0.7; */
-    /* transform: scaleY(1.5); */
     opacity: 0%;
   }
 }

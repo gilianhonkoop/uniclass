@@ -1,6 +1,5 @@
 "use client";
 
-import { createClient } from "@/utils/supabase/client";
 import EditTraining from "@/components/modals/EditTraining";
 import DeleteTraining from "@/components/modals/DeleteTraining";
 import ShowUsers from "@/components/modals/ShowUsers";

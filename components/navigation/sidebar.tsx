@@ -16,7 +16,7 @@ export default function Sidebar() {
   return (
     <div className="h-full w-full flex flex-col rounded-r-3xl bg-white overflow-hidden">
       <div className="w-full h-[6rem] shadow-md shadow-transparant flex items-center justify-center">
-        <p className="text-cgreen font-bold text-3xl">ZwoeleNaam</p>
+        <p className="text-test-primary font-bold text-3xl">UniClass</p>
       </div>
       <div className="flex flex-col mb-auto">
         {pages.map((page, index) => {
@@ -33,7 +33,7 @@ export default function Sidebar() {
         })}
       </div>
       <div className="text-gray-500 font-bold hover:bg-gray-50 w-full h-[5rem] pl-8 flex items-center text-md hover:cursor-pointer">
-        <div className="hover:text-cgreen w-full h-full transition ease-in-out hover:translate-x-2 duration-300 flex items-center">
+        <div className="hover:text-test-primary w-full h-full transition ease-in-out hover:translate-x-2 duration-300 flex items-center">
           <AuthButton />
         </div>
       </div>

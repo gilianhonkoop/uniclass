@@ -22,7 +22,7 @@ export default async function DashboardLayout({
       </div>
       <div className="flex-1 h-full">
         <div className="w-full h-[6rem] shadow-md shadow-transparant flex items-center justify-center">
-          <p className="text-cgreen font-bold text-3xl">
+          <p className="text-test-primary font-bold text-3xl">
             <CurrentPage />
           </p>
         </div>

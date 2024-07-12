@@ -27,7 +27,8 @@ export default async function Lokalen({
 }: {
   searchParams: { message: string };
 }) {
-  const lokalen: LokaalEntry[] = await fetchLokalen();
+  var lokalen: LokaalEntry[] = [];
+  lokalen = await fetchLokalen();
 
   const maakLokaal = async (formData: FormData) => {
     "use server";

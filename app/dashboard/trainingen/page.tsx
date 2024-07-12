@@ -1,7 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import SearchTraining from "@/components/search/SearchTraining";
 import AddTraining from "@/components/modals/AddTraining";
-import TrainingTable from "@/components/TrainingTable";
+import TrainingTable from "@/components/tables/TrainingTable";
 
 async function getUniversiteiten() {
   "use server";
@@ -104,12 +104,14 @@ export default async function Trainingen({
 }: {
   searchParams: { uniId: number; studieId: number; vakId: number };
 }) {
-  const universiteiten: any[] = await getUniversiteiten();
+  var universiteiten: any[] = [];
+  universiteiten = await getUniversiteiten();
   let studies: any[] | null = null;
   let vakken: any[] | null = null;
 
   //TODO only retrieve used columns
-  let trainingen: any[] | null = await getTrainingen(
+  let trainingen: any[] | null = null;
+  trainingen = await getTrainingen(
     searchParams.uniId,
     searchParams.studieId,
     searchParams.vakId,
