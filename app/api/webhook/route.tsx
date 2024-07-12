@@ -119,7 +119,7 @@ const addPayment = async (
     deelnemers.push(user_id);
 
     const { error } = await supabase
-      .from("training")
+      .from("trainingen")
       .update({ deelnemers: deelnemers })
       .eq("id", training_id);
   } catch (error) {
