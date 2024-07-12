@@ -12,13 +12,12 @@ const addPayment = async (
   amount: number,
   training_id: number,
   order_date: string,
+  payment_intent: string,
 ) => {
   const supabase = createClient();
 
   let deelnemers;
   let user_id;
-
-  console.log("checkpoint 1");
 
   // fetch training information and check if
   // price matches
@@ -29,12 +28,10 @@ const addPayment = async (
       .eq("id", training_id);
 
     if (data == null) {
-      console.log("training not found");
       return;
     }
 
     if (data[0].prijs != amount) {
-      console.log("price mismatch");
       return;
     }
 
@@ -43,8 +40,6 @@ const addPayment = async (
     console.log(error);
     return;
   }
-
-  console.log("checkpoint 2");
 
   // insert order into orders table
   try {
@@ -57,6 +52,7 @@ const addPayment = async (
       training_id: training_id,
       order_date: order_date,
       status: "paid",
+      payment_intent: payment_intent,
     });
   } catch (error) {
     console.log(error);
@@ -72,8 +68,6 @@ const addPayment = async (
       .eq("achternaam", last_name)
       .eq("email", email)
       .eq("telefoon", phone);
-
-    console.log("checkpoint 3");
 
     // insert if user doesnt exist
     if (data?.length == 0) {
@@ -112,8 +106,6 @@ const addPayment = async (
     return;
   }
 
-  console.log("checkpoint 4");
-
   // update training participants
   try {
     deelnemers.push(user_id);
@@ -123,7 +115,6 @@ const addPayment = async (
       .update({ deelnemers: deelnemers })
       .eq("id", training_id);
   } catch (error) {
-    console.log(error);
     return;
   }
 
@@ -145,8 +136,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
       process.env.STRIPE_WEBHOOK_SECRET_KEY as string,
     );
 
-    console.log("event", event.type);
+    // console.log("event", event.type);
     if (event.type == "checkout.session.completed") {
+      console.log(payload);
       if (response.data.object.payment_status == "paid") {
         let training_id = parseFloat(response.data.object.client_reference_id);
         let email = response.data.object.customer_details.email;
@@ -154,6 +146,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         let amount = parseFloat(response.data.object.amount_total) / 100;
         let first_name = response.data.object.custom_fields[0]?.text.value;
         let last_name = response.data.object.custom_fields[1]?.text.value;
+        let payment_intent = response.data.object.payment_intent;
 
         addPayment(
           first_name,
@@ -163,6 +156,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
           amount,
           training_id,
           order_date,
+          payment_intent,
         );
       }
     }
