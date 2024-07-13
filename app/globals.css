@@ -41,10 +41,6 @@
   }
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 .bold {
   font-weight: bold;
 }
@@ -182,43 +178,6 @@ p {
   80%,
   85% {
     width: calc(100% + 8px);
-  }
-}
-
-.waves {
-  position: relative;
-  width: 100%;
-  height: 100px;
-  margin-bottom: -7px;
-}
-
-.parralax > use {
-  animation: move-wave 40s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
-}
-
-.parralax > use:nth-child(1) {
-  animation-delay: -4s;
-  animation-duration: 9s;
-}
-.parralax > use:nth-child(2) {
-  animation-delay: -5s;
-  animation-duration: 17s;
-}
-.parralax > use:nth-child(3) {
-  animation-delay: -15s;
-  animation-duration: 25s;
-}
-.parralax > use:nth-child(4) {
-  animation-delay: -20s;
-  animation-duration: 35s;
-}
-
-@keyframes move-wave {
-  0% {
-    transform: translate3d(-90px, 0, 0);
-  }
-  100% {
-    transform: translate3d(85px, 0, 0);
   }
 }
 

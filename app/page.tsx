@@ -12,6 +12,10 @@ import { cookies } from "next/headers";
 import BlobAnimtation from "@/components/BlobAnimation";
 import dynamic from "next/dynamic";
 
+const Waves = dynamic(() => import("@/components/waves/waves"), {
+  loading: () => <></>,
+});
+
 const SearchBox = dynamic(() => import("@/components/search/SearchBox"), {
   loading: () => <p>Loading...</p>,
 });
@@ -53,7 +57,7 @@ export default async function Index() {
   return (
     <div className="animate-in flex-1 w-full flex flex-col h-screen relative items-center bg-white text-black">
       <Navbar setLanguage={setLanguage} />
-      <div className=" flex-1 flex flex-col items-center relative w-full sm:mt-[0rem] mt-[5rem]">
+      <div className=" flex-1 flex flex-col items-center relative w-full sm:mt-[0rem] mt-[5rem] max-w-[100vw] overflow-x-hidden">
         <section className="bg-test-bg w-full h-full min-h-[calc(100vh-80px)] drop-shadow-md flex flex-col">
           <div
             className=" h-fit z-10 relative flex flex-1 w-full 
@@ -237,47 +241,7 @@ export default async function Index() {
           </div>
         </section>
       </div>
-      <div className="w-full h-full bg-white">
-        <svg
-          className="waves"
-          viewBox="0 24 150 28"
-          preserveAspectRatio="none"
-          shapeRendering="auto"
-        >
-          <defs>
-            <path
-              id="gentle-wave"
-              d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
-            />
-          </defs>
-          <g className="parralax">
-            <use
-              xlinkHref="#gentle-wave"
-              x="48"
-              y="0"
-              fill="rgba(255, 148, 18, 0.3)"
-            />
-            <use
-              xlinkHref="#gentle-wave"
-              x="48"
-              y="3"
-              fill="rgba(255, 148, 18, 0.5)"
-            />
-            <use
-              xlinkHref="#gentle-wave"
-              x="48"
-              y="5"
-              fill="rgba(255, 148, 18, 0.7)"
-            />
-            <use
-              xlinkHref="#gentle-wave"
-              x="48"
-              y="7"
-              fill="rgba(255, 148, 18, 1)"
-            />
-          </g>
-        </svg>
-      </div>
+      <Waves />
       <Footer language={language} />
     </div>
   );

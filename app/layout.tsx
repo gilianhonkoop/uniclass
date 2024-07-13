@@ -77,7 +77,7 @@ export default function RootLayout({
       <head>
         <title>UniClass tentamentrainingen</title>
       </head>
-      <body className="w-full text-foreground h-screen absolute overflow-x-hidden">
+      <body className="w-full text-foreground h-screen absolute">
         <Providers>
           <main className="min-h-screen flex flex-col items-center">
             {children}
