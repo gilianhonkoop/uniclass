@@ -57,7 +57,6 @@ h1 {
 
 h2 {
   font-size: 54.93px;
-  /* letter-spacing: 1.6px; */
 }
 
 h3 {
@@ -113,7 +112,6 @@ p {
 
 .spantext::before {
   content: "Economics";
-  /* color: #e141b9; */
   color: #ff9412;
   animation: words 20s infinite;
 }
@@ -123,7 +121,6 @@ p {
   position: absolute;
   width: calc(100% + 8px);
   height: 90%;
-  /* background-color: #4169e1; */
   background-color: #fbfbfa;
   border-left: 2px solid #ff9412;
   right: -8px;

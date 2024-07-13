@@ -1,5 +1,5 @@
 import Navbar from "@/components/navigation/Navbar";
-import SearchBox from "@/components/search/SearchBox";
+// import SearchBox from "@/components/search/SearchBox";
 import { createClient } from "@/utils/supabase/server";
 import Footer from "@/components/Footer";
 import Image from "next/image";
@@ -10,6 +10,11 @@ import math from "@/illustrations/math.svg";
 import GetStarted from "@/components/GetStarted";
 import { cookies } from "next/headers";
 import BlobAnimtation from "@/components/BlobAnimation";
+import dynamic from "next/dynamic";
+
+const SearchBox = dynamic(() => import("@/components/search/SearchBox"), {
+  loading: () => <p>Loading...</p>,
+});
 
 async function getUniversiteiten() {
   "use server";

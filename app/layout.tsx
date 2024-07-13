@@ -3,6 +3,7 @@ import Providers from "./providers";
 import localFont from "next/font/local";
 import { NavigationEvents } from "../components/navigationEvents";
 import { Suspense } from "react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const poppins = localFont({
   src: [
@@ -73,6 +74,9 @@ export default function RootLayout({
     // lg:snap-mandatory
     // lg:snap-y
     <html lang="en" className={`${poppins.className}`}>
+      <head>
+        <title>UniClass tentamentrainingen</title>
+      </head>
       <body className="w-full text-foreground h-screen absolute overflow-x-hidden">
         <Providers>
           <main className="min-h-screen flex flex-col items-center">
@@ -81,6 +85,7 @@ export default function RootLayout({
             <Suspense fallback={null}>
               <NavigationEvents />
             </Suspense>
+            <SpeedInsights />
           </main>
         </Providers>
       </body>
