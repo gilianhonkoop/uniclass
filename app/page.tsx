@@ -1,5 +1,4 @@
 import Navbar from "@/components/navigation/Navbar";
-// import SearchBox from "@/components/search/SearchBox";
 import { createClient } from "@/utils/supabase/server";
 import Footer from "@/components/Footer";
 import Image from "next/image";
@@ -11,14 +10,16 @@ import GetStarted from "@/components/GetStarted";
 import { cookies } from "next/headers";
 import BlobAnimtation from "@/components/BlobAnimation";
 import dynamic from "next/dynamic";
+import Waves from "@/components/waves/waves";
+import SearchBox from "@/components/search/SearchBox";
 
-const Waves = dynamic(() => import("@/components/waves/waves"), {
-  loading: () => <></>,
-});
+// const Waves = dynamic(() => import("@/components/waves/waves"), {
+//   loading: () => <></>,
+// });
 
-const SearchBox = dynamic(() => import("@/components/search/SearchBox"), {
-  loading: () => <p>Loading...</p>,
-});
+// const SearchBox = dynamic(() => import("@/components/search/SearchBox"), {
+//   loading: () => <p>Loading...</p>,
+// });
 
 async function getUniversiteiten() {
   "use server";
