@@ -10,16 +10,16 @@ import GetStarted from "@/components/GetStarted";
 import { cookies } from "next/headers";
 import BlobAnimtation from "@/components/BlobAnimation";
 import dynamic from "next/dynamic";
-import Waves from "@/components/waves/waves";
-import SearchBox from "@/components/search/SearchBox";
+// import Waves from "@/components/waves/waves";
+// import SearchBox from "@/components/search/SearchBox";
 
-// const Waves = dynamic(() => import("@/components/waves/waves"), {
-//   loading: () => <></>,
-// });
+const Waves = dynamic(() => import("@/components/waves/waves"), {
+  loading: () => <></>,
+});
 
-// const SearchBox = dynamic(() => import("@/components/search/SearchBox"), {
-//   loading: () => <p>Loading...</p>,
-// });
+const SearchBox = dynamic(() => import("@/components/search/SearchBox"), {
+  loading: () => <p>Loading...</p>,
+});
 
 async function getUniversiteiten() {
   "use server";
@@ -130,7 +130,12 @@ export default async function Index() {
               <div className="flex w-[100%] h-full">
                 <div className="w-full h-[25rem] relative flex items-center justify-center">
                   <BlobAnimtation />
-                  <Image src={edu} fill={true} alt="classroom illustration" />
+                  <Image
+                    src={edu}
+                    fill={true}
+                    alt="classroom illustration"
+                    loading="eager"
+                  />
                 </div>
               </div>
             </div>

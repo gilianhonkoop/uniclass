@@ -77,7 +77,7 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
     <>
       <nav className="w-full flex flex-row shadow-md justify-center min-h-20 fixed sm:sticky top-0 z-50 bg-test-bg">
         <div className="sm:hidden flex text-white justify-start items-center flex-row w-full bg-dark">
-          <h4 className="text-white font-extralight ml-4">
+          <h4 className="text-white font-light ml-4">
             <span className="">Uni</span>
             <span className="text-test2-orange">Class</span>
           </h4>

@@ -8,11 +8,6 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 const poppins = localFont({
   src: [
     {
-      path: "./fonts/Poppins-ExtraLight.ttf",
-      weight: "200",
-      style: "normal",
-    },
-    {
       path: "./fonts/Poppins-Light.ttf",
       weight: "300",
       style: "normal",
@@ -26,11 +21,6 @@ const poppins = localFont({
       path: "./fonts/Poppins-Medium.ttf",
       weight: "500",
       style: "normal",
-    },
-    {
-      path: "./fonts/Poppins-SemiBold.ttf",
-      weight: "600",
-      style: "italic",
     },
     {
       path: "./fonts/Poppins-Bold.ttf",
