@@ -10,6 +10,11 @@ import location from "@/icons/location.png";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import Footer from "@/components/Footer";
+import dynamic from "next/dynamic";
+
+const Waves = dynamic(() => import("@/components/waves/waves"), {
+  loading: () => <></>,
+});
 
 function formatDate(date: string) {
   date = date.slice(0, 10);
@@ -314,47 +319,7 @@ export default async function Page({
             );
           })}
       </div>
-      <div className="w-full h-full bg-white">
-        <svg
-          className="waves"
-          viewBox="0 24 150 28"
-          preserveAspectRatio="none"
-          shapeRendering="auto"
-        >
-          <defs>
-            <path
-              id="gentle-wave"
-              d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
-            />
-          </defs>
-          <g className="parralax">
-            <use
-              xlinkHref="#gentle-wave"
-              x="48"
-              y="0"
-              fill="rgba(255, 148, 18, 0.3)"
-            />
-            <use
-              xlinkHref="#gentle-wave"
-              x="48"
-              y="3"
-              fill="rgba(255, 148, 18, 0.5)"
-            />
-            <use
-              xlinkHref="#gentle-wave"
-              x="48"
-              y="5"
-              fill="rgba(255, 148, 18, 0.7)"
-            />
-            <use
-              xlinkHref="#gentle-wave"
-              x="48"
-              y="7"
-              fill="rgba(255, 148, 18, 1)"
-            />
-          </g>
-        </svg>
-      </div>
+      <Waves />
       <Footer language={language} />
     </div>
   );

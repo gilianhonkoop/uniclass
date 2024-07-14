@@ -10,16 +10,11 @@ import GetStarted from "@/components/GetStarted";
 import { cookies } from "next/headers";
 import BlobAnimtation from "@/components/BlobAnimation";
 import dynamic from "next/dynamic";
-// import Waves from "@/components/waves/waves";
 import SearchBox from "@/components/search/SearchBox";
 
 const Waves = dynamic(() => import("@/components/waves/waves"), {
   loading: () => <></>,
 });
-
-// const SearchBox = dynamic(() => import("@/components/search/SearchBox"), {
-//   loading: () => <p>Loading...</p>,
-// });
 
 async function getUniversiteiten() {
   "use server";
