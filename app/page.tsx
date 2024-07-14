@@ -129,7 +129,7 @@ export default async function Index() {
                     src={edu}
                     fill={true}
                     alt="classroom illustration"
-                    loading="eager"
+                    priority
                   />
                 </div>
               </div>

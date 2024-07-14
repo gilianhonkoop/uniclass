@@ -29,6 +29,7 @@ const poppins = localFont({
     },
   ],
   display: "swap",
+  // preload: false,
 });
 
 const defaultUrl = process.env.NEXT_PUBLIC_BASE_URL

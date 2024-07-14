@@ -59,6 +59,10 @@ export default function SearchBox({
   currStudieId: string;
   currVakId: string;
 }) {
+  const [universiteitId, setUniversiteitId] =
+    useState<string>(currUniversiteitId);
+  const [studieId, setStudieId] = useState<string>(currStudieId);
+  const [vakId, setVakId] = useState<string>(currVakId);
   const [universiteit, setUniversiteit] = useState<string>(currUniversiteit);
   const [studie, setStudie] = useState<string>(currStudie);
   const [vak, setVak] = useState<string>(currVak);
@@ -97,7 +101,7 @@ export default function SearchBox({
             classNames: {
               input: "",
               inputWrapper:
-                "rounded-md border-medium-400 data-[hover=true]:border-test-primary group-data-[focus=true]:border-test-primary",
+                "rounded-md border-medium-400 data-[hover=true]:border-primary group-data-[focus=true]:border-primary",
               label: "",
             },
           }}
@@ -108,6 +112,7 @@ export default function SearchBox({
             setVak("");
           }}
           onSelectionChange={async (key) => {
+            setUniversiteitId(key as string);
             let k = key as number;
             if (key != null) {
               setStudies(await getStudies(k));
@@ -151,8 +156,10 @@ export default function SearchBox({
               setVak("");
             }}
             onSelectionChange={async (key) => {
+              setStudieId(key as string);
               let k = key as number;
               if (key != null) {
+                currStudieId = key as string;
                 setVakken(await getVakken(k));
                 return router.refresh();
               }
@@ -215,13 +222,19 @@ export default function SearchBox({
               classNames: {
                 input: "",
                 inputWrapper:
-                  "rounded-md border-medium4-00 data-[hover=true]:border-test-primary group-data-[focus=true]:border-primary",
+                  "rounded-md border-medium4-00 data-[hover=true]:border-primary group-data-[focus=true]:border-primary",
                 label: "",
               },
             }}
             defaultSelectedKey={`${currVakId}`}
             onInputChange={(value) => {
               setVak(value);
+            }}
+            onSelectionChange={async (key) => {
+              setVakId(key as string);
+              if (key != null) {
+                currVakId = key as string;
+              }
             }}
           >
             {(vak) => (
@@ -268,14 +281,9 @@ export default function SearchBox({
           }}
           aria-disabled={vak == ""}
           tabIndex={vak == "" ? -1 : undefined}
-          href={
-            "/" +
-            universiteit.replace(/\s+/g, "-") +
-            "/" +
-            studie.replace(/\s+/g, "-") +
-            "/" +
-            vak.replace(/\s+/g, "-")
-          }
+          href={encodeURI(
+            "/training/" + universiteitId + " " + studieId + " " + vakId,
+          )}
           className="hover:cursor-pointer flex justify-center items-center h-[4rem] min-w-[16rem] lg:min-w-[15vw] 
         rounded-sm shadow-sm hover:shadow-md text-white bg-test2-orange hover:scale-[102%] text-center md:mt-0 mt-[1.5rem]
         transition"
