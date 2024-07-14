@@ -52,6 +52,8 @@ export default async function Index() {
     language = lan.value;
   }
 
+  console.log("test");
+
   return (
     <div className="animate-in flex-1 w-full flex flex-col h-screen relative items-center bg-test-bg text-black">
       <Navbar setLanguage={setLanguage} />
