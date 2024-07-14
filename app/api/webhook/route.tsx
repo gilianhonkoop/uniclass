@@ -19,6 +19,10 @@ const addPayment = async (
   let deelnemers;
   let user_id;
 
+  await supabase.from("test").insert({
+    atttempt: "attempt",
+  });
+
   // fetch training information and check if
   // price matches
   try {
@@ -41,7 +45,7 @@ const addPayment = async (
     return;
   }
 
-  console.log("8");
+  await supabase.from("test").insert({});
 
   // insert order into orders table
   try {
@@ -61,7 +65,7 @@ const addPayment = async (
     return;
   }
 
-  console.log("9");
+  await supabase.from("test").insert({});
 
   try {
     // fetch user data
@@ -112,7 +116,7 @@ const addPayment = async (
     return;
   }
 
-  console.log("11");
+  await supabase.from("test").insert({});
 
   // update training participants
   try {
@@ -126,23 +130,21 @@ const addPayment = async (
     return;
   }
 
-  console.log("12");
+  await supabase.from("test").insert({});
 
   return;
 };
 
 export async function POST(req: NextRequest, res: NextResponse) {
-  console.log("entered");
+  const supabase = createClient();
+  await supabase.from("test").insert({ attempt: "entered POST" });
+
   const payload = await req.text();
   const response = JSON.parse(payload);
 
   const sig = req.headers.get("Stripe-Signature");
 
-  console.log("2");
-
   const order_date = new Date(response?.created * 1000).toLocaleString();
-
-  console.log("3");
 
   try {
     let event = stripe.webhooks.constructEvent(
@@ -151,7 +153,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       process.env.STRIPE_WEBHOOK_SECRET_KEY as string,
     );
 
-    console.log("4");
+    await supabase.from("test").insert({ attempt: "sig created" });
 
     if (event.type == "checkout.session.completed") {
       if (response.data.object.payment_status == "paid") {
@@ -165,8 +167,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
         let last_name = response.data.object.custom_fields[1]?.text.value;
         let payment_intent = response.data.object.payment_intent;
 
-        console.log("6");
-
         addPayment(
           first_name,
           last_name,
@@ -177,8 +177,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
           order_date,
           payment_intent,
         );
-
-        console.log("7");
       }
     }
     return NextResponse.json({ status: 200, event: event.type });
