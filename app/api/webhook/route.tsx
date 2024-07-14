@@ -41,6 +41,8 @@ const addPayment = async (
     return;
   }
 
+  console.log("8");
+
   // insert order into orders table
   try {
     const { data, error } = await supabase.from("orders").insert({
@@ -59,6 +61,8 @@ const addPayment = async (
     return;
   }
 
+  console.log("9");
+
   try {
     // fetch user data
     const { data, error } = await supabase
@@ -68,6 +72,8 @@ const addPayment = async (
       .eq("achternaam", last_name)
       .eq("email", email)
       .eq("telefoon", phone);
+
+    console.log("10");
 
     // insert if user doesnt exist
     if (data?.length == 0) {
@@ -106,6 +112,8 @@ const addPayment = async (
     return;
   }
 
+  console.log("11");
+
   // update training participants
   try {
     deelnemers.push(user_id);
@@ -118,17 +126,23 @@ const addPayment = async (
     return;
   }
 
+  console.log("12");
+
   return;
 };
 
 export async function POST(req: NextRequest, res: NextResponse) {
+  console.log("entered");
   const payload = await req.text();
   const response = JSON.parse(payload);
-  console.log(payload);
 
   const sig = req.headers.get("Stripe-Signature");
 
+  console.log("2");
+
   const order_date = new Date(response?.created * 1000).toLocaleString();
+
+  console.log("3");
 
   try {
     let event = stripe.webhooks.constructEvent(
@@ -137,8 +151,12 @@ export async function POST(req: NextRequest, res: NextResponse) {
       process.env.STRIPE_WEBHOOK_SECRET_KEY as string,
     );
 
+    console.log("4");
+
     if (event.type == "checkout.session.completed") {
       if (response.data.object.payment_status == "paid") {
+        console.log("5");
+
         let training_id = parseFloat(response.data.object.client_reference_id);
         let email = response.data.object.customer_details.email;
         let phone = response.data.object.customer_details.phone;
@@ -146,6 +164,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
         let first_name = response.data.object.custom_fields[0]?.text.value;
         let last_name = response.data.object.custom_fields[1]?.text.value;
         let payment_intent = response.data.object.payment_intent;
+
+        console.log("6");
 
         addPayment(
           first_name,
@@ -157,6 +177,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
           order_date,
           payment_intent,
         );
+
+        console.log("7");
       }
     }
     return NextResponse.json({ status: 200, event: event.type });
