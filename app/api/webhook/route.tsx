@@ -138,17 +138,17 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     if (event.type == "checkout.session.completed") {
       if (response.data.object.payment_status == "paid") {
-        // let training_id = parseFloat(response.data.object.client_reference_id);
-        let email = response.data.object.customer_details.email;
-        let phone = response.data.object.customer_details.phone;
+        let training_id = parseFloat(response.data.object.client_reference_id);
+        // let email = response.data.object.customer_details.email;
+        // let phone = response.data.object.customer_details.phone;
         let amount = parseFloat(response.data.object.amount_total) / 100;
         let first_name = response.data.object.custom_fields[0]?.text.value;
         let last_name = response.data.object.custom_fields[1]?.text.value;
         let payment_intent = response.data.object.payment_intent;
 
-        let training_id = 2;
-        // let email = "abasdgc@gmail.com";
-        // let phone = "+123254634";
+        // let training_id = 2;
+        let email = "abasdgc@gmail.com";
+        let phone = "+123254634";
         // let amount = 29;
         // let first_name = "kasdgaadgn";
         // let last_name = "gaadgadg";
