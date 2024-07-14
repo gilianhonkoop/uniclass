@@ -52,7 +52,7 @@ export default async function Page({ params }: { params: { info: string } }) {
           />
         </Suspense>
         <Suspense fallback={<>Loading...</>}>
-          <Trainings vakId={vakId} />
+          <Trainings vakId={vakId} pathName={params.info} />
         </Suspense>
       </div>
       <Waves />

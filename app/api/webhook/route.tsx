@@ -124,6 +124,7 @@ const addPayment = async (
 export async function POST(req: NextRequest, res: NextResponse) {
   const payload = await req.text();
   const response = JSON.parse(payload);
+  console.log(payload);
 
   const sig = req.headers.get("Stripe-Signature");
 
@@ -136,9 +137,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       process.env.STRIPE_WEBHOOK_SECRET_KEY as string,
     );
 
-    // console.log("event", event.type);
     if (event.type == "checkout.session.completed") {
-      console.log(payload);
       if (response.data.object.payment_status == "paid") {
         let training_id = parseFloat(response.data.object.client_reference_id);
         let email = response.data.object.customer_details.email;

@@ -4,8 +4,16 @@ import Image from "next/image";
 import calendar from "@/icons/calendar2.png";
 import clock from "@/icons/clock.png";
 import location from "@/icons/location.png";
+import CreateSession from "@/lib/stripe/create_session/CreateSession";
+import { redirect } from "next/navigation";
 
-export default async function Trainings({ vakId }: { vakId: string }) {
+export default async function Trainings({
+  vakId,
+  pathName,
+}: {
+  vakId: string;
+  pathName: string;
+}) {
   var trainingen = await getTrainingen(vakId);
 
   if (trainingen.length == 0) {
@@ -81,8 +89,23 @@ export default async function Trainings({ vakId }: { vakId: string }) {
                 {"€" + training.prijs.toFixed(2)}
               </h4>
 
-              <form>
+              <form
+                action={async () => {
+                  "use server";
+                  let currUrl = `https://www.uniclass.nl/training/${pathName}`;
+
+                  let StripeUrl = await CreateSession(
+                    training.prijs,
+                    training.id,
+                    training.naam,
+                    currUrl,
+                  );
+                  redirect(StripeUrl!);
+                }}
+              >
                 <button
+                  type="submit"
+                  role="link"
                   className="hover:cursor-pointer flex justify-center items-center h-[4rem] min-w-[12rem] 
                           rounded-md shadow-sm hover:shadow-md text-white bg-primary hover:scale-[101%]"
                 >
@@ -92,18 +115,18 @@ export default async function Trainings({ vakId }: { vakId: string }) {
                 </button>
               </form>
               {/* <div className="w-[6rem] h-[6rem] min-w-[6rem] min-h-[6rem] mr-5">
-                        <div className="w-full h-full relative rounded-full overflow-hidden bg-red-300 mt-2 ">
-                          <Image
-                            sizes="50, 50"
-                            src={user}
-                            fill={true}
-                            alt="Picture of the lecturer"
-                          />
-                        </div>
-                        <p className="text-center text-[14px] mt-1">
-                          {training.docent.split(" ")[0]}
-                        </p>
-                      </div> */}
+                <div className="w-full h-full relative rounded-full overflow-hidden bg-red-300 mt-2 ">
+                  <Image
+                    sizes="50, 50"
+                    src={user}
+                    fill={true}
+                    alt="Picture of the lecturer"
+                  />
+                </div>
+                <p className="text-center text-[14px] mt-1">
+                  {training.docent.split(" ")[0]}
+                </p>
+              </div> */}
             </div>
           </div>
         </div>
