@@ -18,6 +18,7 @@ const addPayment = async (
 
   let deelnemers;
   let user_id;
+  let training_naam;
 
   // fetch training information and check if
   // price matches
@@ -35,6 +36,7 @@ const addPayment = async (
       return;
     }
 
+    training_naam = data[0].naam;
     deelnemers = data[0].deelnemers;
   } catch (error) {
     console.log(error);
@@ -53,6 +55,7 @@ const addPayment = async (
       order_date: order_date,
       status: "paid",
       payment_intent: payment_intent,
+      training_naam: training_naam,
     });
   } catch (error) {
     console.log(error);
@@ -139,7 +142,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     if (event.type == "checkout.session.completed") {
       if (response.data.object.payment_status == "paid") {
         let training_id = parseFloat(response.data.object.client_reference_id);
-        // let email = response.data.object.customer_details.email;
+        let email = response.data.object.customer_details.email;
         // let phone = response.data.object.customer_details.phone;
         let amount = parseFloat(response.data.object.amount_total) / 100;
         let first_name = response.data.object.custom_fields[0]?.text.value;
@@ -147,7 +150,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         let payment_intent = response.data.object.payment_intent;
 
         // let training_id = 2;
-        let email = "abasdgc@gmail.com";
+        // let email = "abasdgc@gmail.com";
         let phone = "+123254634";
         // let amount = 29;
         // let first_name = "kasdgaadgn";
