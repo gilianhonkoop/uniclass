@@ -19,10 +19,6 @@ const addPayment = async (
   let deelnemers;
   let user_id;
 
-  await supabase.from("test").insert({
-    atttempt: "attempt",
-  });
-
   // fetch training information and check if
   // price matches
   try {
@@ -45,8 +41,6 @@ const addPayment = async (
     return;
   }
 
-  await supabase.from("test").insert({});
-
   // insert order into orders table
   try {
     const { data, error } = await supabase.from("orders").insert({
@@ -65,8 +59,6 @@ const addPayment = async (
     return;
   }
 
-  await supabase.from("test").insert({});
-
   try {
     // fetch user data
     const { data, error } = await supabase
@@ -76,8 +68,6 @@ const addPayment = async (
       .eq("achternaam", last_name)
       .eq("email", email)
       .eq("telefoon", phone);
-
-    console.log("10");
 
     // insert if user doesnt exist
     if (data?.length == 0) {
@@ -116,8 +106,6 @@ const addPayment = async (
     return;
   }
 
-  await supabase.from("test").insert({});
-
   // update training participants
   try {
     deelnemers.push(user_id);
@@ -130,15 +118,10 @@ const addPayment = async (
     return;
   }
 
-  await supabase.from("test").insert({});
-
   return;
 };
 
 export async function POST(req: NextRequest, res: NextResponse) {
-  const supabase = createClient();
-  await supabase.from("test").insert({ attempt: "entered POST" });
-
   const payload = await req.text();
   const response = JSON.parse(payload);
 
@@ -153,19 +136,23 @@ export async function POST(req: NextRequest, res: NextResponse) {
       process.env.STRIPE_WEBHOOK_SECRET_KEY as string,
     );
 
-    await supabase.from("test").insert({ attempt: "sig created" });
-
     if (event.type == "checkout.session.completed") {
       if (response.data.object.payment_status == "paid") {
-        console.log("5");
+        // let training_id = parseFloat(response.data.object.client_reference_id);
+        // let email = response.data.object.customer_details.email;
+        // let phone = response.data.object.customer_details.phone;
+        // let amount = parseFloat(response.data.object.amount_total) / 100;
+        // let first_name = response.data.object.custom_fields[0]?.text.value;
+        // let last_name = response.data.object.custom_fields[1]?.text.value;
+        // let payment_intent = response.data.object.payment_intent;
 
-        let training_id = parseFloat(response.data.object.client_reference_id);
-        let email = response.data.object.customer_details.email;
-        let phone = response.data.object.customer_details.phone;
-        let amount = parseFloat(response.data.object.amount_total) / 100;
-        let first_name = response.data.object.custom_fields[0]?.text.value;
-        let last_name = response.data.object.custom_fields[1]?.text.value;
-        let payment_intent = response.data.object.payment_intent;
+        let training_id = 2;
+        let email = "abasdgc@gmail.com";
+        let phone = "+123254634";
+        let amount = 29;
+        let first_name = "kasdgaadgn";
+        let last_name = "gaadgadg";
+        let payment_intent = "pi_nogwafsat";
 
         addPayment(
           first_name,
