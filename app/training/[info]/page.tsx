@@ -1,125 +1,17 @@
 import Navbar from "@/components/navigation/Navbar";
-import SearchBox from "@/components/search/SearchBox";
-import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-import Image from "next/image";
 import user from "@/icons/user.png";
-import calendar from "@/icons/calendar2.png";
-import clock from "@/icons/clock.png";
-import location from "@/icons/location.png";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import Footer from "@/components/Footer";
 import dynamic from "next/dynamic";
+import { Suspense } from "react";
+import SearchFunctions from "@/components/search/SearchFunctions";
+import Trainings from "@/components/Trainings";
 
 const Waves = dynamic(() => import("@/components/waves/waves"), {
   loading: () => <></>,
 });
-
-function formatDate(date: string) {
-  date = date.slice(0, 10);
-  const dates = date.split("-");
-
-  return dates[2] + "/" + dates[1] + "/" + dates[0];
-}
-
-function formatTime(begin: string, eind: string) {
-  begin = begin.slice(11, 16);
-  eind = eind.slice(11, 16);
-
-  return begin + "-" + eind;
-}
-
-async function getUniversiteiten() {
-  "use server";
-
-  const supabase = createClient();
-  const { data, error } = await supabase
-    .from("universiteiten")
-    .select()
-    .order("id", { ascending: false });
-
-  if (data == null) {
-    return [];
-  }
-
-  return data;
-}
-
-async function getStudies(id: number | string) {
-  const supabase = createClient();
-  const { data, error } = await supabase
-    .from("studies")
-    .select()
-    .eq("universiteit_id", id)
-    .order("id", { ascending: false });
-
-  if (data == null) {
-    return [];
-  }
-
-  return data;
-}
-
-async function getVakken(id: number | string) {
-  const supabase = createClient();
-  const { data, error } = await supabase
-    .from("vakken")
-    .select()
-    .eq("studie_id", id)
-    .order("id", { ascending: false });
-
-  if (data == null) {
-    return [];
-  }
-
-  return data;
-}
-
-async function getTrainingen(id: number | string) {
-  const supabase = createClient();
-  const { data, error } = await supabase
-    .from("trainingen")
-    .select()
-    .eq("vak_id", id)
-    .eq("status", "active")
-    .order("id", { ascending: false });
-
-  if (data == null) {
-    return [];
-  }
-
-  return data;
-}
-
-async function getLessen(ids: string[]) {
-  const supabase = createClient();
-  const { data, error } = await supabase
-    .from("lessen")
-    .select()
-    .in("id", ids)
-    .order("begin", { ascending: true });
-
-  if (data == null) {
-    return [];
-  }
-
-  return data;
-}
-
-async function getLokaal(id: string | number) {
-  const supabase = createClient();
-  const { data, error } = await supabase
-    .from("lokalen")
-    .select("naam")
-    .eq("id", id);
-
-  if (data == null) {
-    return [];
-  }
-
-  return data;
-}
 
 export default async function Page({ params }: { params: { info: string } }) {
   var language = "nl";
@@ -136,8 +28,6 @@ export default async function Page({ params }: { params: { info: string } }) {
     language = lan.value;
   }
 
-  const universiteiten = await getUniversiteiten();
-
   const info: string[] = decodeURIComponent(params.info).split(" ");
 
   if (info.length != 3) {
@@ -148,139 +38,22 @@ export default async function Page({ params }: { params: { info: string } }) {
   var studieId: string = info[1];
   var vakId: string = info[2];
 
-  var studies: any[] = [];
-  studies = await getStudies(uniId);
-  var vakken: any[] = [];
-  vakken = await getVakken(studieId);
-  var trainingen: any[] = [];
-  trainingen = await getTrainingen(vakId);
-
   return (
     <div className="animate-in flex-1 w-full flex flex-col items-center justify-center bg-white">
       <Navbar setLanguage={setLanguage} />
-      <div className="flex-1 flex flex-col items-center opacity-0z-0 z-0 w-full mt-[3rem]">
-        <div className="mb-[5rem]">
-          <SearchBox
+      <div className="flex-1 flex flex-col items-center opacity-0z-0 z-0 w-full mt-[3rem] mb-[5rem] gap-[5rem]">
+        <Suspense fallback={<></>}>
+          <SearchFunctions
             language={language}
-            inputUniversiteiten={universiteiten}
-            inputStudies={studies}
-            inputVakken={vakken}
-            currUniversiteit={uniId}
-            currStudie={studieId}
-            currVak={vakId}
-            currUniversiteitId={uniId}
-            currStudieId={studieId}
-            currVakId={vakId}
+            uniId={uniId}
+            studieId={studieId}
+            vakId={vakId}
+            empty={false}
           />
-        </div>
-        {trainingen.length == 0 && (
-          <p>Er zijn momenteel geen trainingen voor dit vak.</p>
-        )}
-        {trainingen.length != 0 &&
-          trainingen.map(async (training, index) => {
-            const lessen = await getLessen(training.lessen);
-
-            return (
-              <div
-                className="flex flex-row items-start mb-20 text-black"
-                key={index}
-              >
-                <div className="flex flex-col text-left mb-10 max-w-[50rem]">
-                  <div className="flex flex-row items-start mx-5">
-                    <h4 className="text-primary mb-2">{training.naam}</h4>
-                  </div>
-                  <div className="flex flex-row items-start mx-5 mb-10">
-                    <p className="whitespace-pre-wrap">
-                      {training.omschrijving}
-                    </p>
-                  </div>
-                  <div className="flex flex-row items-start justify-center sm:justify-start mx-5 mb-10">
-                    <div className="flex flex-row max-w-full flex-wrap justify-center sm:justify-start gap-6">
-                      {lessen.map(async (les, index) => {
-                        const lokaal = await getLokaal(les.lokaal_id);
-                        return (
-                          <div
-                            className="w-[19rem] min-h-[10rem] border rounded-sm flex flex-col py-2 px-3"
-                            key={index}
-                          >
-                            <p className="text-primary mb-auto font-medium">
-                              {les.naam}
-                            </p>
-                            <div className="text-[16px] opacity-80 flex flex-row items-center mb-2">
-                              <div className="min-w-[25px] w-[25px] h-[25px] relative mr-2">
-                                <Image
-                                  sizes="50, 50"
-                                  src={calendar}
-                                  fill={true}
-                                  alt="Date icon"
-                                />
-                              </div>
-                              {formatDate(les.begin)}
-                            </div>
-                            <div className="text-[16px] opacity-80 flex flex-row items-center mb-2">
-                              <div className="min-w-[25px] w-[25px] h-[25px] relative mr-2">
-                                <Image
-                                  sizes="50, 50"
-                                  src={clock}
-                                  fill={true}
-                                  alt="Time icon"
-                                />
-                              </div>
-                              {formatTime(les.begin, les.eind)}
-                            </div>
-                            <div className="text-[16px] opacity-80 flex flex-row items-center mb-2">
-                              <div className="min-w-[25px] w-[25px] h-[25px] relative mr-2">
-                                <Image
-                                  sizes="50, 50"
-                                  src={location}
-                                  fill={true}
-                                  alt="Location icon"
-                                />
-                              </div>
-                              {lokaal[0]?.naam}
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                  <div className="flex flex-row items-start mx-5">
-                    <div className="flex flex-col sm:flex-row gap-1 justify-start sm:gap-5 w-full items-center">
-                      <h4 className="text-center text-primary mr-4%">
-                        <span className="text-[18px] mr-1 opacity-60 text-black">
-                          Totaal:
-                        </span>
-                        {"€" + training.prijs.toFixed(2)}
-                      </h4>
-                      <Link
-                        href={`${training.betaallink}?client_reference_id=${training.id}`}
-                        target="_blank"
-                        className="hover:cursor-pointer flex justify-center items-center h-[4rem] min-w-[12rem] 
-                          rounded-md shadow-sm hover:shadow-md text-white bg-primary hover:scale-[101%]"
-                      >
-                        <p className="text-[15px] uppercase font-bold">
-                          Bestel training {">"}
-                        </p>
-                      </Link>
-                      {/* <div className="w-[6rem] h-[6rem] min-w-[6rem] min-h-[6rem] mr-5">
-                        <div className="w-full h-full relative rounded-full overflow-hidden bg-red-300 mt-2 ">
-                          <Image
-                            sizes="50, 50"
-                            src={user}
-                            fill={true}
-                            alt="Picture of the lecturer"
-                          />
-                        </div>
-                        <p className="text-center text-[14px] mt-1">
-                          {training.docent.split(" ")[0]}
-                        </p>
-                      </div> */}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+        </Suspense>
+        <Suspense fallback={<>Loading...</>}>
+          <Trainings vakId={vakId} />
+        </Suspense>
       </div>
       <Waves />
       <Footer language={language} />

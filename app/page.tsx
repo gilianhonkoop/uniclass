@@ -11,6 +11,8 @@ import { cookies } from "next/headers";
 import BlobAnimtation from "@/components/BlobAnimation";
 import dynamic from "next/dynamic";
 import SearchBox from "@/components/search/SearchBox";
+import SearchFunctions from "@/components/search/SearchFunctions";
+import { Suspense } from "react";
 
 const Waves = dynamic(() => import("@/components/waves/waves"), {
   loading: () => <></>,
@@ -51,7 +53,7 @@ export default async function Index() {
   }
 
   return (
-    <div className="animate-in flex-1 w-full flex flex-col h-screen relative items-center bg-white text-black">
+    <div className="animate-in flex-1 w-full flex flex-col h-screen relative items-center bg-test-bg text-black">
       <Navbar setLanguage={setLanguage} />
       <div className=" flex-1 flex flex-col items-center relative w-full sm:mt-[0rem] mt-[5rem] max-w-[100vw] overflow-x-hidden">
         <section className="bg-test-bg w-full h-full min-h-[calc(100vh-80px)] drop-shadow-md flex flex-col">
@@ -144,18 +146,15 @@ export default async function Index() {
               id="search"
               className="scroll-mt-[17.5rem] h-[15rem] sm:h-[10rem] flex justify-center items-center mx-[5rem]"
             >
-              <SearchBox
-                language={language}
-                inputUniversiteiten={universiteiten}
-                inputStudies={[]}
-                inputVakken={[]}
-                currUniversiteit={""}
-                currStudie={""}
-                currVak={""}
-                currUniversiteitId={""}
-                currStudieId={""}
-                currVakId={""}
-              />
+              <Suspense fallback={<></>}>
+                <SearchFunctions
+                  language={language}
+                  uniId={"-1"}
+                  studieId={"-1"}
+                  vakId={"-1"}
+                  empty={true}
+                />
+              </Suspense>
             </div>
           </div>
           <div className="w-full h-[5vh] mb-5 items-center justify-center lg:mt-0 md:mt-[3rem] hidden lg:flex">
