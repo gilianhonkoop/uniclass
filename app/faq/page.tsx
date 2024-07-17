@@ -206,7 +206,7 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <Waves />
+      <Waves backgroundColor={"bg-white"} />
       <Footer language={language} />
     </div>
   );

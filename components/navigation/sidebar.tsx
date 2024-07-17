@@ -14,7 +14,7 @@ export default function Sidebar() {
   ];
 
   return (
-    <div className="h-full w-full flex flex-col rounded-r-3xl bg-white overflow-hidden">
+    <div className="h-screen w-full flex flex-col rounded-r-3xl bg-white overflow-hidden">
       <div className="w-full h-[6rem] shadow-md shadow-transparant flex items-center justify-center">
         <p className="text-test-primary font-bold text-3xl">UniClass</p>
       </div>

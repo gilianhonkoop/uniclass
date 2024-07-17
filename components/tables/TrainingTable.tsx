@@ -53,19 +53,10 @@ const columns = [
 ];
 
 export default function TrainingTable({ trainingen }: { trainingen: any[] }) {
-  // let dates = Array();
-  // trainingen.map(async (i, training: any) => {
-  //   let lessen = await getLessen(training.lessen);
-  //   let be = Array(2);
-  //   be[0] = formatDate(lessen[0].begin);
-  //   be[1] = formatDate(lessen[-1].begin);
-  //   dates.push(be);
-  // });
-
   return (
     <>
       {trainingen && (
-        <Table isStriped aria-label="Alle trainingen">
+        <Table isHeaderSticky isStriped aria-label="Alle trainingen">
           <TableHeader columns={columns}>
             {(column) => (
               <TableColumn key={column.key}>{column.label}</TableColumn>
@@ -75,7 +66,9 @@ export default function TrainingTable({ trainingen }: { trainingen: any[] }) {
             {(training) => (
               <TableRow key={training.key}>
                 <TableCell>{training.id}</TableCell>
-                <TableCell width={150}>{training.naam}</TableCell>
+                <TableCell className="max-w-[100px] min-w-[120px]">
+                  {training.naam}
+                </TableCell>
                 <TableCell width={300}>
                   <div className="overflow-y-scroll max-h-[10rem] max-w-[500px]">
                     {training.omschrijving}
@@ -86,7 +79,7 @@ export default function TrainingTable({ trainingen }: { trainingen: any[] }) {
                   {training.deelnemers.length + "/" + training.plaatsen}
                 </TableCell>
                 <TableCell>{training.prijs.toFixed(2)}</TableCell>
-                <TableCell className="max-w-[130px] min-w-[100px]">
+                <TableCell className="max-w-[110px] min-w-[80px]">
                   tbc
                 </TableCell>
                 <TableCell className="max-w-[100px]">

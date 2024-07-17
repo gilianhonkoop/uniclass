@@ -1,8 +1,14 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { experimental_taintUniqueValue } from "react";
 
 export const createClient = () => {
   const cookieStore = cookies();
+  experimental_taintUniqueValue(
+    "Do not pass anon key to the client.",
+    globalThis,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+  );
 
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,

@@ -35,7 +35,6 @@ export default function AddTraining({
     const plaatsen = formData.get("plaatsen") as string;
     const docent = formData.get("docent") as string;
     const taal = formData.get("taal") as string;
-    const betaallink = formData.get("betaallink") as string;
 
     if (uni_id && studie_id && vak_id) {
       const supabase = createClient();
@@ -46,7 +45,6 @@ export default function AddTraining({
         plaatsen: plaatsen,
         docent: docent,
         taal: taal,
-        betaallink: betaallink,
         universiteit_id: uni_id,
         studie_id: studie_id,
         vak_id: vak_id,
@@ -111,14 +109,6 @@ export default function AddTraining({
                     name="docent"
                     className="p-2 border-2 rounded-md border-grey-600"
                     placeholder={"docent"}
-                    type="text"
-                    autoComplete="off"
-                    required
-                  ></input>
-                  <input
-                    name="betaallink"
-                    className="p-2 border-2 rounded-md border-grey-600"
-                    placeholder={"betaal link"}
                     type="text"
                     autoComplete="off"
                     required

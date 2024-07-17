@@ -19,10 +19,14 @@ export default function SearchTraining({
   const router = useRouter();
 
   return (
-    <div className="w-full flex flex-row items-center justify-start gap-6">
+    <div className="max-w-[1000px] w-full flex flex-row items-center justify-center gap-6">
       <Select
         onChange={(e) => {
-          router.replace("/dashboard/trainingen?uniId=" + e.target.value);
+          if (e.target.value == "") {
+            router.replace("/dashboard/trainingen");
+          } else {
+            router.replace("/dashboard/trainingen?uniId=" + e.target.value);
+          }
         }}
         items={universiteiten}
         label="Universiteit"
@@ -38,12 +42,16 @@ export default function SearchTraining({
       {studies && (
         <Select
           onChange={(e) => {
-            router.replace(
-              "/dashboard/trainingen?uniId=" +
-                uniId +
-                "&studieId=" +
-                e.target.value,
-            );
+            if (e.target.value == "") {
+              router.replace("/dashboard/trainingen?uniId=" + uniId);
+            } else {
+              router.replace(
+                "/dashboard/trainingen?uniId=" +
+                  uniId +
+                  "&studieId=" +
+                  e.target.value,
+              );
+            }
           }}
           items={studies}
           label="Studie"
@@ -66,14 +74,23 @@ export default function SearchTraining({
       {vakken && (
         <Select
           onChange={(e) => {
-            router.replace(
-              "/dashboard/trainingen?uniId=" +
-                uniId +
-                "&studieId=" +
-                studieId +
-                "&vakId=" +
-                e.target.value,
-            );
+            if (e.target.value == "") {
+              router.replace(
+                "/dashboard/trainingen?uniId=" +
+                  uniId +
+                  "&studieId=" +
+                  e.target.value,
+              );
+            } else {
+              router.replace(
+                "/dashboard/trainingen?uniId=" +
+                  uniId +
+                  "&studieId=" +
+                  studieId +
+                  "&vakId=" +
+                  e.target.value,
+              );
+            }
           }}
           items={vakken}
           label="Vak"

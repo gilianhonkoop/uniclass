@@ -1,9 +1,12 @@
 import styles from "./waves.module.css";
-import dynamic from "next/dynamic";
 
-export default function Waves() {
+export default function Waves({
+  backgroundColor,
+}: {
+  backgroundColor: string;
+}) {
   return (
-    <div className="w-full h-full bg-white">
+    <div className={`w-full h-full ${backgroundColor}`}>
       <svg
         className={styles.waves}
         viewBox="0 24 150 28"

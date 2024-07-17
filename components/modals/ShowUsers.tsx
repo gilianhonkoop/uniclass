@@ -15,7 +15,6 @@ import {
   ModalFooter,
   Button,
   Checkbox,
-  CheckboxGroup,
 } from "@nextui-org/react";
 import {
   Table,

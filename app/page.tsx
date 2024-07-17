@@ -241,7 +241,7 @@ export default async function Index() {
           </div>
         </section>
       </div>
-      <Waves />
+      <Waves backgroundColor={"bg-test-bg"} />
       <Footer language={language} />
     </div>
   );

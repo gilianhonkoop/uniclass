@@ -78,8 +78,10 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
       <nav className="w-full flex flex-row shadow-md justify-center min-h-20 fixed sm:sticky top-0 z-50 bg-inherit">
         <div className="sm:hidden flex text-white justify-start items-center flex-row w-full bg-dark">
           <h4 className="text-white font-light ml-4">
-            <span className="">Uni</span>
-            <span className="text-test2-orange">Class</span>
+            <Link href="/">
+              <span className="">Uni</span>
+              <span className="text-test2-orange">Class</span>
+            </Link>
           </h4>
         </div>
         <div
@@ -105,8 +107,10 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
         <div className="flex-1 max-sm:hidden w-full flex min-h-16 bg-inherit sticky top-0 z-50 justify-center mt-[0rem]">
           <div className="flex flex-1 flex-row justify-between items-center max-w-6xl sm:mx-[2rem] md:mx-[5rem]">
             <h3 className="text-black font-normal">
-              <span className="">Uni</span>
-              <span className="text-test2-orange">Class</span>
+              <Link href="/">
+                <span className="">Uni</span>
+                <span className="text-test2-orange">Class</span>
+              </Link>
             </h3>
             <ul className="w-fit flex justify-start items-center text-[18px] tracking-[1.6px] text-black">
               {navLinks.map((page, index) => (

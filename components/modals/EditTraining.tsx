@@ -28,7 +28,6 @@ export default function EditTraining({ training }: { training: any }) {
     const prijs = formData.get("prijs") as string;
     const plaatsen = formData.get("plaatsen") as string;
     const docent = formData.get("docent") as string;
-    const betaallink = formData.get("betaallink") as string;
     const taal = formData.get("taal") as string;
     const status = formData.get("status") as string;
 
@@ -41,7 +40,6 @@ export default function EditTraining({ training }: { training: any }) {
         prijs: prijs,
         plaatsen: plaatsen,
         docent: docent,
-        betaallink: betaallink,
         taal: taal,
         status: status,
       })
@@ -71,7 +69,8 @@ export default function EditTraining({ training }: { training: any }) {
                 Wijzigen
               </ModalHeader>
               <form>
-                <ModalBody>
+                <ModalBody className="flex flex-col gap-0">
+                  <p>titel</p>
                   <input
                     name="naam"
                     className="p-2 border-2 rounded-md border-grey-600"
@@ -80,6 +79,7 @@ export default function EditTraining({ training }: { training: any }) {
                     autoComplete="off"
                     required
                   ></input>
+                  <p className="mt-2">omschrijving</p>
                   <textarea
                     name="omschrijving"
                     className="p-2 border-2 rounded-md border-grey-600 max-h-fit h-[15rem]"
@@ -87,6 +87,7 @@ export default function EditTraining({ training }: { training: any }) {
                     autoComplete="off"
                     required
                   ></textarea>
+                  <p className="mt-2">prijs</p>
                   <input
                     name="prijs"
                     id="prijs"
@@ -96,6 +97,7 @@ export default function EditTraining({ training }: { training: any }) {
                     autoComplete="off"
                     required
                   ></input>
+                  <p className="mt-2">plaatsen</p>
                   <input
                     name="plaatsen"
                     className="p-2 border-2 rounded-md border-grey-600"
@@ -104,6 +106,7 @@ export default function EditTraining({ training }: { training: any }) {
                     autoComplete="off"
                     required
                   ></input>
+                  <p className="mt-2">docent</p>
                   <input
                     name="docent"
                     className="p-2 border-2 rounded-md border-grey-600"
@@ -112,14 +115,7 @@ export default function EditTraining({ training }: { training: any }) {
                     autoComplete="off"
                     required
                   ></input>
-                  <input
-                    name="betaallink"
-                    className="p-2 border-2 rounded-md border-grey-600"
-                    defaultValue={training.betaallink}
-                    type="text"
-                    autoComplete="off"
-                    required
-                  ></input>
+                  <p className="mt-2">taal</p>
                   <select
                     name="taal"
                     className="p-2 border-2 rounded-md border-grey-600 bg-white w-full"
@@ -134,6 +130,7 @@ export default function EditTraining({ training }: { training: any }) {
                       );
                     })}
                   </select>
+                  <p className="mt-2">status</p>
                   <select
                     name="status"
                     className="p-2 border-2 rounded-md border-grey-600 bg-white w-full"

@@ -48,7 +48,7 @@ export default async function Lokalen({
   };
 
   return (
-    <div className="flex flex-col w-full h-fit items-center">
+    <div className="flex flex-col w-full h-max items-center">
       <form className="flex flex-col gap-5 items-center pt-20">
         <input
           placeholder="Vul een nieuw lokaal in"
@@ -68,11 +68,14 @@ export default async function Lokalen({
       {searchParams?.message && (
         <p className="mt-4 p-4 text-center text-md">{searchParams.message}</p>
       )}
-      <div className="mt-20 mb-10 text-3xl u">Huidige lokalen:</div>
-      <div className="w-full flex flex-col gap-2 items-center">
-        {lokalen.map((lokaal, index) => {
-          return <LokaalRij key={index} name={lokaal.naam} id={lokaal.id} />;
-        })}
+
+      <div className="text-3xl mt-20">Huidige lokalen:</div>
+      <div className="overflow-y-auto max-h-[25rem] ">
+        <div className="w-full flex flex-col gap-2 items-center">
+          {lokalen.map((lokaal, index) => {
+            return <LokaalRij key={index} name={lokaal.naam} id={lokaal.id} />;
+          })}
+        </div>
       </div>
     </div>
   );

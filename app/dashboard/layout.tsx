@@ -16,8 +16,8 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="flex flex-row items-center justify-center w-full h-screen bg-gray-50">
-      <div className="h-full max-w-[16%] w-full min-w-[14rem] shadow-md">
+    <div className="flex flex-row flex-1 items-stretch justify-center w-full bg-gray-50 min-h-full">
+      <div className="min-h-full max-w-[16%] w-full min-w-[10rem] shadow-md left-0 sticky bg-white">
         <Sidebar />
       </div>
       <div className="flex-1 h-full">

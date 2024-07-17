@@ -55,7 +55,7 @@ export default async function Page({ params }: { params: { info: string } }) {
           <Trainings vakId={vakId} pathName={params.info} />
         </Suspense>
       </div>
-      <Waves />
+      <Waves backgroundColor={"bg-white"} />
       <Footer language={language} />
     </div>
   );

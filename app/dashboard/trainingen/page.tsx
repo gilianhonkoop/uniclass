@@ -2,6 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import SearchTraining from "@/components/search/SearchTraining";
 import AddTraining from "@/components/modals/AddTraining";
 import TrainingTable from "@/components/tables/TrainingTable";
+import ShowDeleted from "@/components/search/ShowDeleted";
 
 async function getUniversiteiten() {
   "use server";
@@ -57,6 +58,7 @@ async function getTrainingen(
   uniId: number | undefined,
   studieId: number | undefined,
   vakId: number | undefined,
+  getDeleted: string | undefined,
 ) {
   "use server";
 
@@ -68,6 +70,7 @@ async function getTrainingen(
       .eq("universiteit_id", uniId)
       .eq("studie_id", studieId)
       .eq("vak_id", vakId)
+      .neq("status", getDeleted)
       .order("id", { ascending: false });
 
     return data;
@@ -79,6 +82,7 @@ async function getTrainingen(
       .from("trainingen")
       .select()
       .eq("universiteit_id", uniId)
+      .neq("status", getDeleted)
       .eq("studie_id", studieId)
       .order("id", { ascending: false });
 
@@ -90,6 +94,7 @@ async function getTrainingen(
     const { data, error } = await supabase
       .from("trainingen")
       .select()
+      .neq("status", getDeleted)
       .eq("universiteit_id", uniId)
       .order("id", { ascending: false });
 
@@ -102,12 +107,24 @@ async function getTrainingen(
 export default async function Trainingen({
   searchParams,
 }: {
-  searchParams: { uniId: number; studieId: number; vakId: number };
+  searchParams: {
+    uniId: number;
+    studieId: number;
+    vakId: number;
+    showDeleted: string | undefined;
+  };
 }) {
   var universiteiten: any[] = [];
   universiteiten = await getUniversiteiten();
   let studies: any[] | null = null;
   let vakken: any[] | null = null;
+  let showDeleted: string;
+
+  if (searchParams.showDeleted == "true") {
+    showDeleted = "";
+  } else {
+    showDeleted = "deleted";
+  }
 
   //TODO only retrieve used columns
   let trainingen: any[] | null = null;
@@ -115,6 +132,7 @@ export default async function Trainingen({
     searchParams.uniId,
     searchParams.studieId,
     searchParams.vakId,
+    showDeleted,
   );
 
   if (trainingen == null) {
@@ -131,7 +149,7 @@ export default async function Trainingen({
 
   return (
     <div className="h-screen">
-      <div className="h-[6rem] flex flex-row items-center gap-10 px-20">
+      <div className="h-[6rem] flex flex-row items-center gap-10 px-10 justify-evenly">
         <SearchTraining
           universiteiten={universiteiten}
           studies={studies}
@@ -139,7 +157,10 @@ export default async function Trainingen({
           uniId={searchParams.uniId}
           studieId={searchParams.studieId}
         />
-        <div className="h-fit mr-10">
+        <div className="flex my-[1rem]">
+          <ShowDeleted />
+        </div>
+        <div className="h-fit">
           <AddTraining
             uni_id={searchParams.uniId}
             studie_id={searchParams.studieId}
@@ -147,6 +168,7 @@ export default async function Trainingen({
           />
         </div>
       </div>
+
       <div className="w-full h-full py-5 px-8 flex flex-col">
         <TrainingTable trainingen={trainingen} />
       </div>
