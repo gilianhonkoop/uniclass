@@ -17,7 +17,11 @@ export default async function Trainings({
   var trainingen = await getTrainingen(vakId);
 
   if (trainingen.length == 0) {
-    return <p>Er zijn momenteel geen trainingen voor dit vak.</p>;
+    return (
+      <div>
+        <p>Er zijn momenteel geen trainingen voor dit vak.</p>
+      </div>
+    );
   } else {
     return trainingen.map(async (training, index) => {
       const lessen = await getLessen(training.lessen);

@@ -42,15 +42,14 @@ export default async function Page({ params }: { params: { info: string } }) {
     <div className="animate-in flex-1 w-full flex flex-col items-center justify-center bg-white">
       <Navbar setLanguage={setLanguage} />
       <div className="flex-1 flex flex-col items-center opacity-0z-0 z-0 w-full mt-[3rem] mb-[5rem] gap-[5rem]">
-        <Suspense fallback={<></>}>
-          <SearchFunctions
-            language={language}
-            uniId={uniId}
-            studieId={studieId}
-            vakId={vakId}
-            empty={false}
-          />
-        </Suspense>
+        <Suspense fallback={<></>}></Suspense>
+        <SearchFunctions
+          language={language}
+          uniId={uniId}
+          studieId={studieId}
+          vakId={vakId}
+          empty={false}
+        />
         <Suspense fallback={<>Loading...</>}>
           <Trainings vakId={vakId} pathName={params.info} />
         </Suspense>
