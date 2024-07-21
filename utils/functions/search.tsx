@@ -1,8 +1,19 @@
+"use server";
+
 import { createClient } from "@/utils/supabase/server";
 
-export async function getUniversiteiten() {
-  "use server";
+export async function getAllLessen() {
+  const supabase = createClient();
+  const { data, error } = await supabase.from("lessen").select();
 
+  if (data == null) {
+    return [];
+  }
+
+  return data;
+}
+
+export async function getUniversiteiten() {
   const supabase = createClient();
   const { data, error } = await supabase
     .from("universiteiten")
@@ -89,4 +100,58 @@ export async function getLokaal(id: string | number) {
   }
 
   return data;
+}
+
+export async function getSpecificTrainingen(
+  uniId: number | undefined,
+  studieId: number | undefined,
+  vakId: number | undefined,
+  getExpired: string,
+  getDeleted: string,
+) {
+  "use server";
+
+  if (uniId != -1 && studieId != -1 && vakId != -1) {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("trainingen")
+      .select()
+      .eq("universiteit_id", uniId)
+      .eq("studie_id", studieId)
+      .eq("vak_id", vakId)
+      .neq("status", getExpired)
+      .neq("status", getDeleted)
+      .order("id", { ascending: false });
+
+    return data;
+  }
+
+  if (uniId != -1 && studieId != -1) {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("trainingen")
+      .select()
+      .eq("universiteit_id", uniId)
+      .neq("status", getExpired)
+      .neq("status", getDeleted)
+      .eq("studie_id", studieId)
+      .order("id", { ascending: false });
+
+    return data;
+  }
+
+  if (uniId != -1) {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("trainingen")
+      .select()
+      .neq("status", getExpired)
+      .neq("status", getDeleted)
+      .eq("universiteit_id", uniId)
+      .order("id", { ascending: false });
+
+    return data;
+  }
+
+  return [];
 }

@@ -3,27 +3,27 @@ import { useState, useEffect } from "react";
 import { Checkbox } from "@nextui-org/react";
 
 export default function ShowDeleted({
-  showDeleted,
-  setShowDeleted,
+  showExpired,
+  setShowExpired,
 }: {
-  showDeleted: string;
-  setShowDeleted: Function;
+  showExpired: string;
+  setShowExpired: Function;
 }) {
   return (
     <>
       <Checkbox
         color="primary"
         value={"Unpublished"}
-        isSelected={showDeleted == ""}
+        isSelected={showExpired == ""}
         onValueChange={() => {
-          if (showDeleted == "") {
-            setShowDeleted("deleted");
+          if (showExpired == "") {
+            setShowExpired("expired");
           } else {
-            setShowDeleted("");
+            setShowExpired("");
           }
         }}
       >
-        Show Deleted
+        Show Expired
       </Checkbox>
     </>
   );

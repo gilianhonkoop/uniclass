@@ -1,7 +1,7 @@
 import "./globals.css";
 import Providers from "./providers";
 import localFont from "next/font/local";
-import { NavigationEvents } from "../components/navigationEvents";
+import { NavigationEvents } from "../components/navigation/navigationEvents";
 import { Suspense } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 

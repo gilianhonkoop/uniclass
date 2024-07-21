@@ -9,12 +9,18 @@ export default function SearchTraining({
   vakken,
   uniId,
   studieId,
+  setUniId,
+  setStudieId,
+  setVakId,
 }: {
   universiteiten: any[];
   studies: any[] | null;
   vakken: any[] | null;
   uniId: number;
   studieId: number;
+  setUniId: Function;
+  setStudieId: Function;
+  setVakId: Function;
 }) {
   const router = useRouter();
 
@@ -23,9 +29,9 @@ export default function SearchTraining({
       <Select
         onChange={(e) => {
           if (e.target.value == "") {
-            router.replace("/dashboard/trainingen");
+            setUniId(-1);
           } else {
-            router.replace("/dashboard/trainingen?uniId=" + e.target.value);
+            setUniId(e.target.value);
           }
         }}
         items={universiteiten}
@@ -43,14 +49,9 @@ export default function SearchTraining({
         <Select
           onChange={(e) => {
             if (e.target.value == "") {
-              router.replace("/dashboard/trainingen?uniId=" + uniId);
+              setStudieId(-1);
             } else {
-              router.replace(
-                "/dashboard/trainingen?uniId=" +
-                  uniId +
-                  "&studieId=" +
-                  e.target.value,
-              );
+              setStudieId(e.target.value);
             }
           }}
           items={studies}
@@ -75,21 +76,9 @@ export default function SearchTraining({
         <Select
           onChange={(e) => {
             if (e.target.value == "") {
-              router.replace(
-                "/dashboard/trainingen?uniId=" +
-                  uniId +
-                  "&studieId=" +
-                  e.target.value,
-              );
+              setVakId(-1);
             } else {
-              router.replace(
-                "/dashboard/trainingen?uniId=" +
-                  uniId +
-                  "&studieId=" +
-                  studieId +
-                  "&vakId=" +
-                  e.target.value,
-              );
+              setVakId(e.target.value);
             }
           }}
           items={vakken}
