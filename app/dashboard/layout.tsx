@@ -8,13 +8,11 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // const supabase = createClient();
-
-  // IMPORTANT
-  // const { data, error } = await supabase.auth.getUser();
-  // if (error || !data?.user) {
-  //   redirect("/login");
-  // }
+  const supabase = createClient();
+  const { data, error } = await supabase.auth.getUser();
+  if (error || !data?.user) {
+    redirect("/login");
+  }
 
   return (
     <div className="flex flex-row flex-1 items-stretch justify-center w-full bg-gray-50 min-h-full">
