@@ -3,49 +3,15 @@ import SearchTraining from "@/components/search/SearchTraining";
 import AddTraining from "@/components/modals/AddTraining";
 import TrainingTable from "@/components/tables/TrainingTable";
 import ShowDeleted from "@/components/search/ShowDeleted";
+import {
+  getStudies,
+  getVakken,
+  getUniversiteiten,
+} from "@/utils/functions/search";
 
-async function getUniversiteiten() {
-  "use server";
-
+async function getAllLessen() {
   const supabase = createClient();
-  const { data, error } = await supabase
-    .from("universiteiten")
-    .select()
-    .order("id", { ascending: false });
-
-  if (data == null) {
-    return [];
-  }
-
-  return data;
-}
-
-async function getStudies(id: number) {
-  "use server";
-
-  const supabase = createClient();
-  const { data, error } = await supabase
-    .from("studies")
-    .select()
-    .eq("universiteit_id", id)
-    .order("id", { ascending: false });
-
-  if (data == null) {
-    return [];
-  }
-
-  return data;
-}
-
-async function getVakken(id: number) {
-  "use server";
-
-  const supabase = createClient();
-  const { data, error } = await supabase
-    .from("vakken")
-    .select()
-    .eq("studie_id", id)
-    .order("id", { ascending: false });
+  const { data, error } = await supabase.from("lessen").select();
 
   if (data == null) {
     return [];
@@ -114,11 +80,12 @@ export default async function Trainingen({
     showDeleted: string | undefined;
   };
 }) {
-  var universiteiten: any[] = [];
-  universiteiten = await getUniversiteiten();
+  var universiteiten: any[] = await getUniversiteiten();
   let studies: any[] | null = null;
   let vakken: any[] | null = null;
   let showDeleted: string;
+  let trainingen: any[] | null = null;
+  let lessen: any[] = await getAllLessen();
 
   if (searchParams.showDeleted == "true") {
     showDeleted = "";
@@ -126,25 +93,33 @@ export default async function Trainingen({
     showDeleted = "deleted";
   }
 
-  //TODO only retrieve used columns
-  let trainingen: any[] | null = null;
-  trainingen = await getTrainingen(
-    searchParams.uniId,
-    searchParams.studieId,
-    searchParams.vakId,
-    showDeleted,
-  );
+  if (searchParams.uniId) {
+    trainingen = await getTrainingen(
+      searchParams.uniId,
+      searchParams.studieId,
+      searchParams.vakId,
+      showDeleted,
+    );
 
-  if (trainingen == null) {
+    if (trainingen == null) {
+      trainingen = [];
+    }
+  } else {
     trainingen = [];
+    lessen = [];
   }
+  //TODO only retrieve used columns
 
   if (searchParams.uniId) {
     studies = await getStudies(searchParams.uniId);
+  } else {
+    studies = [];
   }
 
   if (searchParams.studieId) {
     vakken = await getVakken(searchParams.studieId);
+  } else {
+    vakken = [];
   }
 
   return (
@@ -170,7 +145,7 @@ export default async function Trainingen({
       </div>
 
       <div className="w-full h-full py-5 px-8 flex flex-col">
-        <TrainingTable trainingen={trainingen} />
+        <TrainingTable trainingen={trainingen} lessen={lessen} />
       </div>
     </div>
   );

@@ -9,8 +9,13 @@ export default function ShowDeleted() {
     setDomLoaded(true);
   }, []);
 
-  const urlParams = new URLSearchParams(window.location.search);
-  let x = urlParams.get("showDeleted");
+  let x: string | null = "false";
+  let urlParams = new URLSearchParams();
+
+  if (domLoaded) {
+    urlParams = new URLSearchParams(window.location.search);
+    x = urlParams.get("showDeleted");
+  }
 
   return (
     <>

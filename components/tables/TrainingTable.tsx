@@ -52,7 +52,32 @@ const columns = [
   },
 ];
 
-export default function TrainingTable({ trainingen }: { trainingen: any[] }) {
+export default function TrainingTable({
+  trainingen,
+  lessen,
+}: {
+  trainingen: any[];
+  lessen: any[];
+}) {
+  function getBeginAndEnd(lesIds: number[]) {
+    var newArray: any[] = lessen
+      .filter(function (les) {
+        return les.id in lesIds;
+      })
+      .map(function (obj) {
+        return new Date(obj.begin);
+      });
+
+    if (newArray.length > 0) {
+      let min = new Date(Math.min(...newArray)).toLocaleString().split(",")[0];
+      let max = new Date(Math.max(...newArray)).toLocaleString().split(",")[0];
+
+      return `begin: ${min} \n eind: ${max}`;
+    } else {
+      return "nog geen lessen";
+    }
+  }
+
   return (
     <>
       {trainingen && (
@@ -80,7 +105,7 @@ export default function TrainingTable({ trainingen }: { trainingen: any[] }) {
                 </TableCell>
                 <TableCell>{training.prijs.toFixed(2)}</TableCell>
                 <TableCell className="max-w-[110px] min-w-[80px]">
-                  tbc
+                  {getBeginAndEnd(training.lessen)}
                 </TableCell>
                 <TableCell className="max-w-[100px]">
                   {training.status}
