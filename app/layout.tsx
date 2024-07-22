@@ -36,25 +36,23 @@ const defaultUrl = process.env.NEXT_PUBLIC_BASE_URL
   ? `https://${process.env.NEXT_PUBLIC_BASE_URL}`
   : "http://localhost:3000";
 
-// export const metadata = {
-//   metadataBase: new URL(defaultUrl),
-//   description: "Hoge kwaliteit tentamentraining voor een eerlijke prijs",
-//   openGraph: {
-//     title: "UniClass",
-//     description: "Hoge kwaliteit tentamentraining voor een eerlijke prijs",
-//     url: "https://uniclass.nl",
-//     siteName: "UniClass",
-//     images: [
-//       {
-//         url: "/logo.png",
-//         width: 1834,
-//         height: 475,
-//       },
-//     ],
-//     locale: "nl_NL",
-//     type: "website",
-//   },
-// };
+export const metadata = {
+  openGraph: {
+    title: "UniClass",
+    description: "Hoge kwaliteit tentamentraining voor een eerlijke prijs",
+    url: "https://uniclass.nl",
+    siteName: "UniClass",
+    images: [
+      {
+        url: "https://uniclass.nl/logo.png",
+        width: 1834,
+        height: 475,
+      },
+    ],
+    locale: "nl_NL",
+    type: "website",
+  },
+};
 
 export default function RootLayout({
   children,
@@ -76,7 +74,7 @@ export default function RootLayout({
             <Suspense fallback={null}>
               <NavigationEvents />
             </Suspense>
-            {/* <SpeedInsights /> */}
+            <SpeedInsights />
           </main>
         </Providers>
       </body>
