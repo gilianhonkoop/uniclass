@@ -1,7 +1,5 @@
 import Navbar from "@/components/navigation/Navbar";
 import { redirect } from "next/navigation";
-import user from "@/icons/user.png";
-import Link from "next/link";
 import { cookies } from "next/headers";
 import Footer from "@/components/Footer";
 import dynamic from "next/dynamic";
