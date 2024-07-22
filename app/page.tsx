@@ -10,7 +10,6 @@ import GetStarted from "@/components/GetStarted";
 import { cookies } from "next/headers";
 import BlobAnimtation from "@/components/BlobAnimation";
 import dynamic from "next/dynamic";
-import SearchBox from "@/components/search/SearchBox";
 import SearchFunctions from "@/components/search/SearchFunctions";
 import { Suspense } from "react";
 
