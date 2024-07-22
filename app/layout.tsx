@@ -44,6 +44,16 @@ export const metadata = {
     siteName: "UniClass",
     images: [
       {
+        url: "https://uniclass.nl/logo2.png",
+        width: 362,
+        height: 78,
+      },
+      {
+        url: "https://uniclass.nl/logo3.png",
+        width: 716,
+        height: 153,
+      },
+      {
         url: "https://uniclass.nl/logo.png",
         width: 1834,
         height: 475,
