@@ -116,7 +116,7 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
               {navLinks.map((page, index) => (
                 <li className="sm:w-[4rem] md:w-[6rem] text-center" key={index}>
                   <Link
-                    className="hover:text-test-primary ease-in-out duration-300 transition-colors text-white"
+                    className="hover:text-test2-orange ease-in-out duration-300 transition-colors text-white"
                     href={page.href}
                   >
                     {page.title}
@@ -129,7 +129,7 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
                 }}
               >
                 <li key="4" className="text-right w-[3rem]">
-                  <button className="hover:text-test-primary text-white">
+                  <button className="hover:text-test2-orange text-white">
                     NL
                   </button>
                 </li>
@@ -141,7 +141,9 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
                 }}
               >
                 <li key="5" className="text-left w-[3rem]">
-                  <button className="hover:text-primary text-white">EN</button>
+                  <button className="hover:text-test2-orange text-white">
+                    EN
+                  </button>
                 </li>
               </form>
             </ul>
