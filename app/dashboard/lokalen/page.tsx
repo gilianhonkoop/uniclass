@@ -60,7 +60,7 @@ export default async function Lokalen({
         />
         <button
           formAction={maakLokaal}
-          className="w-[20rem] border rounded h-[3rem] bg-dark text-white"
+          className="w-[20rem] border rounded h-[3rem] bg-primary-dark text-white"
         >
           Toevoegen
         </button>

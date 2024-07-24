@@ -12,7 +12,7 @@ export default function Page({ text }: { text: string }) {
       }}
       className="mt-[4rem] flex justify-center md:justify-start"
     >
-      <button className="rounded-sm bg-test2-orange text-white w-[14rem] h-[60px]">
+      <button className="rounded-sm bg-primary-orange text-white w-[14rem] h-[60px]">
         {text}
       </button>
     </form>

@@ -52,10 +52,10 @@ export default async function Index() {
   }
 
   return (
-    <div className=" flex-1 w-full flex flex-col h-screen relative items-center bg-test-bg text-black">
+    <div className="flex-1 w-full flex flex-col h-screen relative items-center bg-primary-bg text-black">
       <Navbar setLanguage={setLanguage} />
       <div className=" flex-1 flex flex-col items-center relative w-full sm:mt-[0rem] mt-[5rem] max-w-[100vw] overflow-x-hidden">
-        <section className="bg-test-bg w-full h-full min-h-[calc(100vh-80px)] drop-shadow-md flex flex-col">
+        <section className="bg-primary-bg w-full h-full min-h-[calc(100vh-80px)] drop-shadow-md flex flex-col">
           <div
             className=" h-fit z-10 relative flex flex-1 w-full 
           lg:mb-[4vh] lg:mb-0 mb-0 sm:mb-[3rem] items-center justify-center mt-[4rem]"
@@ -68,7 +68,7 @@ export default async function Index() {
                 {language == "nl" && (
                   <h1 className="font-normal text-center lg:text-left md:min-w-[90vw] lg:min-w-fit">
                     <div className="wrapper-typing flex flex-col items-center lg:items-start">
-                      <span className="text-test-black">
+                      <span className="text-primary-black">
                         Volg een training{" "}
                       </span>
                       <div className="min-w-[280px] max-w-[382px]">
@@ -80,7 +80,7 @@ export default async function Index() {
                 {language == "en" && (
                   <h1 className="font-normal font-medium text-center lg:text-left">
                     <div className="wrapper-typing flex flex-col items-center lg:items-start">
-                      <span className="text-test-black">
+                      <span className="text-primary-black">
                         Find a training in{" "}
                       </span>
                       <div className="min-w-[280px] max-w-[382px]">
@@ -92,30 +92,37 @@ export default async function Index() {
                 {language == "nl" && (
                   <p
                     className="text-[max(16px,2vw)] lg:text-[max(20px,1.2vw)] lg:mx-0 md:mx-[5rem] sm:mx-[2rem] mx-0rem 
-                  mt-8 font-normal text-test-black text-center lg:text-left leading-tight text-opacity-90 "
+                  mt-8 font-normal text-primary-black text-center lg:text-left leading-tight text-opacity-90 "
                   >
                     Bereid je voor op{" "}
-                    <span className="text-test-primary"> examens </span> onder
-                    begeleiding van
-                    <span className="text-test-primary"> ervaren </span>
+                    <span className="text-primary-darkblue"> examens </span>{" "}
+                    onder begeleiding van
+                    <span className="text-primary-darkblue"> ervaren </span>
                     docenten. Bouw{" "}
-                    <span className="text-test-primary"> vertrouwen </span> en
-                    behaal{" "}
-                    <span className="text-test-primary"> resultaten</span>.
+                    <span className="text-primary-darkblue">
+                      {" "}
+                      vertrouwen{" "}
+                    </span>{" "}
+                    en behaal{" "}
+                    <span className="text-primary-darkblue"> resultaten</span>.
                   </p>
                 )}
                 {language == "en" && (
                   <p
-                    className="text-[max(16px,2vw)] lg:text-[max(20px,1.2vw)] mt-8 font-normal text-test-black text-center 
+                    className="text-[max(16px,2vw)] lg:text-[max(20px,1.2vw)] mt-8 font-normal text-primary-black text-center 
                   lg:text-left leading-tight text-opacity-90"
                   >
                     Prepare for your{" "}
-                    <span className="text-test-primary"> exams </span> under the
-                    guidance of
-                    <span className="text-test-primary"> experienced </span>
+                    <span className="text-primary-darkblue"> exams </span> under
+                    the guidance of
+                    <span className="text-primary-darkblue"> experienced </span>
                     teachers. Build{" "}
-                    <span className="text-test-primary"> confidence </span> and
-                    achieve <span className="text-test-primary"> results</span>.
+                    <span className="text-primary-darkblue">
+                      {" "}
+                      confidence{" "}
+                    </span>{" "}
+                    and achieve{" "}
+                    <span className="text-primary-darkblue"> results</span>.
                   </p>
                 )}
                 <div className="visible lg:invisible">
@@ -240,7 +247,7 @@ export default async function Index() {
           </div>
         </section>
       </div>
-      <Waves backgroundColor={"bg-test-bg"} />
+      <Waves backgroundColor={"bg-primary-bg"} />
       <Footer language={language} />
     </div>
   );

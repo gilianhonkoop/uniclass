@@ -287,7 +287,7 @@ export default function SearchBox2({
             "/training/" + universiteitId + " " + studieId + " " + vakId,
           )}
           className="hover:cursor-pointer flex justify-center items-center h-[4rem] min-w-[16rem] lg:min-w-[15vw] 
-        rounded-sm shadow-sm hover:shadow-md text-white bg-test2-orange hover:scale-[102%] text-center md:mt-0 mt-[1.5rem]
+        rounded-sm shadow-sm hover:shadow-md text-white bg-primary-orange hover:scale-[102%] text-center md:mt-0 mt-[1.5rem]
         transition"
         >
           {language == "nl" && (

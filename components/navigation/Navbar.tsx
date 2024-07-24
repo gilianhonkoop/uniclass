@@ -75,17 +75,17 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
 
   return (
     <>
-      <nav className="w-full flex flex-row shadow-md justify-center min-h-20 fixed sm:sticky top-0 z-50 bg-dark">
-        <div className="sm:hidden flex text-white justify-start items-center flex-row w-full bg-dark">
+      <nav className="w-full flex flex-row shadow-md justify-center min-h-20 fixed sm:sticky top-0 z-50 bg-primary-dark">
+        <div className="sm:hidden flex text-white justify-start items-center flex-row w-full bg-primary-dark">
           <h4 className="font-light ml-4">
             <Link href="/">
               <span className="text-white">Uni</span>
-              <span className="text-test2-orange">Class</span>
+              <span className="text-primary-orange">Class</span>
             </Link>
           </h4>
         </div>
         <div
-          className="sm:hidden flex justify-end items-center flex-row w-full bg-dark pr-4"
+          className="sm:hidden flex justify-end items-center flex-row w-full bg-primary-dark pr-4"
           onClick={() => {
             toggleMenu();
             document.body.style.overflowY =
@@ -109,14 +109,14 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
             <h3 className="font-light">
               <Link href="/">
                 <span className="text-white">Uni</span>
-                <span className="text-test2-orange">Class</span>
+                <span className="text-primary-orange">Class</span>
               </Link>
             </h3>
             <ul className="w-fit flex justify-start items-center text-[18px] tracking-[1.6px] text-black">
               {navLinks.map((page, index) => (
                 <li className="sm:w-[4rem] md:w-[6rem] text-center" key={index}>
                   <Link
-                    className="hover:text-test2-orange ease-in-out duration-300 transition-colors text-white"
+                    className="hover:text-primary-orange ease-in-out duration-300 transition-colors text-white"
                     href={page.href}
                   >
                     {page.title}
@@ -129,7 +129,7 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
                 }}
               >
                 <li key="4" className="text-right w-[3rem]">
-                  <button className="hover:text-test2-orange text-white">
+                  <button className="hover:text-primary-orange text-white">
                     NL
                   </button>
                 </li>
@@ -141,7 +141,7 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
                 }}
               >
                 <li key="5" className="text-left w-[3rem]">
-                  <button className="hover:text-test2-orange text-white">
+                  <button className="hover:text-primary-orange text-white">
                     EN
                   </button>
                 </li>
@@ -157,7 +157,7 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="sm:hidden fixed left-0 top-0 w-full h-screen bg-dark text-black z-20 p-10 px-14 origin-top"
+            className="sm:hidden fixed left-0 top-0 w-full h-screen bg-primary-dark text-black z-20 p-10 px-14 origin-top"
           >
             <div className="flex h-full flex-col">
               <div className="flex justify-start">

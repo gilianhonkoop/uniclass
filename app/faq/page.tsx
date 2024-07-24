@@ -47,7 +47,7 @@ export default function Page() {
                   We offer courses tailored to different universities and fields
                   of study. To find out which courses are available, please
                   visit our website{" "}
-                  <Link className="text-primary-600" href={"/"}>
+                  <Link className="text-primary" href={"/"}>
                     www.uniclass.nl
                   </Link>
                   . If you're interested in a course that's not listed, feel
@@ -143,7 +143,7 @@ export default function Page() {
                 <p className="text-gray-500">
                   Yes, if you're interested in joining a course that's already
                   in progress, please send an email to{" "}
-                  <span className="text-primary-600 hover:underline hover:cursor-text">
+                  <span className="text-primary hover:underline hover:cursor-text">
                     {" "}
                     info@uniclass.nl{" "}
                   </span>
@@ -194,7 +194,7 @@ export default function Page() {
                 </h3>
                 <p className="text-gray-500">
                   To lodge a complaint, please send an email to{" "}
-                  <span className="text-primary-600 hover:underline hover:cursor-text">
+                  <span className="text-primary hover:underline hover:cursor-text">
                     {" "}
                     info@uniclass.nl{" "}
                   </span>

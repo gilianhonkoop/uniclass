@@ -75,32 +75,6 @@ p {
   font-size: 18px;
 }
 
-.spacer {
-  aspect-ratio: 960/200;
-  width: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-
-.layer1 {
-  background-image: url("../waves/wave1.svg");
-}
-
-.layer2 {
-  background-image: url("../waves/wave2.svg");
-}
-
-.bluegr {
-  background: linear-gradient(
-    to top right,
-    rgba(122, 167, 255, 0.32),
-    rgba(245, 246, 247, 1) 25%,
-    rgba(245, 246, 247, 1) 75%,
-    rgba(122, 167, 255, 0.32)
-  );
-}
-
 .spantext {
   position: relative;
   height: 96px;

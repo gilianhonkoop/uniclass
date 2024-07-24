@@ -118,19 +118,6 @@ export default async function Trainings({
                   </p>
                 </button>
               </form>
-              {/* <div className="w-[6rem] h-[6rem] min-w-[6rem] min-h-[6rem] mr-5">
-                <div className="w-full h-full relative rounded-full overflow-hidden bg-red-300 mt-2 ">
-                  <Image
-                    sizes="50, 50"
-                    src={user}
-                    fill={true}
-                    alt="Picture of the lecturer"
-                  />
-                </div>
-                <p className="text-center text-[14px] mt-1">
-                  {training.docent.split(" ")[0]}
-                </p>
-              </div> */}
             </div>
           </div>
         </div>
