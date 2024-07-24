@@ -52,7 +52,7 @@ export default async function Index() {
   }
 
   return (
-    <div className="animate-in flex-1 w-full flex flex-col h-screen relative items-center bg-test-bg text-black">
+    <div className=" flex-1 w-full flex flex-col h-screen relative items-center bg-test-bg text-black">
       <Navbar setLanguage={setLanguage} />
       <div className=" flex-1 flex flex-col items-center relative w-full sm:mt-[0rem] mt-[5rem] max-w-[100vw] overflow-x-hidden">
         <section className="bg-test-bg w-full h-full min-h-[calc(100vh-80px)] drop-shadow-md flex flex-col">
