@@ -75,11 +75,11 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
 
   return (
     <>
-      <nav className="w-full flex flex-row shadow-md justify-center min-h-20 fixed sm:sticky top-0 z-50 bg-inherit">
+      <nav className="w-full flex flex-row shadow-md justify-center min-h-20 fixed sm:sticky top-0 z-50 bg-dark">
         <div className="sm:hidden flex text-white justify-start items-center flex-row w-full bg-dark">
-          <h4 className="text-white font-light ml-4">
+          <h4 className="font-light ml-4">
             <Link href="/">
-              <span className="">Uni</span>
+              <span className="text-white">Uni</span>
               <span className="text-test2-orange">Class</span>
             </Link>
           </h4>
@@ -106,9 +106,9 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
         </div>
         <div className="flex-1 max-sm:hidden w-full flex min-h-16 bg-inherit sticky top-0 z-50 justify-center mt-[0rem]">
           <div className="flex flex-1 flex-row justify-between items-center max-w-6xl sm:mx-[2rem] md:mx-[5rem]">
-            <h3 className="text-black font-normal">
+            <h3 className="font-light">
               <Link href="/">
-                <span className="">Uni</span>
+                <span className="text-white">Uni</span>
                 <span className="text-test2-orange">Class</span>
               </Link>
             </h3>
@@ -116,7 +116,7 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
               {navLinks.map((page, index) => (
                 <li className="sm:w-[4rem] md:w-[6rem] text-center" key={index}>
                   <Link
-                    className="hover:text-test-primary ease-in-out duration-300 transition-colors"
+                    className="hover:text-test-primary ease-in-out duration-300 transition-colors text-white"
                     href={page.href}
                   >
                     {page.title}
@@ -129,17 +129,19 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
                 }}
               >
                 <li key="4" className="text-right w-[3rem]">
-                  <button className="hover:text-test-primary">NL</button>
+                  <button className="hover:text-test-primary text-white">
+                    NL
+                  </button>
                 </li>
               </form>
-              {"/"}
+              <p className="text-white">/</p>
               <form
                 action={(e) => {
                   setLanguage("en");
                 }}
               >
                 <li key="5" className="text-left w-[3rem]">
-                  <button className="hover:text-primary">EN</button>
+                  <button className="hover:text-primary text-white">EN</button>
                 </li>
               </form>
             </ul>
