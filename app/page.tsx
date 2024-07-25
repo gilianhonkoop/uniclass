@@ -145,12 +145,12 @@ export default async function Index() {
           </div>
 
           <div
-            className="min-h-[30rem] lg:min-h-0 z-20 relative flex flex-1 items-center 
+            className=" min-h-[30rem] lg:min-h-0 z-20 relative flex flex-1 items-center 
           justify-center w-full items-center"
           >
             <div
               id="search"
-              className="scroll-mt-[17.5rem] h-[15rem] sm:h-[10rem] flex justify-center items-center mx-[5rem]"
+              className="rounded-lg scroll-mt-[17.5rem] h-[15rem] sm:h-[10rem] flex justify-center items-center px-[5rem]"
             >
               <Suspense fallback={<></>}>
                 <SearchFunctions

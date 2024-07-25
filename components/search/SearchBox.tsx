@@ -1,7 +1,7 @@
 "use client";
 
 import { createClient } from "@/utils/supabase/client";
-import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
+import { Autocomplete, AutocompleteItem, listboxItem } from "@nextui-org/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -87,7 +87,7 @@ export default function SearchBox({
     <div className="w-full h-full flex flex-col justify-center items-center">
       <div className="w-full flex flex-col lg:flex-row justify-center items-center gap-8 text-black">
         <Autocomplete
-          className="text-black"
+          className="text-white"
           defaultItems={inputUniversiteiten}
           variant="bordered"
           label={unilabel}
@@ -96,13 +96,18 @@ export default function SearchBox({
             listboxWrapper: "",
             listbox: "",
             popoverContent: "rounded-md",
+            clearButton: "group-data-[hover=true]:text-white",
+            selectorButton: "text-white",
           }}
+          listboxProps={{ shouldFocusWrap: true }}
           inputProps={{
             classNames: {
-              input: "",
+              input: "text-md",
               inputWrapper:
-                "rounded-md border-medium-400 data-[hover=true]:border-primary group-data-[focus=true]:border-primary",
-              label: "",
+                "rounded-md border-primary-darkblue bg-primary-darkblue border-[3px] data-[hover=true]:scale-[1.01]  \
+                 data-[hover=true]:border-primary-darkblue group-data-[focus=true]:border-primary-darkblue h-[4rem]",
+              label:
+                "text-white group-data-[filled-within=true]:text-white/70 text-md",
             },
           }}
           defaultSelectedKey={`${currUniversiteitId}`}
@@ -110,6 +115,8 @@ export default function SearchBox({
             setUniversiteit(text);
             setStudie("");
             setVak("");
+            setStudies([]);
+            setVakken([]);
           }}
           onSelectionChange={async (key) => {
             setUniversiteitId(key as string);
@@ -125,176 +132,137 @@ export default function SearchBox({
               className="text-black"
               key={uni.id}
               value={uni.id}
+              classNames={{ title: "text-wrap" }}
             >
               {uni.naam}
             </AutocompleteItem>
           )}
         </Autocomplete>
-        {universiteit != "" && (
-          <Autocomplete
-            className="text-black"
-            defaultItems={studies}
-            variant="bordered"
-            label={opleidinglabel}
-            classNames={{
-              base: "max-w-xs",
-              listboxWrapper: "",
-              listbox: "",
-              popoverContent: "rounded-md",
-            }}
-            inputProps={{
-              classNames: {
-                input: "",
-                inputWrapper:
-                  "rounded-md border-medium4-00 data-[hover=true]:border-primary group-data-[focus=true]:border-primary",
-                label: "",
-              },
-            }}
-            defaultSelectedKey={`${currStudieId}`}
-            onInputChange={(text) => {
-              setStudie(text);
-              setVak("");
-            }}
-            onSelectionChange={async (key) => {
-              setStudieId(key as string);
-              let k = key as number;
-              if (key != null) {
-                currStudieId = key as string;
-                setVakken(await getVakken(k));
-                return router.refresh();
-              }
-            }}
-          >
-            {(studie) => (
-              <AutocompleteItem
-                className="text-black"
-                key={studie.id}
-                value={studie.id}
-              >
-                {studie.naam}
-              </AutocompleteItem>
-            )}
-          </Autocomplete>
-        )}
-        {universiteit == "" && (
-          <Autocomplete
-            className="text-black"
-            defaultItems={studies}
-            isDisabled
-            variant="bordered"
-            label={opleidinglabel}
-            classNames={{
-              base: "max-w-xs",
-              listboxWrapper: "",
-              listbox: "",
-              popoverContent: "rounded-md",
-            }}
-            inputProps={{
-              classNames: {
-                input: "",
-                inputWrapper:
-                  "rounded-md border-medium4-00 data-[hover=true]:border-primary group-data-[focus=true]:border-primary",
-                label: "",
-              },
-            }}
-            onInputChange={(value) => {
-              setStudie(value);
-            }}
-          >
-            <AutocompleteItem key={0} className="text-black">
-              b
-            </AutocompleteItem>
-          </Autocomplete>
-        )}
-        {studie != "" && (
-          <Autocomplete
-            className="text-black"
-            defaultItems={vakken}
-            variant="bordered"
-            label={vaklabel}
-            classNames={{
-              base: "max-w-xs",
-              listboxWrapper: "",
-              listbox: "",
-              popoverContent: "rounded-md",
-            }}
-            inputProps={{
-              classNames: {
-                input: "",
-                inputWrapper:
-                  "rounded-md border-medium4-00 data-[hover=true]:border-primary group-data-[focus=true]:border-primary",
-                label: "",
-              },
-            }}
-            defaultSelectedKey={`${currVakId}`}
-            onInputChange={(value) => {
-              setVak(value);
-            }}
-            onSelectionChange={async (key) => {
-              setVakId(key as string);
-              if (key != null) {
-                currVakId = key as string;
-              }
-            }}
-          >
-            {(vak) => (
-              <AutocompleteItem
-                className="text-black"
-                key={vak.id}
-                value={vak.id}
-              >
-                {vak.naam}
-              </AutocompleteItem>
-            )}
-          </Autocomplete>
-        )}
-        {studie == "" && (
-          <Autocomplete
-            className="text-black"
-            defaultItems={vakken}
-            variant="bordered"
-            label={vaklabel}
-            classNames={{
-              base: "max-w-xs",
-              listboxWrapper: "",
-              listbox: "",
-              popoverContent: "rounded-md",
-            }}
-            inputProps={{
-              classNames: {
-                input: "",
-                inputWrapper:
-                  "rounded-md border-medium4-00 data-[hover=true]:border-primary group-data-[focus=true]:border-primary",
-                label: "",
-              },
-            }}
-            isDisabled
-          >
-            <AutocompleteItem className="text-black" key={0}>
-              a
-            </AutocompleteItem>
-          </Autocomplete>
-        )}
-        <Link
-          style={{
-            pointerEvents: vak == "" ? "none" : "auto",
+        <Autocomplete
+          className="text-white"
+          defaultItems={studies}
+          variant="bordered"
+          label={opleidinglabel}
+          // isDisabled={universiteit == ""}
+          classNames={{
+            base: "max-w-xs",
+            listboxWrapper: "",
+            listbox: "",
+            popoverContent: "rounded-md",
+            clearButton: "group-data-[hover=true]:text-white",
+            selectorButton: "text-white",
           }}
-          aria-disabled={vak == ""}
-          tabIndex={vak == "" ? -1 : undefined}
-          href={encodeURI(
-            "/training/" + universiteitId + " " + studieId + " " + vakId,
-          )}
-          className="hover:cursor-pointer flex justify-center items-center h-[4rem] min-w-[16rem] lg:min-w-[15vw] 
-        rounded-sm shadow-sm hover:shadow-md text-white bg-primary-orange hover:scale-[102%] text-center md:mt-0 mt-[1.5rem]
-        transition"
+          inputProps={{
+            classNames: {
+              input: "text-md",
+              inputWrapper:
+                "rounded-md border-primary-darkblue bg-primary-darkblue border-[3px] data-[hover=true]:scale-[1.01]  \
+                 data-[hover=true]:border-primary-darkblue group-data-[focus=true]:border-primary-darkblue h-[4rem]",
+              label:
+                "text-white group-data-[filled-within=true]:text-white/70 text-md",
+            },
+          }}
+          defaultSelectedKey={`${currStudieId}`}
+          onInputChange={(text) => {
+            setStudie(text);
+            setVak("");
+            setVakken([]);
+          }}
+          onSelectionChange={async (key) => {
+            setStudieId(key as string);
+            let k = key as number;
+            if (key != null) {
+              currStudieId = key as string;
+              setVakken(await getVakken(k));
+              return router.refresh();
+            }
+          }}
         >
-          {language == "nl" && (
-            <p className="text-[15px] uppercase font-bold">Bekijk trainingen</p>
+          {(studie) => (
+            <AutocompleteItem
+              className="text-black"
+              key={studie.id}
+              value={studie.id}
+              classNames={{ title: "text-wrap" }}
+            >
+              {studie.naam}
+            </AutocompleteItem>
           )}
-          {language == "en" && (
-            <p className="text-[15px] uppercase font-bold">Search training</p>
+        </Autocomplete>
+        <Autocomplete
+          className="text-white"
+          defaultItems={vakken}
+          variant="bordered"
+          label={vaklabel}
+          // isDisabled={studie == ""}
+          classNames={{
+            base: "max-w-xs",
+            listboxWrapper: "",
+            listbox: "",
+            popoverContent: "rounded-md",
+            clearButton: "group-data-[hover=true]:text-white",
+            selectorButton: "text-white",
+          }}
+          inputProps={{
+            classNames: {
+              input: "text-md",
+              inputWrapper:
+                "rounded-md border-primary-darkblue bg-primary-darkblue border-[3px] data-[hover=true]:scale-[1.01]  \
+                 data-[hover=true]:border-primary-darkblue group-data-[focus=true]:border-primary-darkblue h-[4rem]",
+              label:
+                "text-white group-data-[filled-within=true]:text-white/70 text-md",
+            },
+          }}
+          defaultSelectedKey={`${currVakId}`}
+          onInputChange={(value) => {
+            setVak(value);
+          }}
+          onSelectionChange={async (key) => {
+            setVakId(key as string);
+            if (key != null) {
+              currVakId = key as string;
+            }
+          }}
+        >
+          {(vak) => (
+            <AutocompleteItem
+              className="text-black"
+              key={vak.id}
+              value={vak.id}
+              classNames={{ title: "text-wrap" }}
+            >
+              {vak.naam}
+            </AutocompleteItem>
           )}
-        </Link>
+        </Autocomplete>
+        <div
+          style={{
+            cursor: vak == "" ? "not-allowed" : "pointer",
+          }}
+        >
+          <Link
+            style={{
+              pointerEvents: vak == "" ? "none" : "auto",
+            }}
+            aria-disabled={vak == ""}
+            tabIndex={vak == "" ? -1 : undefined}
+            href={encodeURI(
+              "/training/" + universiteitId + " " + studieId + " " + vakId,
+            )}
+            className="hover:cursor-pointer flex justify-center items-center h-[4rem] min-w-[16rem] lg:min-w-[15vw] 
+        rounded-sm shadow-sm hover:shadow-md text-white bg-primary-dark hover:scale-[102%] text-center md:mt-0 mt-[1.5rem]
+        transition"
+          >
+            {language == "nl" && (
+              <p className="text-[15px] uppercase font-bold">
+                Bekijk trainingen
+              </p>
+            )}
+            {language == "en" && (
+              <p className="text-[15px] uppercase font-bold">Search training</p>
+            )}
+          </Link>
+        </div>
       </div>
     </div>
   );
