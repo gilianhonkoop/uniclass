@@ -9,7 +9,7 @@ const Waves = dynamic(() => import("@/components/waves/waves"), {
 });
 
 export default function Page() {
-  var language = "nl";
+  var language = "en";
 
   async function setLanguage(language: string) {
     "use server";
@@ -19,7 +19,7 @@ export default function Page() {
 
   const lan = cookies().get("language");
 
-  if (lan?.value == "en") {
+  if (lan?.value == "nl") {
     language = lan.value;
   }
 

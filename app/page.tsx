@@ -6,7 +6,7 @@ import bracket from "@/icons/angle_bracket.svg";
 import edu from "@/illustrations/landingpage.svg";
 import slagen from "@/illustrations/slagen.svg";
 import math from "@/illustrations/math.svg";
-import GetStarted from "@/components/GetStarted";
+import GetStarted from "@/components/other/GetStarted";
 import { cookies } from "next/headers";
 import BlobAnimtation from "@/components/BlobAnimation";
 import dynamic from "next/dynamic";
@@ -37,7 +37,7 @@ export default async function Index() {
   var universiteiten: any[] = [];
   universiteiten = await getUniversiteiten();
 
-  var language = "nl";
+  var language = "en";
 
   async function setLanguage(language: string) {
     "use server";
@@ -47,7 +47,7 @@ export default async function Index() {
 
   const lan = cookies().get("language");
 
-  if (lan?.value == "en") {
+  if (lan?.value == "nl") {
     language = lan.value;
   }
 
@@ -190,7 +190,7 @@ export default async function Index() {
               {language == "nl" && (
                 <div className="flex flex-col items-center pt-8">
                   <h6 className="text-primary font-normal text-center">
-                    Haal Elk Vak Met Vertrouwen
+                    Haal elk vak met vertrouwen
                   </h6>
                   <p className="text-center">
                     Leer strategieën en kennis waarmee jij elk tentamen haalt
@@ -200,7 +200,7 @@ export default async function Index() {
               {language == "en" && (
                 <div className="flex flex-col items-center pt-8">
                   <h6 className="text-primary font-normal text-center">
-                    Pass Any Subject With Confidence
+                    Pass any subject with confidence
                   </h6>
                   <p className="text-center">
                     Learn the strategies and knowledge you need to excel in
@@ -229,14 +229,14 @@ export default async function Index() {
                     Excellente docenten
                   </h6>
                   <p className="text-center text-black">
-                    Onze docenten worden gemiddel geëvalueerd met een 8,9.
+                    Onze docenten worden gemiddeld geëvalueerd met een 8,9
                   </p>
                 </div>
               )}
               {language == "en" && (
                 <div className="flex flex-col items-center pt-8">
                   <h6 className="text-primary font-normal text-center">
-                    Excellent Teachers
+                    Excellent teachers
                   </h6>
                   <p className="text-center">
                     Our excellent teachers get evaluated with an 8.9 on average
