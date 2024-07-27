@@ -6,7 +6,7 @@ export default function Waves({
   backgroundColor: string;
 }) {
   return (
-    <div className={`w-full h-full ${backgroundColor}`}>
+    <div className={`w-full h-fit ${backgroundColor}`}>
       <svg
         className={styles.waves}
         viewBox="0 24 150 28"
