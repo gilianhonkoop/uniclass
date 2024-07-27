@@ -210,7 +210,7 @@ export default async function Index() {
               )}
             </div>
           </div>
-          <div className="max-w-[40rem] w-full h-full flex justify-center items-center mx-5 mt-[4rem] lg:mt-5">
+          <div className="max-w-[40rem] w-full h-full flex justify-center items-center mx-5 lg:mt-5">
             <div className="min-h-[30rem] w-full max-w-[50vw] sm:max-w-[25rem] flex flex-col">
               <div className="flex flex-1 relative items-end">
                 <Image
