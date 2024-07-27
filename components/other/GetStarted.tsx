@@ -3,7 +3,7 @@
 export default function Page({ text }: { text: string }) {
   return (
     <form
-      action={async () => {
+      action={() => {
         const section = document.querySelector("#search");
         section!.scrollIntoView({
           behavior: "smooth",

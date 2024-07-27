@@ -78,16 +78,16 @@ export default function RootLayout({
         <title>UniClass tentamentrainingen</title>
       </head>
       <body className="w-full text-foreground absolute h-full">
-        <Providers>
-          <main className="min-h-screen flex flex-col items-center">
-            {children}
+        {/* <Providers> */}
+        <main className="min-h-screen flex flex-col items-center">
+          {children}
 
-            <Suspense fallback={null}>
+          {/* <Suspense fallback={null}>
               <NavigationEvents />
-            </Suspense>
-            <SpeedInsights />
-          </main>
-        </Providers>
+            </Suspense> */}
+          {/* <SpeedInsights /> */}
+        </main>
+        {/* </Providers> */}
       </body>
     </html>
   );

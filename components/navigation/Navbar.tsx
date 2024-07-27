@@ -114,7 +114,10 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
             </h3>
             <ul className="w-fit flex justify-start items-center text-[18px] tracking-[1.6px] text-black">
               {navLinks.map((page, index) => (
-                <li className="sm:w-[4rem] md:w-[6rem] text-center" key={index}>
+                <li
+                  className="sm:w-[4rem] md:w-[5rem] lg:w-[6rem] text-center"
+                  key={index}
+                >
                   <Link
                     className="hover:text-primary-orange ease-in-out duration-300 transition-colors text-white"
                     href={page.href}
@@ -143,6 +146,21 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
                 <li key="5" className="text-left w-[3rem]">
                   <button className="hover:text-primary-orange text-white">
                     EN
+                  </button>
+                </li>
+              </form>
+              <form
+                action={(e) => {
+                  const section = document.querySelector("#search");
+                  section!.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+                }}
+              >
+                <li key="4" className="text-right w-fit">
+                  <button className="hover:text-primary-orange text-white">
+                    Book training
                   </button>
                 </li>
               </form>
