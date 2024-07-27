@@ -1,6 +1,6 @@
 import Navbar from "@/components/navigation/Navbar";
 import { createClient } from "@/utils/supabase/server";
-// import Footer from "@/components/Footer";
+import Footer from "@/components/Footer";
 import Image from "next/image";
 import bracket from "@/icons/angle_bracket.svg";
 import edu from "@/illustrations/landingpage.svg";
@@ -14,10 +14,6 @@ import SearchFunctions from "@/components/search/SearchFunctions";
 import { Suspense } from "react";
 
 const Waves = dynamic(() => import("@/components/waves/waves"), {
-  loading: () => <></>,
-});
-
-const Footer = dynamic(() => import("@/components/Footer"), {
   loading: () => <></>,
 });
 
@@ -38,25 +34,26 @@ async function getUniversiteiten() {
 }
 
 export default async function Index() {
-  var universiteiten: any[] = [];
-  universiteiten = await getUniversiteiten();
+  // var universiteiten: any[] = [];
+  // universiteiten = await getUniversiteiten();
 
   var language = "en";
 
-  async function setLanguage(language: string) {
-    "use server";
+  // async function setLanguage(language: string) {
+  //   "use server";
 
-    cookies().set("language", language);
-  }
+  //   cookies().set("language", language);
+  // }
 
-  const lan = cookies().get("language");
+  // const lan = cookies().get("language");
 
-  if (lan?.value == "nl") {
-    language = lan.value;
-  }
+  // if (lan?.value == "nl") {
+  //   language = lan.value;
+  // }
 
   return (
     <div className="flex-1 w-full flex flex-col h-screen relative items-center bg-primary-bg text-black">
+      <p>hi there</p>
       {/* <Navbar setLanguage={setLanguage} />
       <div className=" flex-1 flex flex-col items-center relative w-full sm:mt-[0rem] mt-[5rem] max-w-[100vw] overflow-x-hidden">
         <section className="bg-primary-bg w-full h-full min-h-[calc(100vh-80px)] drop-shadow-md flex flex-col">
