@@ -64,7 +64,7 @@ export default async function Index() {
               className="mx-[5rem] flex flex-col lg:flex-row items-center w-full 
             max-h-[fit] max-w-6xl gap-[2rem] sm:gap-[5rem] lg:gap-8"
             >
-              <div className="flex w-[100%] h-full flex-col items-center lg:items-start justify-evenly">
+              {/* <div className="flex w-[100%] h-full flex-col items-center lg:items-start justify-evenly">
                 {language == "nl" && (
                   <h1 className="font-normal text-center lg:text-left md:min-w-[90vw] lg:min-w-fit">
                     <div className="wrapper-typing flex flex-col items-center lg:items-start">
@@ -129,7 +129,7 @@ export default async function Index() {
                   {language == "nl" && <GetStarted text="Zoek Training" />}
                   {language == "en" && <GetStarted text="Find Training" />}
                 </div>
-              </div>
+              </div> */}
               <div className="flex w-[100%] h-full">
                 <div className="w-full h-[25rem] relative flex items-center justify-center">
                   <BlobAnimtation />
@@ -148,7 +148,7 @@ export default async function Index() {
             className=" min-h-[30rem] lg:min-h-0 z-20 relative flex flex-1 items-center 
           justify-center w-full items-center"
           >
-            <div
+            {/* <div
               id="search"
               className="rounded-lg scroll-mt-[17.5rem] h-[15rem] sm:h-[10rem] flex justify-center items-center px-[5rem]"
             >
@@ -161,7 +161,7 @@ export default async function Index() {
                   empty={true}
                 />
               </Suspense>
-            </div>
+            </div> */}
           </div>
           <div className="w-full h-[5vh] mb-5 items-center justify-center lg:mt-0 md:mt-[3rem] hidden lg:flex">
             <div className="w-[5vh] h-[5vh] rotate-90 relative">
@@ -175,7 +175,7 @@ export default async function Index() {
           </div>
         </section>
 
-        <section className="z-0 w-full h-full min-h-[calc(100vh-120px)] lg:py-0 py-20 flex-col lg:flex-row flex justify-center items-center">
+        {/* <section className="z-0 w-full h-full min-h-[calc(100vh-120px)] lg:py-0 py-20 flex-col lg:flex-row flex justify-center items-center">
           <div className="max-w-[40rem] w-full h-full flex justify-center items-center mx-5 lg:mt-5">
             <div className="min-h-[30rem] w-full max-w-[50vw] sm:max-w-[25rem] flex flex-col">
               <div className="flex flex-1 relative">
@@ -245,10 +245,11 @@ export default async function Index() {
               )}
             </div>
           </div>
-        </section>
+        </section> */}
+        <p>hi there</p>
       </div>
       <Waves backgroundColor={"bg-primary-bg"} />
-      {/* <Footer language={language} /> */}
+      <Footer language={language} />
     </div>
   );
 }
