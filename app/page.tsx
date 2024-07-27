@@ -55,7 +55,7 @@ export default async function Index() {
     <div className="flex-1 w-full flex flex-col h-screen relative items-center bg-primary-bg text-black">
       <Navbar setLanguage={setLanguage} />
       <div className=" flex-1 flex flex-col items-center relative w-full sm:mt-[0rem] mt-[5rem] max-w-[100vw] overflow-x-clip">
-        <section className="bg-primary-bg w-full h-full min-h-[100%] lg:min-h-[calc(100vh-80px)] drop-shadow-md flex flex-col">
+        <section className="bg-primary-bg w-full h-full min-h-[100vh] lg:min-h-[calc(100vh-80px)] drop-shadow-md flex flex-col">
           <div
             className=" h-fit z-10 relative flex flex-1 w-full 
           lg:mb-[4vh] lg:mb-0 mb-0 sm:mb-[3rem] items-center justify-center mt-[4rem]"
@@ -64,7 +64,7 @@ export default async function Index() {
               className="mx-[5rem] flex flex-col lg:flex-row items-center w-full 
             max-h-[fit] max-w-6xl gap-[2rem] sm:gap-[5rem] lg:gap-8"
             >
-              <div className="flex w-[100vh] h-full flex-col items-center lg:items-start justify-evenly">
+              <div className="flex w-[100%] h-full flex-col items-center lg:items-start justify-evenly">
                 {language == "nl" && (
                   <h1 className="font-normal text-center lg:text-left md:min-w-[90vw] lg:min-w-fit">
                     <div className="wrapper-typing flex flex-col items-center lg:items-start">
@@ -144,7 +144,7 @@ export default async function Index() {
             </div>
           </div>
 
-          <div className="h-[50vh] lg:h-[10rem] my-[4vh] lg:my-0 z-20 relative flex items-center justify-center w-full searchbox">
+          <div className="h-[50vh] lg:h-[10rem] my-[5vh] lg:my-0 z-20 relative flex items-center justify-center w-full searchbox">
             <div
               id="search"
               className="rounded-lg scroll-mt-[17.5rem] h-fit lg:h-[10rem] flex justify-center items-center px-[5rem]"
