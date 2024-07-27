@@ -145,8 +145,8 @@ export default async function Index() {
           </div>
 
           <div
-            className=" min-h-[30rem] lg:min-h-0 z-20 relative flex flex-1 items-center 
-          justify-center w-full items-center"
+            className="h-[30rem] lg:h-[10rem] z-20 relative flex items-center 
+          justify-center w-full"
           >
             <div
               id="search"
