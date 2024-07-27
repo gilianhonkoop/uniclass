@@ -150,7 +150,7 @@ export default async function Index() {
           >
             <div
               id="search"
-              className="rounded-lg scroll-mt-[17.5rem] h-[15rem] sm:h-[10rem] flex justify-center items-center px-[5rem]"
+              className="rounded-lg scroll-mt-[17.5rem] h-fit lg:h-[10rem] flex justify-center items-center px-[5rem]"
             >
               <Suspense fallback={<></>}>
                 <SearchFunctions
