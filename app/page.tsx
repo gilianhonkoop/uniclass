@@ -17,21 +17,21 @@ const Waves = dynamic(() => import("@/components/waves/waves"), {
   loading: () => <></>,
 });
 
-async function getUniversiteiten() {
-  "use server";
+// async function getUniversiteiten() {
+//   "use server";
 
-  const supabase = createClient();
-  const { data, error } = await supabase
-    .from("universiteiten")
-    .select()
-    .order("id", { ascending: false });
+//   const supabase = createClient();
+//   const { data, error } = await supabase
+//     .from("universiteiten")
+//     .select()
+//     .order("id", { ascending: false });
 
-  if (data == null) {
-    return [];
-  }
+//   if (data == null) {
+//     return [];
+//   }
 
-  return data;
-}
+//   return data;
+// }
 
 export default async function Index() {
   // var universiteiten: any[] = [];
@@ -39,23 +39,23 @@ export default async function Index() {
 
   var language = "en";
 
-  // async function setLanguage(language: string) {
-  //   "use server";
+  async function setLanguage(language: string) {
+    "use server";
 
-  //   cookies().set("language", language);
-  // }
+    cookies().set("language", language);
+  }
 
-  // const lan = cookies().get("language");
+  const lan = cookies().get("language");
 
-  // if (lan?.value == "nl") {
-  //   language = lan.value;
-  // }
+  if (lan?.value == "nl") {
+    language = lan.value;
+  }
 
   return (
-    <div className="flex-1 w-full flex flex-col h-screen relative items-center bg-primary-bg text-black">
+    <div className="flex-1 w-full flex flex-col min-h-screen relative items-center bg-primary-bg text-black">
       <p>hi there</p>
-      {/* <Navbar setLanguage={setLanguage} />
-      <div className=" flex-1 flex flex-col items-center relative w-full sm:mt-[0rem] mt-[5rem] max-w-[100vw] overflow-x-hidden">
+      <Navbar setLanguage={setLanguage} />
+      {/* <div className=" flex-1 flex flex-col items-center relative w-full sm:mt-[0rem] mt-[5rem] max-w-[100vw] overflow-x-hidden">
         <section className="bg-primary-bg w-full h-full min-h-[calc(100vh-80px)] drop-shadow-md flex flex-col">
           <div
             className=" h-fit z-10 relative flex flex-1 w-full 
@@ -249,7 +249,7 @@ export default async function Index() {
         </section>
       </div> */}
       <Waves backgroundColor={"bg-primary-bg"} />
-      <Footer language={language} />
+      {/* <Footer language={language} /> */}
     </div>
   );
 }
