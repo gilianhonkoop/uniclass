@@ -211,7 +211,7 @@ export default async function Index() {
             </div>
           </div>
           <div className="max-w-[40rem] w-full h-full flex justify-center items-center mx-5 lg:mt-5">
-            <div className="min-h-[30rem] w-full max-w-[50vw] sm:max-w-[25rem] flex flex-col">
+            <div className="min-h-[26rem] sm:min-h-[30rem] lg:min-h-[30rem] w-full max-w-[50vw] sm:max-w-[25rem] flex flex-col">
               <div className="flex flex-1 relative items-end">
                 <Image
                   src={slagen}
