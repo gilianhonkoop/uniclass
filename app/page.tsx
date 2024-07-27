@@ -55,7 +55,7 @@ export default async function Index() {
     <div className="flex-1 w-full flex flex-col h-screen relative items-center bg-primary-bg text-black">
       <Navbar setLanguage={setLanguage} />
       <div className=" flex-1 flex flex-col items-center relative w-full sm:mt-[0rem] mt-[5rem] max-w-[100vw] overflow-x-clip">
-        <section className="bg-primary-bg w-full h-full min-h-[calc(100vh-80px)] drop-shadow-md flex flex-col">
+        <section className="bg-primary-bg w-full h-full min-h-[100%] lg:min-h-[calc(100vh-80px)] drop-shadow-md flex flex-col">
           <div
             className=" h-fit z-10 relative flex flex-1 w-full 
           lg:mb-[4vh] lg:mb-0 mb-0 sm:mb-[3rem] items-center justify-center mt-[4rem]"
