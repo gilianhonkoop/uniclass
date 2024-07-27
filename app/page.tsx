@@ -176,7 +176,7 @@ export default async function Index() {
         </section>
 
         <section className="z-0 w-full h-full min-h-[calc(100vh-120px)] lg:py-0 py-20 flex-col lg:flex-row flex justify-center items-center">
-          {/* <div className="max-w-[40rem] w-full h-full flex justify-center items-center mx-5 lg:mt-5">
+          <div className="max-w-[40rem] w-full h-full flex justify-center items-center mx-5 lg:mt-5">
             <div className="min-h-[30rem] w-full max-w-[50vw] sm:max-w-[25rem] flex flex-col">
               <div className="flex flex-1 relative">
                 <Image
@@ -244,9 +244,6 @@ export default async function Index() {
                 </div>
               )}
             </div>
-          </div> */}
-          <div className="w-full h-[10rem] flex justify-center items-center">
-            <p>hi there</p>
           </div>
         </section>
       </div>
