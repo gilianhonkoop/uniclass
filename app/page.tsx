@@ -1,6 +1,6 @@
 import Navbar from "@/components/navigation/Navbar";
 import { createClient } from "@/utils/supabase/server";
-import Footer from "@/components/Footer";
+// import Footer from "@/components/Footer";
 import Image from "next/image";
 import bracket from "@/icons/angle_bracket.svg";
 import edu from "@/illustrations/landingpage.svg";
@@ -14,6 +14,10 @@ import SearchFunctions from "@/components/search/SearchFunctions";
 import { Suspense } from "react";
 
 const Waves = dynamic(() => import("@/components/waves/waves"), {
+  loading: () => <></>,
+});
+
+const Footer = dynamic(() => import("@/components/Footer"), {
   loading: () => <></>,
 });
 
