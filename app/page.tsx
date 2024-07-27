@@ -64,7 +64,7 @@ export default async function Index() {
               className="mx-[5rem] flex flex-col lg:flex-row items-center w-full 
             max-h-[fit] max-w-6xl gap-[2rem] sm:gap-[5rem] lg:gap-8"
             >
-              <div className="flex w-[100%] h-full flex-col items-center lg:items-start justify-evenly">
+              <div className="flex w-[100vh] h-full flex-col items-center lg:items-start justify-evenly">
                 {language == "nl" && (
                   <h1 className="font-normal text-center lg:text-left md:min-w-[90vw] lg:min-w-fit">
                     <div className="wrapper-typing flex flex-col items-center lg:items-start">
