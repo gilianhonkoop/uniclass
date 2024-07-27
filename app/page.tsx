@@ -248,7 +248,7 @@ export default async function Index() {
         </section>
       </div>
       <Waves backgroundColor={"bg-primary-bg"} />
-      {/* <Footer language={language} /> */}
+      <Footer language={language} />
     </div>
   );
 }
