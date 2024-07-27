@@ -5,6 +5,7 @@
 @media not all and (min-resolution: 0.001dpcm) {
   .searchbox {
     height: 80vh;
+    background-color: red;
   }
 }
 

@@ -144,10 +144,10 @@ export default async function Index() {
             </div>
           </div>
 
-          <div className="h-[600px] lg:h-[10rem] z-20 relative flex items-center justify-center w-full searchbox">
+          <div className="h-[50vh] lg:h-[10rem] z-20 relative flex items-center justify-center w-full searchbox">
             <div
               id="search"
-              className="rounded-lg scroll-mt-[17.5rem] h-fit lg:h-[10rem] flex justify-center items-center px-[5rem] h-[600px]"
+              className="rounded-lg scroll-mt-[17.5rem] h-fit lg:h-[10rem] flex justify-center items-center px-[5rem]"
             >
               <Suspense fallback={<></>}>
                 <SearchFunctions
