@@ -31,16 +31,19 @@ const addPayment = async (
       .eq("id", training_id);
 
     console.log("ab3");
+    console.log(data);
 
     if (data == null) {
       return;
     }
 
+    console.log("ab4");
+
     if (data[0].prijs != amount) {
       return;
     }
 
-    console.log("ab4");
+    console.log("ab5");
 
     training_naam = data[0].naam;
     deelnemers = data[0].deelnemers;
@@ -68,7 +71,7 @@ const addPayment = async (
     return;
   }
 
-  console.log("ab5");
+  console.log("ab6");
 
   try {
     // fetch user data
@@ -148,7 +151,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
     );
     if (event.type == "checkout.session.completed") {
       if (response.data.object.payment_status == "paid") {
-        console.log("in4");
         let training_id = parseFloat(response.data.object.client_reference_id);
         let email = response.data.object.customer_details.email as string;
         let phone = response.data.object.customer_details.phone as string;
