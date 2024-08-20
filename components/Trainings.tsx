@@ -55,7 +55,7 @@ export default async function Trainings({
                           alt="Date icon"
                         />
                       </div>
-                      {formatDate(les.begin)}
+                      {les.begin == null ? "tbd" : formatDate(les.begin)}
                     </div>
                     <div className="text-[16px] opacity-80 flex flex-row items-center mb-2">
                       <div className="min-w-[25px] w-[25px] h-[25px] relative mr-2">
@@ -66,7 +66,9 @@ export default async function Trainings({
                           alt="Time icon"
                         />
                       </div>
-                      {formatTime(les.begin, les.eind)}
+                      {les.begin == null || les.eind == null
+                        ? "tbd"
+                        : formatTime(les.begin, les.eind)}
                     </div>
                     <div className="text-[16px] opacity-80 flex flex-row items-center mb-2">
                       <div className="min-w-[25px] w-[25px] h-[25px] relative mr-2">
@@ -107,16 +109,31 @@ export default async function Trainings({
                   redirect(StripeUrl!);
                 }}
               >
-                <button
-                  type="submit"
-                  role="link"
-                  className="hover:cursor-pointer flex justify-center items-center h-[4rem] min-w-[12rem] 
+                {training.plaatsen != training.deelnemers.length && (
+                  <button
+                    type="submit"
+                    role="link"
+                    className="hover:cursor-pointer flex justify-center items-center h-[4rem] min-w-[12rem] 
                           rounded-md shadow-sm hover:shadow-md text-white bg-primary hover:scale-[101%]"
-                >
-                  <p className="text-[15px] uppercase font-bold">
-                    Bestel training {">"}
-                  </p>
-                </button>
+                  >
+                    <p className="text-[15px] uppercase font-bold">
+                      Bestel training {">"}
+                    </p>
+                  </button>
+                )}
+                {training.plaatsen == training.deelnemers.length && (
+                  <button
+                    disabled
+                    type="submit"
+                    role="link"
+                    className="hover:cursor-not-allowed flex justify-center items-center h-[4rem] min-w-[12rem] 
+                          rounded-md shadow-sm text-white bg-primary"
+                  >
+                    <p className="text-[15px] uppercase font-bold">
+                      Training is vol
+                    </p>
+                  </button>
+                )}
               </form>
             </div>
           </div>

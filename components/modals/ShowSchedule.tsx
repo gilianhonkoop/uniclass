@@ -154,8 +154,10 @@ export default function ShowUsers({ training }: { training: any }) {
                       begin: null,
                       eind: null,
                     };
-                    lessen.push(les);
-                    router.refresh();
+                    let newlessen = lessen.concat();
+                    newlessen.push(les);
+                    setLessen(newlessen);
+                    // router.refresh();
                   }}
                   className="my-5 text-center text-cgreen text-center text-md w-full hover:cursor-pointer"
                 >
