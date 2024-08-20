@@ -4,7 +4,7 @@ import { createClient } from "@/utils/supabase/server";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
-const addPayment = async (
+async function addPayment(
   first_name: string,
   last_name: string,
   email: string,
@@ -13,8 +13,7 @@ const addPayment = async (
   training_id: number,
   order_date: string,
   payment_intent: string,
-) => {
-  console.log("ab1");
+) {
   const supabase = createClient();
 
   console.log("ab2");
@@ -24,6 +23,12 @@ const addPayment = async (
 
   // fetch training information and check if
   // price matches
+
+  try {
+    const { data, error } = await supabase.from("trainingen").select();
+    console.log("test", data);
+  } catch {}
+
   try {
     const { data, error } = await supabase
       .from("trainingen")
@@ -34,6 +39,7 @@ const addPayment = async (
     console.log(data, training_id);
 
     if (data == null) {
+      console.log("empty data");
       return;
     }
 
@@ -133,7 +139,7 @@ const addPayment = async (
   }
 
   return;
-};
+}
 
 export async function POST(req: NextRequest, res: NextResponse) {
   const payload = await req.text();
@@ -151,7 +157,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     );
     if (event.type == "checkout.session.completed") {
       if (response.data.object.payment_status == "paid") {
-        let training_id = parseFloat(response.data.object.client_reference_id);
+        let training_id = parseInt(response.data.object.client_reference_id);
         let email = response.data.object.customer_details.email as string;
         let phone = response.data.object.customer_details.phone as string;
         let amount = parseFloat(response.data.object.amount_total) / 100;
@@ -162,7 +168,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         console.log(payload);
         console.log("first", training_id);
 
-        addPayment(
+        await addPayment(
           first_name,
           last_name,
           email,
