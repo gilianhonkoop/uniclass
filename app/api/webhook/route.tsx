@@ -31,7 +31,7 @@ const addPayment = async (
       .eq("id", training_id);
 
     console.log("ab3");
-    console.log(data);
+    console.log(data, training_id);
 
     if (data == null) {
       return;
@@ -159,7 +159,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
         let last_name = response.data.object.custom_fields[1]?.text.value;
         let payment_intent = response.data.object.payment_intent;
 
-        console.log("first");
+        console.log(payload);
+        console.log("first", training_id);
 
         addPayment(
           first_name,
