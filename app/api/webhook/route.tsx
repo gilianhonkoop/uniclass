@@ -14,8 +14,10 @@ const addPayment = async (
   order_date: string,
   payment_intent: string,
 ) => {
+  console.log("ab1");
   const supabase = createClient();
 
+  console.log("ab2");
   let deelnemers;
   let user_id;
   let training_naam;
@@ -28,6 +30,8 @@ const addPayment = async (
       .select("prijs, deelnemers, naam")
       .eq("id", training_id);
 
+    console.log("ab3");
+
     if (data == null) {
       return;
     }
@@ -35,6 +39,8 @@ const addPayment = async (
     if (data[0].prijs != amount) {
       return;
     }
+
+    console.log("ab4");
 
     training_naam = data[0].naam;
     deelnemers = data[0].deelnemers;
@@ -61,6 +67,8 @@ const addPayment = async (
     console.log(error);
     return;
   }
+
+  console.log("ab5");
 
   try {
     // fetch user data
@@ -125,8 +133,6 @@ const addPayment = async (
 };
 
 export async function POST(req: NextRequest, res: NextResponse) {
-  console.log("in");
-
   const payload = await req.text();
   const response = JSON.parse(payload);
 
@@ -134,17 +140,12 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
   const order_date = new Date(response?.created * 1000).toLocaleString();
 
-  console.log("in2");
-
   try {
     let event = stripe.webhooks.constructEvent(
       payload,
       sig as string,
       process.env.STRIPE_WEBHOOK_SECRET_KEY as string,
     );
-
-    console.log("in3");
-
     if (event.type == "checkout.session.completed") {
       if (response.data.object.payment_status == "paid") {
         console.log("in4");
