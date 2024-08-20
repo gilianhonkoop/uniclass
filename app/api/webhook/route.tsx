@@ -125,12 +125,16 @@ const addPayment = async (
 };
 
 export async function POST(req: NextRequest, res: NextResponse) {
+  console.log("in");
+
   const payload = await req.text();
   const response = JSON.parse(payload);
 
   const sig = req.headers.get("Stripe-Signature");
 
   const order_date = new Date(response?.created * 1000).toLocaleString();
+
+  console.log("in2");
 
   try {
     let event = stripe.webhooks.constructEvent(
@@ -139,8 +143,11 @@ export async function POST(req: NextRequest, res: NextResponse) {
       process.env.STRIPE_WEBHOOK_SECRET_KEY as string,
     );
 
+    console.log("in3");
+
     if (event.type == "checkout.session.completed") {
       if (response.data.object.payment_status == "paid") {
+        console.log("in4");
         let training_id = parseFloat(response.data.object.client_reference_id);
         let email = response.data.object.customer_details.email as string;
         let phone = response.data.object.customer_details.phone as string;
@@ -148,6 +155,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
         let first_name = response.data.object.custom_fields[0]?.text.value;
         let last_name = response.data.object.custom_fields[1]?.text.value;
         let payment_intent = response.data.object.payment_intent;
+
+        console.log("first");
 
         addPayment(
           first_name,
@@ -159,6 +168,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
           order_date,
           payment_intent,
         );
+
+        console.log("second");
       }
     }
     return NextResponse.json({ status: 200, event: event.type });
