@@ -16,7 +16,6 @@ async function addPayment(
 ) {
   const supabase = createClient();
 
-  console.log("ab2");
   let deelnemers;
   let user_id;
   let training_naam;
