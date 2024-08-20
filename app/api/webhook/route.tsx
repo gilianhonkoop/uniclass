@@ -25,31 +25,18 @@ async function addPayment(
   // price matches
 
   try {
-    const { data, error } = await supabase.from("trainingen").select();
-    console.log("test", data);
-  } catch {}
-
-  try {
     const { data, error } = await supabase
       .from("trainingen")
       .select("prijs, deelnemers, naam")
       .eq("id", training_id);
 
-    console.log("ab3");
-    console.log(data, training_id);
-
     if (data == null) {
-      console.log("empty data");
       return;
     }
-
-    console.log("ab4");
 
     if (data[0].prijs != amount) {
       return;
     }
-
-    console.log("ab5");
 
     training_naam = data[0].naam;
     deelnemers = data[0].deelnemers;
@@ -76,8 +63,6 @@ async function addPayment(
     console.log(error);
     return;
   }
-
-  console.log("ab6");
 
   try {
     // fetch user data
@@ -165,9 +150,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
         let last_name = response.data.object.custom_fields[1]?.text.value;
         let payment_intent = response.data.object.payment_intent;
 
-        console.log(payload);
-        console.log("first", training_id);
-
         await addPayment(
           first_name,
           last_name,
@@ -178,8 +160,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
           order_date,
           payment_intent,
         );
-
-        console.log("second");
       }
     }
     return NextResponse.json({ status: 200, event: event.type });
