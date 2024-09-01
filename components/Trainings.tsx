@@ -27,7 +27,10 @@ export default async function Trainings({
       const lessen = await getLessen(training.lessen);
 
       return (
-        <div key={index} className="flex flex-col text-left max-w-[50rem]">
+        <div
+          key={index}
+          className="flex flex-col text-left w-full max-w-[50rem]"
+        >
           <div className="flex flex-row items-start mx-5">
             <h4 className="text-primary mb-2">{training.naam}</h4>
           </div>
