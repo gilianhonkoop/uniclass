@@ -115,7 +115,7 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
             </h3>
             <ul className="w-fit flex justify-start items-center text-[18px] tracking-[1.6px] text-black">
               <li
-                className="sm:w-[4rem] md:w-[5rem] lg:w-[6rem] text-center"
+                className="sm:w-[4rem] md:w-[4rem] lg:w-[5rem] text-center"
                 key={0}
               >
                 <Link
@@ -126,7 +126,7 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
                 </Link>
               </li>
               <li
-                className="sm:w-[4rem] md:w-[5rem] lg:w-[6rem] text-center"
+                className="sm:w-[4rem] md:w-[4rem] lg:w-[5rem] text-center"
                 key={1}
               >
                 <Link
@@ -151,7 +151,7 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
               >
                 <li
                   key="4"
-                  className="text-right md:w-[5vw] lg:w-[4vw] w-[5.5vw]"
+                  className="text-right md:w-[2rem] lg:w-[3rem] w-[2rem]"
                 >
                   <button className="hover:text-primary-orange text-white">
                     NL
@@ -166,7 +166,7 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
               >
                 <li
                   key="5"
-                  className="text-left md:w-[5vw] w-[5.5vw] lg:w-[4vw]"
+                  className="text-left md:w-[2rem] lg:w-[3rem] w-[2rem]"
                 >
                   <button className="hover:text-primary-orange text-white">
                     EN
