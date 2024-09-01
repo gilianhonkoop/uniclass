@@ -179,3 +179,15 @@ p {
     opacity: 0%;
   }
 }
+
+.roundshadowsm {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.roundshadowxl {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 1.5px;
+}
+
+.shadowbar {
+  box-shadow: rgba(255, 148, 18, 1) -5px 0px;
+}
