@@ -5,7 +5,7 @@ import Image from "next/image";
 import bars from "@/icons/bars.svg";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 const navLinks = [
   { title: "Home", href: "/" },
@@ -35,6 +35,7 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
   const toggleMenu = () => {
     setOpen((prevOpen) => !prevOpen);
   };
+  const pathname = usePathname();
 
   const menuVars = {
     initial: {
@@ -106,32 +107,52 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
         </div>
         <div className="flex-1 max-sm:hidden w-full flex min-h-16 bg-inherit sticky top-0 z-50 justify-center mt-[0rem]">
           <div className="flex flex-1 flex-row justify-between items-center max-w-6xl sm:mx-[2rem] md:mx-[5rem]">
-            <h3 className="font-light">
+            <h3 className="font-light pr-4">
               <Link href="/">
                 <span className="text-white">Uni</span>
                 <span className="text-primary-orange">Class</span>
               </Link>
             </h3>
             <ul className="w-fit flex justify-start items-center text-[18px] tracking-[1.6px] text-black">
-              {navLinks.map((page, index) => (
-                <li
-                  className="sm:w-[4rem] md:w-[5rem] lg:w-[6rem] text-center"
-                  key={index}
+              <li
+                className="sm:w-[4rem] md:w-[5rem] lg:w-[6rem] text-center"
+                key={0}
+              >
+                <Link
+                  className="hover:text-primary-orange ease-in-out duration-300 transition-colors text-white"
+                  href={"/"}
                 >
-                  <Link
-                    className="hover:text-primary-orange ease-in-out duration-300 transition-colors text-white"
-                    href={page.href}
-                  >
-                    {page.title}
-                  </Link>
-                </li>
-              ))}
+                  Home
+                </Link>
+              </li>
+              <li
+                className="sm:w-[4rem] md:w-[5rem] lg:w-[6rem] text-center"
+                key={1}
+              >
+                <Link
+                  className="hover:text-primary-orange ease-in-out duration-300 transition-colors text-white"
+                  href={"/faq"}
+                >
+                  FAQ
+                </Link>
+              </li>
+              <li className="w-fit text-center" key={2}>
+                <Link
+                  className="hover:text-primary-orange ease-in-out duration-300 transition-colors text-white"
+                  href={"/contact"}
+                >
+                  Contact
+                </Link>
+              </li>
               <form
                 action={(e) => {
                   setLanguage("nl");
                 }}
               >
-                <li key="4" className="text-right w-[3rem]">
+                <li
+                  key="4"
+                  className="text-right md:w-[5vw] lg:w-[4vw] w-[5.5vw]"
+                >
                   <button className="hover:text-primary-orange text-white">
                     NL
                   </button>
@@ -143,27 +164,32 @@ export default function Navbar({ setLanguage }: { setLanguage: any }) {
                   setLanguage("en");
                 }}
               >
-                <li key="5" className="text-left w-[3rem]">
+                <li
+                  key="5"
+                  className="text-left md:w-[5vw] w-[5.5vw] lg:w-[4vw]"
+                >
                   <button className="hover:text-primary-orange text-white">
                     EN
                   </button>
                 </li>
               </form>
-              <form
-                action={(e) => {
-                  const section = document.querySelector("#search");
-                  section!.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  });
-                }}
-              >
-                <li key="4" className="text-right w-fit">
-                  <button className="hover:text-primary-orange text-white">
-                    Book training
-                  </button>
-                </li>
-              </form>
+              {pathname == "/" && (
+                <form
+                  action={(e) => {
+                    const section = document.querySelector("#search");
+                    section!.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }}
+                >
+                  <li key="4" className="text-right">
+                    <button className="hover:text-primary-orange text-white m-0 p-0">
+                      <span className="whitespace-nowrap">Book training</span>
+                    </button>
+                  </li>
+                </form>
+              )}
             </ul>
           </div>
         </div>
