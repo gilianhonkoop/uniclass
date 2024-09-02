@@ -15,7 +15,7 @@ import ShowDeleted from "@/components/search/ShowDeleted";
 import ShowExpired from "@/components/search/ShowExpired";
 
 export default function Page() {
-  const [showExpired, setShowExpired] = useState("");
+  const [showExpired, setShowExpired] = useState("expired");
   const [showDeleted, setShowDeleted] = useState("deleted");
   const [uniId, setUniId] = useState(-1);
   const [studieId, setStudieId] = useState(-1);
