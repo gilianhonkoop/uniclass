@@ -42,8 +42,8 @@ export default function AddTraining({
     const taal = formData.get("taal") as string;
 
     let uniName = await getUniName(uni_id);
-    let studieName = await getStudieName(uni_id);
-    let vakName = await getVakName(uni_id);
+    let studieName = await getStudieName(studie_id);
+    let vakName = await getVakName(vak_id);
 
     if (uni_id && studie_id && vak_id) {
       const supabase = createClient();
@@ -57,7 +57,7 @@ export default function AddTraining({
         universiteit_id: uni_id,
         studie_id: studie_id,
         vak_id: vak_id,
-        info: `${uniName} + "-" + ${studieName} + "-" +  ${vakName}`,
+        info: `${uniName} - ${studieName} - ${vakName}`,
       });
 
       return router.refresh();
