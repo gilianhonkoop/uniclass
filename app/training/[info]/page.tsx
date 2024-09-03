@@ -39,7 +39,7 @@ export default async function Page({ params }: { params: { info: string } }) {
   return (
     <div className="animate-in flex-1 w-full flex flex-col items-center justify-center bg-white">
       <Navbar setLanguage={setLanguage} />
-      <div className="flex-1 flex flex-col items-center opacity-0z-0 z-0 w-full mt-[3rem] mb-[5rem] gap-[rem]">
+      <div className="flex-1 flex flex-col items-center opacity-0z-0 z-0 w-full sm:mt-[3rem] mt-[7rem] mb-[5rem] gap-[2rem]">
         <Suspense fallback={<></>}>
           {" "}
           <SearchFunctions2
@@ -50,7 +50,7 @@ export default async function Page({ params }: { params: { info: string } }) {
             empty={false}
           />
         </Suspense>
-        <div className="mb-[3rem]"></div>
+        <div className="sm:mb-[3rem]"></div>
         <Suspense fallback={<>Loading...</>}>
           <Trainings vakId={vakId} pathName={params.info} />
         </Suspense>
