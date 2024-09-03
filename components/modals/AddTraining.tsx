@@ -41,9 +41,9 @@ export default function AddTraining({
     const docent = formData.get("docent") as string;
     const taal = formData.get("taal") as string;
 
-    let uniName = getUniName(uni_id);
-    let studieName = getStudieName(uni_id);
-    let vakName = getVakName(uni_id);
+    let uniName = await getUniName(uni_id);
+    let studieName = await getStudieName(uni_id);
+    let vakName = await getVakName(uni_id);
 
     if (uni_id && studie_id && vak_id) {
       const supabase = createClient();
