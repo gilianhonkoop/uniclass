@@ -11,6 +11,11 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+import {
+  getUniName,
+  getStudieName,
+  getVakName,
+} from "@/utils/functions/search";
 
 const talen = ["nederlands", "engels"];
 const statussen = ["unpublished", "active", "expired", "deleted"];
@@ -36,6 +41,10 @@ export default function AddTraining({
     const docent = formData.get("docent") as string;
     const taal = formData.get("taal") as string;
 
+    let uniName = getUniName(uni_id);
+    let studieName = getStudieName(uni_id);
+    let vakName = getVakName(uni_id);
+
     if (uni_id && studie_id && vak_id) {
       const supabase = createClient();
       const { error } = await supabase.from("trainingen").insert({
@@ -48,7 +57,7 @@ export default function AddTraining({
         universiteit_id: uni_id,
         studie_id: studie_id,
         vak_id: vak_id,
-        info: "",
+        info: `${uniName} + "-" + ${studieName} + "-" +  ${vakName}`,
       });
 
       return router.refresh();

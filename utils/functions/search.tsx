@@ -155,3 +155,45 @@ export async function getSpecificTrainingen(
 
   return [];
 }
+
+export async function getUniName(id: number) {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("universiteiten")
+    .select("naam")
+    .eq("id", id);
+
+  if (data == null) {
+    return "";
+  }
+
+  return data[0].naam;
+}
+
+export async function getStudieName(id: number) {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("studies")
+    .select("naam")
+    .eq("id", id);
+
+  if (data == null) {
+    return "";
+  }
+
+  return data[0].naam;
+}
+
+export async function getVakName(id: number) {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("vaken")
+    .select("naam")
+    .eq("id", id);
+
+  if (data == null) {
+    return "";
+  }
+
+  return data[0].naam;
+}

@@ -99,7 +99,7 @@ export default function TrainingTable({
                     {training.omschrijving}
                   </div>
                 </TableCell>
-                <TableCell width={180}>uni, studie en vak info+link</TableCell>
+                <TableCell width={180}>{training.info}</TableCell>
                 <TableCell>
                   {training.deelnemers.length + "/" + training.plaatsen}
                 </TableCell>
