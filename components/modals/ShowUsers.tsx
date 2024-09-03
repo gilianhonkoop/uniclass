@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import user from "@/icons/user.png";
 import Image from "next/image";
 import { createClient } from "@/utils/supabase/client";
@@ -55,8 +56,8 @@ const columns = [
     label: "BETAALMETHODE",
   },
   {
-    key: "refund",
-    label: "REFUND",
+    key: "stripe",
+    label: "STRIPE",
   },
 
   {
@@ -81,12 +82,23 @@ async function deleteGebruiker(id: number, training: any, selected: boolean) {
   return true;
 }
 
-async function getGebruikers(deelnemers: number[]) {
+// async function getGebruikers(deelnemers: number[]) {
+async function getGebruikers(training_id: number) {
   const supabase = createClient();
+  // const { data, error } = await supabase
+  //   .from("gebruikers")
+  //   .select()
+  //   .in("id", deelnemers)
+  //   .order("id", { ascending: true });
+
+  // if (error) {
+  //   return [];
+  // }
+
   const { data, error } = await supabase
-    .from("gebruikers")
+    .from("orders")
     .select()
-    .in("id", deelnemers)
+    .eq("training_id", training_id)
     .order("id", { ascending: true });
 
   if (error) {
@@ -112,7 +124,8 @@ export default function ShowUsers({ training }: { training: any }) {
         width={20}
         height={20}
         onClick={async () => {
-          setDeelnemers(await getGebruikers(training.deelnemers));
+          // setDeelnemers(await getGebruikers(training.deelnemers));
+          setDeelnemers(await getGebruikers(training.id));
           setSelected(
             Array.from(
               { length: training.deelnemers.length },
@@ -153,12 +166,22 @@ export default function ShowUsers({ training }: { training: any }) {
                           <TableCell>{user.email}</TableCell>
                           <TableCell>{user.telefoon}</TableCell>
                           <TableCell>
-                            {user.created_at.slice(0, 10)}{" "}
-                            {user.created_at.slice(12, 19)}
+                            {/* {user.created_at.slice(0, 10)}{" "}
+                            {user.created_at.slice(12, 19)} */}
+                            {user.order_date.slice(0, 10)}{" "}
+                            {user.order_date.slice(12, 19)}
                           </TableCell>
-                          <TableCell>prijs</TableCell>
-                          <TableCell>betaalmethode</TableCell>
-                          <TableCell>prijs in transaction</TableCell>
+                          <TableCell>{user.prijs}</TableCell>
+                          <TableCell>{user.betaalmethode}</TableCell>
+                          <TableCell>
+                            {user.payment_itent && (
+                              <Link
+                                href={`https://dashboard.stripe.com/payments/${user.payment_itent}`}
+                              >
+                                stripe link
+                              </Link>
+                            )}
+                          </TableCell>
                           <TableCell className="min-w-[50px]">
                             <div className="flex flex-row gap-3">
                               <Checkbox
