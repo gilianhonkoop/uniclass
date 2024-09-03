@@ -121,7 +121,7 @@ export default async function Trainings({
                           rounded-md shadow-sm hover:shadow-md text-white bg-primary hover:scale-[101%]"
                     >
                       <p className="text-[15px] uppercase font-bold">
-                        Bestel training {">"}
+                        Book training {">"}
                       </p>
                     </button>
                   )}
@@ -134,7 +134,7 @@ export default async function Trainings({
                           rounded-md shadow-sm text-white bg-primary"
                     >
                       <p className="text-[15px] uppercase font-bold">
-                        Training is vol
+                        Training is full
                       </p>
                     </button>
                   )}

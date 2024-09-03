@@ -48,12 +48,12 @@ export default function AddTraining({
         universiteit_id: uni_id,
         studie_id: studie_id,
         vak_id: vak_id,
+        info: "",
       });
 
       return router.refresh();
     }
 
-    //TODO manuall add uni study course
     return;
   };
 
