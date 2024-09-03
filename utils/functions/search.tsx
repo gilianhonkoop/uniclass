@@ -187,7 +187,7 @@ export async function getStudieName(id: number) {
 export async function getVakName(id: number) {
   const supabase = createClient();
   const { data, error } = await supabase
-    .from("vaken")
+    .from("vakken")
     .select("naam")
     .eq("id", id);
 
