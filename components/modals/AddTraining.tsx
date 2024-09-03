@@ -40,6 +40,7 @@ export default function AddTraining({
     const plaatsen = formData.get("plaatsen") as string;
     const docent = formData.get("docent") as string;
     const taal = formData.get("taal") as string;
+    const status = formData.get("status") as string;
 
     let uniName = await getUniName(uni_id);
     let studieName = await getStudieName(studie_id);
@@ -58,6 +59,7 @@ export default function AddTraining({
         studie_id: studie_id,
         vak_id: vak_id,
         info: `${uniName} - ${studieName} - ${vakName}`,
+        status: status,
       });
 
       return router.refresh();
