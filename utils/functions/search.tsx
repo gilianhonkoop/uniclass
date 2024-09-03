@@ -110,9 +110,9 @@ export async function getSpecificTrainingen(
   getDeleted: string,
 ) {
   "use server";
+  const supabase = createClient();
 
   if (uniId != -1 && studieId != -1 && vakId != -1) {
-    const supabase = createClient();
     const { data, error } = await supabase
       .from("trainingen")
       .select()
@@ -127,7 +127,6 @@ export async function getSpecificTrainingen(
   }
 
   if (uniId != -1 && studieId != -1) {
-    const supabase = createClient();
     const { data, error } = await supabase
       .from("trainingen")
       .select()
@@ -141,7 +140,6 @@ export async function getSpecificTrainingen(
   }
 
   if (uniId != -1) {
-    const supabase = createClient();
     const { data, error } = await supabase
       .from("trainingen")
       .select()
@@ -151,6 +149,15 @@ export async function getSpecificTrainingen(
       .order("id", { ascending: false });
 
     return data;
+  }
+
+  if (uniId == -1) {
+    const { data, error } = await supabase
+      .from("trainingen")
+      .select()
+      .neq("status", getExpired)
+      .neq("status", getDeleted)
+      .order("id", { ascending: false });
   }
 
   return [];
