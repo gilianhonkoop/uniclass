@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import user from "@/icons/user.png";
 import Image from "next/image";
 import { createClient } from "@/utils/supabase/client";
@@ -176,12 +175,13 @@ export default function ShowUsers({ training }: { training: any }) {
                           <TableCell>{user.betaalmethode}</TableCell>
                           <TableCell>
                             {user.payment_intent && (
-                              <Link
-                                className="text-black"
+                              <a
+                                target="_blank"
                                 href={`https://dashboard.stripe.com/payments/${user.payment_intent}`}
+                                rel="noopener noreferrer"
                               >
                                 stripe link
-                              </Link>
+                              </a>
                             )}
                           </TableCell>
                           <TableCell className="min-w-[50px]">
