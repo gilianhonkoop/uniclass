@@ -171,10 +171,6 @@ export default function Page() {
                   Feel free to contact us via email, and we can check the
                   availability of individual tutoring sessions with the teacher.
                 </p>
-                <p className="text-gray-500">
-                  You can use this version for any purposes, because it is
-                  open-source under the MIT license.
-                </p>
               </div>
               <div className="mb-10">
                 <h3 className="flex items-center mb-4 text-xl font-medium text-gray-900">
