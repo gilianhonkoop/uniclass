@@ -151,18 +151,14 @@ export async function getSpecificTrainingen(
     return data;
   }
 
-  if (uniId == -1) {
-    const { data, error } = await supabase
-      .from("trainingen")
-      .select()
-      .neq("status", getExpired)
-      .neq("status", getDeleted)
-      .order("id", { ascending: false });
+  const { data, error } = await supabase
+    .from("trainingen")
+    .select()
+    .neq("status", getExpired)
+    .neq("status", getDeleted)
+    .order("id", { ascending: false });
 
-    return data;
-  }
-
-  return [];
+  return data;
 }
 
 export async function getUniName(id: number) {
