@@ -69,9 +69,7 @@ export default function Page() {
       setTrainingen(trainings);
     }
 
-    if (uniId != -1) {
-      Train();
-    }
+    Train();
   }, [uniId, studieId, vakId, showExpired, showDeleted]);
 
   return (

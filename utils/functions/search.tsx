@@ -112,6 +112,8 @@ export async function getSpecificTrainingen(
   "use server";
   const supabase = createClient();
 
+  console.log(uniId);
+
   if (uniId != -1 && studieId != -1 && vakId != -1) {
     const { data, error } = await supabase
       .from("trainingen")
@@ -151,14 +153,16 @@ export async function getSpecificTrainingen(
     return data;
   }
 
-  const { data, error } = await supabase
-    .from("trainingen")
-    .select()
-    .neq("status", getExpired)
-    .neq("status", getDeleted)
-    .order("id", { ascending: false });
+  if (uniId == -1) {
+    const { data, error } = await supabase
+      .from("trainingen")
+      .select()
+      .neq("status", getExpired)
+      .neq("status", getDeleted)
+      .order("id", { ascending: false });
 
-  return data;
+    return data;
+  }
 }
 
 export async function getUniName(id: number) {
