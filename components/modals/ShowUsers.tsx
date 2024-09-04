@@ -83,7 +83,7 @@ async function deleteGebruiker(id: number, training: any, selected: boolean) {
 }
 
 // async function getGebruikers(deelnemers: number[]) {
-async function getGebruikers(training_id: number) {
+async function getGebruikers(deelnemers: number[], training_id: number) {
   const supabase = createClient();
   // const { data, error } = await supabase
   //   .from("gebruikers")
@@ -99,6 +99,7 @@ async function getGebruikers(training_id: number) {
     .from("orders")
     .select()
     .eq("training_id", training_id)
+    .in("gebruiker_id", deelnemers)
     .order("id", { ascending: true });
 
   if (error) {
@@ -125,7 +126,7 @@ export default function ShowUsers({ training }: { training: any }) {
         height={20}
         onClick={async () => {
           // setDeelnemers(await getGebruikers(training.deelnemers));
-          setDeelnemers(await getGebruikers(training.id));
+          setDeelnemers(await getGebruikers(training.deelnemers, training.id));
           setSelected(
             Array.from(
               { length: training.deelnemers.length },

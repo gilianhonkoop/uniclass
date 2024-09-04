@@ -44,25 +44,6 @@ async function addPayment(
     return;
   }
 
-  // insert order into orders table
-  try {
-    const { data, error } = await supabase.from("orders").insert({
-      prijs: amount,
-      email: email,
-      telefoon: phone,
-      voornaam: first_name,
-      achternaam: last_name,
-      training_id: training_id,
-      order_date: order_date,
-      status: "paid",
-      payment_intent: payment_intent,
-      training_naam: training_naam,
-    });
-  } catch (error) {
-    console.log(error);
-    return;
-  }
-
   try {
     // fetch user data
     const { data, error } = await supabase
@@ -105,6 +86,26 @@ async function addPayment(
         .update({ trainingen: trainingen })
         .eq("id", data[0].id);
     }
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+
+  // insert order into orders table
+  try {
+    const { data, error } = await supabase.from("orders").insert({
+      prijs: amount,
+      email: email,
+      telefoon: phone,
+      voornaam: first_name,
+      achternaam: last_name,
+      training_id: training_id,
+      order_date: order_date,
+      status: "paid",
+      payment_intent: payment_intent,
+      training_naam: training_naam,
+      gebruiker_id: user_id,
+    });
   } catch (error) {
     console.log(error);
     return;
