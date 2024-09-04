@@ -158,6 +158,8 @@ export async function getSpecificTrainingen(
       .neq("status", getExpired)
       .neq("status", getDeleted)
       .order("id", { ascending: false });
+
+    return data;
   }
 
   return [];
