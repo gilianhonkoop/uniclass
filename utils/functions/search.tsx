@@ -149,9 +149,7 @@ export async function getSpecificTrainingen(
       .order("id", { ascending: false });
 
     return data;
-  }
-
-  if (uniId == -1) {
+  } else {
     const { data, error } = await supabase
       .from("trainingen")
       .select()
