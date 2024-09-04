@@ -176,6 +176,7 @@ export default function ShowUsers({ training }: { training: any }) {
                           <TableCell>
                             {user.payment_intent && (
                               <a
+                                className="underline text-sky-600"
                                 target="_blank"
                                 href={`https://dashboard.stripe.com/payments/${user.payment_intent}`}
                                 rel="noopener noreferrer"
