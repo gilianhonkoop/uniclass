@@ -170,14 +170,15 @@ export default function ShowUsers({ training }: { training: any }) {
                             {/* {user.created_at.slice(0, 10)}{" "}
                             {user.created_at.slice(12, 19)} */}
                             {user.order_date.slice(0, 10)}{" "}
-                            {user.order_date.slice(12, 19)}
+                            {user.order_date.slice(11, 19)}
                           </TableCell>
                           <TableCell>{user.prijs}</TableCell>
                           <TableCell>{user.betaalmethode}</TableCell>
                           <TableCell>
-                            {user.payment_itent && (
+                            {user.payment_intent && (
                               <Link
-                                href={`https://dashboard.stripe.com/payments/${user.payment_itent}`}
+                                className="text-black"
+                                href={`https://dashboard.stripe.com/payments/${user.payment_intent}`}
                               >
                                 stripe link
                               </Link>
