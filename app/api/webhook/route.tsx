@@ -153,19 +153,23 @@ export async function POST(req: NextRequest, res: NextResponse) {
         let payment_intent = response.data.object.payment_intent;
         let payment_type: null | string = null;
 
-        if (payment_intent != null) {
-          const paymentIntent =
-            await stripe.paymentIntents.retrieve(payment_intent);
+        try {
+          if (payment_intent != null) {
+            const paymentIntent =
+              await stripe.paymentIntents.retrieve(payment_intent);
 
-          if (paymentIntent.payment_method_types[0] == "card") {
-            const paymentMethod = await stripe.paymentMethods.retrieve(
-              paymentIntent.payment_method as string,
-            );
+            if (paymentIntent.payment_method_types[0] == "card") {
+              const paymentMethod = await stripe.paymentMethods.retrieve(
+                paymentIntent.payment_method as string,
+              );
 
-            payment_type = `card: ${paymentMethod.card?.brand}`;
-          } else {
-            payment_type = paymentIntent.payment_method_types[0];
+              payment_type = `card: ${paymentMethod.card?.brand}`;
+            } else {
+              payment_type = paymentIntent.payment_method_types[0];
+            }
           }
+        } catch (error) {
+          console.log("retrieve payment type error");
         }
 
         await addPayment(
