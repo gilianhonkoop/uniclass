@@ -13,6 +13,7 @@ async function addPayment(
   training_id: number,
   order_date: string,
   payment_intent: string,
+  payment_type: string | null,
 ) {
   const supabase = createClient();
 
@@ -105,6 +106,7 @@ async function addPayment(
       payment_intent: payment_intent,
       training_naam: training_naam,
       gebruiker_id: user_id,
+      betaalmethode: payment_type,
     });
   } catch (error) {
     console.log(error);
@@ -149,6 +151,22 @@ export async function POST(req: NextRequest, res: NextResponse) {
         let first_name = response.data.object.custom_fields[0]?.text.value;
         let last_name = response.data.object.custom_fields[1]?.text.value;
         let payment_intent = response.data.object.payment_intent;
+        let payment_type: null | string = null;
+
+        if (payment_intent != null) {
+          const paymentIntent =
+            await stripe.paymentIntents.retrieve(payment_intent);
+
+          if (paymentIntent.payment_method_types[0] == "card") {
+            const paymentMethod = await stripe.paymentMethods.retrieve(
+              paymentIntent.payment_method as string,
+            );
+
+            payment_type = `card: ${paymentMethod.card?.brand}`;
+          } else {
+            payment_type = paymentIntent.payment_method_types[0];
+          }
+        }
 
         await addPayment(
           first_name,
@@ -159,6 +177,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
           training_id,
           order_date,
           payment_intent,
+          payment_type,
         );
       }
     }
