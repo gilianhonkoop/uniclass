@@ -29,7 +29,7 @@ export default async function Trainings({
       return (
         <div
           key={index}
-          className="roundshadowxl pl-[5px] flex flex-col text-left w-full max-w-[50rem] bg-black bg-opacity-[5%] rounded-sm"
+          className="roundshadowxl pl-[5px] flex flex-col text-left text-black w-full max-w-[50rem] bg-black bg-opacity-[5%] rounded-sm"
         >
           <div className="shadowbar w-full h-full py-4">
             <div className="flex flex-row items-start mx-5">
