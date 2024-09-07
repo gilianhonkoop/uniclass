@@ -37,7 +37,7 @@ export default async function Page({ params }: { params: { info: string } }) {
   var vakId: string = info[2];
 
   return (
-    <div className="animate-in flex-1 w-full flex flex-col items-center justify-center bg-white">
+    <div className="animate-in flex-1 w-full flex flex-col items-center justify-center bg-white text-black">
       <Navbar setLanguage={setLanguage} />
       <div className="flex-1 flex flex-col items-center opacity-0z-0 z-0 w-full sm:mt-[3rem] mt-[7rem] mb-[5rem] gap-[2rem]">
         <Suspense fallback={<></>}>
