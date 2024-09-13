@@ -213,6 +213,7 @@ export default function ShowUsers({ training }: { training: any }) {
                                 les.id = -2;
                               }
                               onClose();
+                              router.refresh();
                             }}
                           >
                             Opslaan

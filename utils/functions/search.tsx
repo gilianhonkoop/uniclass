@@ -64,7 +64,7 @@ export async function getTrainingen(id: number | string) {
     .select()
     .eq("vak_id", id)
     .eq("status", "active")
-    .order("id", { ascending: false });
+    .order("rank", { ascending: true });
 
   if (data == null) {
     return [];
@@ -123,7 +123,7 @@ export async function getSpecificTrainingen(
       .eq("vak_id", vakId)
       .neq("status", getExpired)
       .neq("status", getDeleted)
-      .order("id", { ascending: false });
+      .order("rank", { ascending: false });
 
     return data;
   }

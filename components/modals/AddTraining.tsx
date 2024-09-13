@@ -1,7 +1,6 @@
 "use client";
 
 import { createClient } from "@/utils/supabase/client";
-import { useRouter } from "next/navigation";
 import {
   Modal,
   ModalContent,
@@ -29,8 +28,6 @@ export default function AddTraining({
   studie_id: number;
   vak_id: number;
 }) {
-  const router = useRouter();
-
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const addEntry = async (formData: FormData) => {
@@ -41,6 +38,13 @@ export default function AddTraining({
     const docent = formData.get("docent") as string;
     const taal = formData.get("taal") as string;
     const status = formData.get("status") as string;
+    let rank = formData.get("rank") as string;
+    let pos: number;
+    if (rank == "") {
+      pos = 999;
+    } else {
+      pos = parseInt(rank);
+    }
 
     let uniName = await getUniName(uni_id);
     let studieName = await getStudieName(studie_id);
@@ -60,9 +64,8 @@ export default function AddTraining({
         vak_id: vak_id,
         info: `${uniName} - ${studieName} - ${vakName}`,
         status: status,
+        rank: pos,
       });
-
-      return router.refresh();
     }
 
     return;
@@ -124,6 +127,13 @@ export default function AddTraining({
                     autoComplete="off"
                     required
                   ></input>
+                  <input
+                    name="rank"
+                    className="p-2 border-2 rounded-md border-grey-600"
+                    placeholder={"positie (kan leeg)"}
+                    type="number"
+                    autoComplete="off"
+                  ></input>
                   <select
                     name="taal"
                     className="p-2 border-2 rounded-md border-grey-600 bg-white w-full"
@@ -163,6 +173,7 @@ export default function AddTraining({
                     formAction={(event) => {
                       addEntry(event);
                       onClose();
+                      window.location.reload();
                     }}
                   >
                     Opslaan

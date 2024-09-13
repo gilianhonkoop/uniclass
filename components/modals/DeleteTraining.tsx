@@ -51,6 +51,7 @@ export default function DeleteEntry({ id }: { id: number }) {
                   onPress={() => {
                     onClose();
                     deleteEntry();
+                    window.location.reload();
                   }}
                 >
                   Verwijderen

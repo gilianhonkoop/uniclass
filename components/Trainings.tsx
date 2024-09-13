@@ -35,6 +35,11 @@ export default async function Trainings({
             <div className="flex flex-row items-start mx-5">
               <h4 className="text-primary mb-2">{training.naam}</h4>
             </div>
+            <div className="flex flex-row items-start mx-5 mb-5">
+              <p className="whitespace-pre-wrap text-xl">
+                Teacher: {training.docent}
+              </p>
+            </div>
             <div className="flex flex-row items-start mx-5 mb-10">
               <p className="whitespace-pre-wrap">{training.omschrijving}</p>
             </div>

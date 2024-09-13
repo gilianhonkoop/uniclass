@@ -3,7 +3,6 @@
 import pen from "@/icons/pen.png";
 import Image from "next/image";
 import { createClient } from "@/utils/supabase/client";
-import { useRouter } from "next/navigation";
 import {
   Modal,
   ModalContent,
@@ -18,8 +17,6 @@ const talen = ["nederlands", "engels"];
 const statussen = ["unpublished", "active", "expired", "deleted"];
 
 export default function EditTraining({ training }: { training: any }) {
-  const router = useRouter();
-
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const editEntry = async (formData: FormData) => {
@@ -30,6 +27,10 @@ export default function EditTraining({ training }: { training: any }) {
     const docent = formData.get("docent") as string;
     const taal = formData.get("taal") as string;
     const status = formData.get("status") as string;
+    let rank = formData.get("rank") as number | null;
+    if (rank == null) {
+      rank = -1;
+    }
 
     const supabase = createClient();
     const { error } = await supabase
@@ -42,11 +43,9 @@ export default function EditTraining({ training }: { training: any }) {
         docent: docent,
         taal: taal,
         status: status,
+        rank: rank,
       })
       .eq("id", training.id);
-
-    return router.refresh();
-
     //TODO manuall add uni study course individually
     return;
   };
@@ -115,6 +114,15 @@ export default function EditTraining({ training }: { training: any }) {
                     autoComplete="off"
                     required
                   ></input>
+                  <p className="mt-2">rank</p>
+                  <input
+                    name="rank"
+                    className="p-2 border-2 rounded-md border-grey-600"
+                    defaultValue={training.rank}
+                    type="text"
+                    autoComplete="off"
+                    required
+                  ></input>
                   <p className="mt-2">taal</p>
                   <select
                     name="taal"
@@ -156,6 +164,7 @@ export default function EditTraining({ training }: { training: any }) {
                     formAction={(event) => {
                       editEntry(event);
                       onClose();
+                      window.location.reload();
                     }}
                   >
                     Opslaan
