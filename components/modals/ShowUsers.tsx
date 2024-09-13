@@ -81,18 +81,8 @@ async function deleteGebruiker(id: number, training: any, selected: boolean) {
   return true;
 }
 
-// async function getGebruikers(deelnemers: number[]) {
 async function getGebruikers(deelnemers: number[], training_id: number) {
   const supabase = createClient();
-  // const { data, error } = await supabase
-  //   .from("gebruikers")
-  //   .select()
-  //   .in("id", deelnemers)
-  //   .order("id", { ascending: true });
-
-  // if (error) {
-  //   return [];
-  // }
 
   const { data, error } = await supabase
     .from("orders")
@@ -115,6 +105,23 @@ export default function ShowUsers({ training }: { training: any }) {
   const [selected, setSelected] = useState<any[]>([]);
   const [deelnemers, setDeelnemers] = useState<any[]>([]);
 
+  const [isCopied, setIsCopied] = useState(false);
+
+  async function handleCopy(text: string) {
+    try {
+      // Copy text to clipboard
+      await navigator.clipboard.writeText(text);
+      setIsCopied(true); // Show "Copied!" effect
+
+      // Remove "Copied!" text after 2 seconds
+      setTimeout(() => setIsCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy text:", err);
+    }
+
+    return;
+  }
+
   return (
     <>
       <Image
@@ -124,7 +131,6 @@ export default function ShowUsers({ training }: { training: any }) {
         width={20}
         height={20}
         onClick={async () => {
-          // setDeelnemers(await getGebruikers(training.deelnemers));
           setDeelnemers(await getGebruikers(training.deelnemers, training.id));
           setSelected(
             Array.from(
@@ -146,8 +152,31 @@ export default function ShowUsers({ training }: { training: any }) {
             <>
               <ModalHeader className="flex flex-col gap-1 items-center">
                 Deelnemers
+                <button
+                  onClick={() => {
+                    let emails: string = "";
+                    deelnemers.map((d, i) => {
+                      emails = emails + d.email + " ";
+                    });
+                    handleCopy(emails);
+                  }}
+                  style={{
+                    padding: "2px 12px",
+                    fontSize: "16px",
+                    borderRadius: "4px",
+                    border: "none",
+                    // Green color for the button
+                    backgroundColor: "#4169e1",
+                    color: "#fff",
+                    cursor: "pointer",
+                    position: "relative",
+                    overflow: "hidden",
+                  }}
+                >
+                  {isCopied ? "Copied!" : "Copy"}
+                </button>
               </ModalHeader>
-              <ModalBody className="flex flex-row mb-5">
+              <ModalBody className="flex flex-col mb-5">
                 {deelnemers.length > 0 && (
                   // TODO: fix weird bug where adding isStriped to table removes an date entry
                   <Table aria-label="Alle gebruikers">
@@ -166,8 +195,6 @@ export default function ShowUsers({ training }: { training: any }) {
                           <TableCell>{user.email}</TableCell>
                           <TableCell>{user.telefoon}</TableCell>
                           <TableCell>
-                            {/* {user.created_at.slice(0, 10)}{" "}
-                            {user.created_at.slice(12, 19)} */}
                             {user.order_date.slice(0, 10)}{" "}
                             {user.order_date.slice(11, 19)}
                           </TableCell>
