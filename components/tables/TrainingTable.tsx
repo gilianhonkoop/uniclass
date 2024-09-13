@@ -62,7 +62,7 @@ export default function TrainingTable({
   function getBeginAndEnd(lesIds: number[]) {
     var newArray: any[] = lessen
       .filter(function (les) {
-        return les.id in lesIds;
+        return lesIds.includes(les.id);
       })
       .map(function (obj) {
         return new Date(obj.begin);

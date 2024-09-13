@@ -15,6 +15,8 @@ import {
   Button,
 } from "@nextui-org/react";
 
+async function updateSchedule(lessen: any[]) {}
+
 async function getLessen(lessen: number[]) {
   const supabase = createClient();
   const { data, error } = await supabase
@@ -44,7 +46,7 @@ async function getLokalen() {
   return data;
 }
 
-export default function ShowUsers({ training }: { training: any }) {
+export default function ShowSchedule({ training }: { training: any }) {
   const router = useRouter();
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -157,7 +159,6 @@ export default function ShowUsers({ training }: { training: any }) {
                     let newlessen = lessen.concat();
                     newlessen.push(les);
                     setLessen(newlessen);
-                    // router.refresh();
                   }}
                   className="my-5 text-center text-cgreen text-center text-md w-full hover:cursor-pointer"
                 >
@@ -213,7 +214,6 @@ export default function ShowUsers({ training }: { training: any }) {
                                 les.id = -2;
                               }
                               onClose();
-                              router.refresh();
                             }}
                           >
                             Opslaan
