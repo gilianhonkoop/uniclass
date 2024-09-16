@@ -29,7 +29,6 @@ export default function AddTraining({
   vak_id: number;
 }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
   const addEntry = async (formData: FormData) => {
     const naam = formData.get("naam") as string;
     const omschrijving = formData.get("omschrijving") as string;
@@ -52,6 +51,7 @@ export default function AddTraining({
 
     if (uni_id && studie_id && vak_id) {
       const supabase = createClient();
+
       const { error } = await supabase.from("trainingen").insert({
         naam: naam,
         omschrijving: omschrijving,
@@ -173,7 +173,7 @@ export default function AddTraining({
                     formAction={(event) => {
                       addEntry(event);
                       onClose();
-                      window.location.reload();
+                      // window.location.reload();
                     }}
                   >
                     Opslaan

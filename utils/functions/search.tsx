@@ -112,8 +112,6 @@ export async function getSpecificTrainingen(
   "use server";
   const supabase = createClient();
 
-  console.log(uniId);
-
   if (uniId != -1 && studieId != -1 && vakId != -1) {
     const { data, error } = await supabase
       .from("trainingen")
