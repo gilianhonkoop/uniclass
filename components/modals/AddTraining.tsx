@@ -170,10 +170,10 @@ export default function AddTraining({
                   <Button
                     type="submit"
                     color="primary"
-                    formAction={(event) => {
-                      addEntry(event);
+                    formAction={async (event) => {
                       onClose();
-                      // window.location.reload();
+                      await addEntry(event);
+                      window.location.reload();
                     }}
                   >
                     Opslaan

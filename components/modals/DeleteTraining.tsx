@@ -48,9 +48,9 @@ export default function DeleteEntry({ id }: { id: number }) {
                 </Button>
                 <Button
                   color="primary"
-                  onPress={() => {
+                  onPress={async () => {
                     onClose();
-                    deleteEntry();
+                    await deleteEntry();
                     window.location.reload();
                   }}
                 >

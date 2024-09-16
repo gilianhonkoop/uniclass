@@ -161,9 +161,9 @@ export default function EditTraining({ training }: { training: any }) {
                   <Button
                     type="submit"
                     color="primary"
-                    formAction={(event) => {
-                      editEntry(event);
+                    formAction={async (event) => {
                       onClose();
+                      await editEntry(event);
                       window.location.reload();
                     }}
                   >
