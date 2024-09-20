@@ -6,6 +6,7 @@ import clock from "@/icons/clock.png";
 import location from "@/icons/location.png";
 import CreateSession from "@/lib/stripe/create_session/CreateSession";
 import { redirect } from "next/navigation";
+import Link from "next/navigation";
 
 export default async function Trainings({
   vakId,
@@ -25,6 +26,10 @@ export default async function Trainings({
   } else {
     return trainingen.map(async (training, index) => {
       const lessen = await getLessen(training.lessen);
+      const processed = training.omschrijving.replace(
+        "<a",
+        `<a class="text-primary" `,
+      );
 
       return (
         <div
@@ -41,7 +46,12 @@ export default async function Trainings({
               </p>
             </div>
             <div className="flex flex-row items-start mx-5 mb-10">
-              <p className="whitespace-pre-wrap">{training.omschrijving}</p>
+              <p
+                className="whitespace-pre-wrap overflow-hidden break-all"
+                dangerouslySetInnerHTML={{
+                  __html: processed,
+                }}
+              ></p>
             </div>
             <div className="flex flex-row items-start justify-center sm:justify-start mx-5 mb-10">
               <div className="flex flex-row max-w-full flex-wrap justify-center sm:justify-start gap-6">
