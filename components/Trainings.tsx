@@ -47,7 +47,7 @@ export default async function Trainings({
             </div>
             <div className="flex flex-row items-start mx-5 mb-10">
               <p
-                className="whitespace-pre-wrap overflow-hidden break-all"
+                className="whitespace-pre-wrap overflow-hidden break-words"
                 dangerouslySetInnerHTML={{
                   __html: processed,
                 }}

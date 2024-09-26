@@ -60,7 +60,12 @@ export default function EditTraining({ training }: { training: any }) {
         height={20}
         onClick={onOpen}
       />
-      <Modal size="xl" isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal
+        size="2xl"
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        scrollBehavior="outside"
+      >
         <ModalContent>
           {(onClose) => (
             <>
@@ -68,7 +73,7 @@ export default function EditTraining({ training }: { training: any }) {
                 Wijzigen
               </ModalHeader>
               <form>
-                <ModalBody className="flex flex-col gap-0">
+                <ModalBody className="flex flex-col gap-0 ">
                   <p>titel</p>
                   <input
                     name="naam"
