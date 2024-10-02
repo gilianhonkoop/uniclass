@@ -63,7 +63,7 @@ export default function Page() {
                   {" "}
                   Still have a question left? Feel free to reach out to us at:{" "}
                 </p>
-                <p className="text-black"> info@unicass.nl</p>
+                <p className="text-black"> info@uniclass.nl</p>
               </div>
             )}
           </div>
