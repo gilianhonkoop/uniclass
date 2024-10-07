@@ -33,17 +33,7 @@ const columns = [
   },
 ];
 
-export default function UserTable({ getUsers }: { getUsers: Function }) {
-  const [page, setPage] = useState(1);
-  const [users, setUsers] = useState<any[]>([]);
-
-  useEffect(() => {
-    const update = async () => {
-      let new_users: any[] = await getUsers(page);
-      setUsers([...users, ...new_users]);
-    };
-    update();
-  }, [page]);
+export default function SearchUserTable({ users }: { users: any[] }) {
   return (
     <>
       {users && (
@@ -74,14 +64,6 @@ export default function UserTable({ getUsers }: { getUsers: Function }) {
           </TableBody>
         </Table>
       )}
-      <button
-        className="my-5"
-        onClick={() => {
-          setPage(page + 1);
-        }}
-      >
-        Load More
-      </button>
     </>
   );
 }

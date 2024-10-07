@@ -1,3 +1,5 @@
+"use server";
+
 import LokaalRij from "@/components/LokaalRij";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
@@ -44,7 +46,7 @@ export default async function Lokalen({
       return redirect("/dashboard/lokalen?message=Kon lokaal niet toevoegen");
     }
 
-    return redirect("/dashboard/lokalen?message=Lokaal is toegeveogd");
+    return redirect("/dashboard/lokalen?message=Lokaal is toegevoegd");
   };
 
   return (

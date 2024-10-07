@@ -53,18 +53,7 @@ const columns = [
   },
 ];
 
-export default function OrderTable({ getOrders }: { getOrders: Function }) {
-  const [page, setPage] = useState(1);
-  const [orders, setOrders] = useState<any[]>([]);
-
-  useEffect(() => {
-    const update = async () => {
-      let new_orders: any[] = await getOrders(page);
-      setOrders([...orders, ...new_orders]);
-    };
-    update();
-  }, [page]);
-
+export default function SearchOrderTable({ orders }: { orders: any[] }) {
   return (
     <>
       {orders && (
@@ -103,14 +92,6 @@ export default function OrderTable({ getOrders }: { getOrders: Function }) {
           </TableBody>
         </Table>
       )}
-      <button
-        className="my-5"
-        onClick={() => {
-          setPage(page + 1);
-        }}
-      >
-        Load More
-      </button>
     </>
   );
 }
