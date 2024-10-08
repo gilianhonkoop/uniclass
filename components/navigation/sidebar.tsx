@@ -11,6 +11,8 @@ export default function Sidebar() {
     { label: "Data", url: "/", type: "subsection" },
     { label: "Gebruikers", url: "/dashboard/gebruikers", type: "page" },
     { label: "Orders", url: "/dashboard/orders", type: "page" },
+    { label: "Admin", url: "/", type: "subsection" },
+    { label: "Verplaats gebruikers", url: "/dashboard/move", type: "page" },
   ];
 
   return (

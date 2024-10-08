@@ -81,6 +81,10 @@ async function deleteGebruiker(id: number, training: any, selected: boolean) {
   return true;
 }
 
+// TODO
+// change this to serach from gebruikers table instead of orders table in case of course change
+// to keep orders in sync with stripe
+
 async function getGebruikers(deelnemers: number[], training_id: number) {
   const supabase = createClient();
 
@@ -88,6 +92,7 @@ async function getGebruikers(deelnemers: number[], training_id: number) {
     .from("orders")
     .select()
     .eq("training_id", training_id)
+    .eq("status", "paid")
     .in("gebruiker_id", deelnemers)
     .order("id", { ascending: true });
 
