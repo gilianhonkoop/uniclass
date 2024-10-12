@@ -6,7 +6,6 @@ import clock from "@/icons/clock.png";
 import location from "@/icons/location.png";
 import CreateSession from "@/lib/stripe/create_session/CreateSession";
 import { redirect } from "next/navigation";
-import Link from "next/navigation";
 
 export default async function Trainings({
   vakId,
@@ -128,19 +127,34 @@ export default async function Trainings({
                     redirect(StripeUrl!);
                   }}
                 >
-                  {training.plaatsen != training.deelnemers.length && (
-                    <button
-                      type="submit"
-                      role="link"
-                      className="hover:cursor-pointer flex justify-center items-center h-[4rem] min-w-[12rem] 
+                  {training.plaatsen != training.deelnemers.length &&
+                    training.status == "active" && (
+                      <button
+                        type="submit"
+                        role="link"
+                        className="hover:cursor-pointer flex justify-center items-center h-[4rem] min-w-[12rem] 
                           rounded-md shadow-sm hover:shadow-md text-white bg-primary hover:scale-[101%]"
-                    >
-                      <p className="text-[15px] uppercase font-bold">
-                        Book training {">"}
-                      </p>
-                    </button>
-                  )}
-                  {training.plaatsen == training.deelnemers.length && (
+                      >
+                        <p className="text-[15px] uppercase font-bold">
+                          Book training {">"}
+                        </p>
+                      </button>
+                    )}
+                  {training.plaatsen == training.deelnemers.length &&
+                    training.status == "active" && (
+                      <button
+                        disabled
+                        type="submit"
+                        role="link"
+                        className="hover:cursor-not-allowed flex justify-center items-center h-[4rem] min-w-[12rem] 
+                          rounded-md shadow-sm text-white bg-primary"
+                      >
+                        <p className="text-[15px] uppercase font-bold">
+                          Training is full
+                        </p>
+                      </button>
+                    )}
+                  {training.status == "expired" && (
                     <button
                       disabled
                       type="submit"
@@ -149,7 +163,7 @@ export default async function Trainings({
                           rounded-md shadow-sm text-white bg-primary"
                     >
                       <p className="text-[15px] uppercase font-bold">
-                        Training is full
+                        Registration is closed
                       </p>
                     </button>
                   )}

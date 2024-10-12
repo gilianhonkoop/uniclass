@@ -63,7 +63,8 @@ export async function getTrainingen(id: number | string) {
     .from("trainingen")
     .select()
     .eq("vak_id", id)
-    .eq("status", "active")
+    // .eq("status", "active")
+    .or("status.eq.active,status.eq.expired")
     .order("rank", { ascending: true });
 
   if (data == null) {
