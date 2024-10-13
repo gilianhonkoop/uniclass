@@ -138,7 +138,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     // const order_date = new Date(response?.created * 1000).toLocaleString();
     const order_date = new Date(response?.created * 1000).toLocaleString(
-      "nl-NL",
+      "en-US",
       { timeZone: "Europe/Amsterdam" },
     );
 
