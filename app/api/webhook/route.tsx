@@ -134,13 +134,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
   const sig = req.headers.get("Stripe-Signature");
 
-  const order_date = new Date(response?.created * 1000).toLocaleString(
-    "nl-NL",
-    {
-      timeZone: "Europe/Amsterdam",
-      timeZoneName: "short",
-    },
-  );
+  const order_date = new Date(response?.created * 1000).toLocaleString();
 
   try {
     let event = stripe.webhooks.constructEvent(
