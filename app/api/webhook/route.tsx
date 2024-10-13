@@ -129,14 +129,20 @@ async function addPayment(
 }
 
 export async function POST(req: NextRequest, res: NextResponse) {
-  const payload = await req.text();
-  const response = JSON.parse(payload);
-
-  const sig = req.headers.get("Stripe-Signature");
-
-  const order_date = new Date(response?.created * 1000).toLocaleString();
-
   try {
+    const payload = await req.text();
+    const response = JSON.parse(payload);
+
+    const sig = req.headers.get("Stripe-Signature");
+
+    // const order_date = new Date(response?.created * 1000).toLocaleString();
+    const order_date = new Date(response?.created * 1000).toLocaleString(
+      "nl-NL",
+      { timeZone: "Europe/Amsterdam" },
+    );
+
+    console.log(order_date);
+
     let event = stripe.webhooks.constructEvent(
       payload,
       sig as string,

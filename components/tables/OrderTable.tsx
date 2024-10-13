@@ -87,14 +87,17 @@ export default function OrderTable({ getOrders }: { getOrders: Function }) {
                 <TableCell className="w-fit">{order.email}</TableCell>
                 <TableCell>{order.telefoon}</TableCell>
                 <TableCell>
-                  {`${order.order_date
+                  {new Date(order.order_date).toLocaleString("nl-NL", {
+                    timeZone: "Europe/Amsterdam",
+                  })}
+                  {/* {`${order.order_date
                     .replace("T", " ")
                     .split(" ")[0]
                     .split("-")
                     .reverse()
                     .join(
                       "-",
-                    )} ${order.order_date.replace("T", " ").split(" ")[1]}`}
+                    )} ${order.order_date.replace("T", " ").split(" ")[1]}`} */}
                 </TableCell>
                 <TableCell>{order.status}</TableCell>
                 <TableCell>{order.payment_intent}</TableCell>
