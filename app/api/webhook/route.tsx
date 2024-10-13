@@ -108,6 +108,7 @@ async function addPayment(
       gebruiker_id: user_id,
       betaalmethode: payment_type,
     });
+    console.log(data, error);
   } catch (error) {
     console.log(error);
     return;
