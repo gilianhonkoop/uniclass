@@ -11,7 +11,13 @@ const Waves = dynamic(() => import("@/components/waves/waves"), {
   loading: () => <></>,
 });
 
-export default async function Page({ params }: { params: { info: string } }) {
+export default async function Page({
+  params,
+  searchParams,
+}: {
+  params: { info: string };
+  searchParams: { success: string; error: string };
+}) {
   var language = "nl";
 
   async function setLanguage(language: string) {
@@ -50,9 +56,13 @@ export default async function Page({ params }: { params: { info: string } }) {
             empty={false}
           />
         </Suspense>
-        <div className="sm:mb-[3rem]"></div>
+        <div className="sm:mb-[1rem]"></div>
         <Suspense fallback={<>Loading...</>}>
-          <Trainings vakId={vakId} pathName={params.info} />
+          <Trainings
+            vakId={vakId}
+            pathName={params.info}
+            searchParams={searchParams}
+          />
         </Suspense>
       </div>
       <Waves backgroundColor={"bg-white"} />

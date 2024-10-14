@@ -48,16 +48,14 @@ export default async function CreateSession(
       client_reference_id: `${trainingId}`,
       mode: "payment",
       success_url: `${currUrl}?success=true`,
-      cancel_url: `${currUrl}?canceled=true`,
+      cancel_url: `${currUrl}?success=false`,
       phone_number_collection: {
         enabled: true,
       },
       automatic_tax: { enabled: false },
     });
-    // return NextResponse.redirect(session.url!, { status: 303 });
     return session.url;
   } catch (err) {
-    return "/error";
-    // return NextResponse.json({ message: err }, { status: 200 });
+    return null;
   }
 }
