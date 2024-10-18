@@ -26,6 +26,7 @@ import {
 } from "@nextui-org/react";
 
 const columns = [
+  { key: "nummer", label: "NUM" },
   {
     key: "voornaam",
     label: "VOORNAAM",
@@ -195,6 +196,7 @@ export default function ShowUsers({ training }: { training: any }) {
                     <TableBody items={deelnemers}>
                       {deelnemers.map((user, index) => (
                         <TableRow key={index}>
+                          <TableCell>{index + 1}</TableCell>
                           <TableCell>{user.voornaam}</TableCell>
                           <TableCell>{user.achternaam}</TableCell>
                           <TableCell>{user.email}</TableCell>

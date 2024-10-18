@@ -83,13 +83,12 @@ export default async function edit({
         .update({ deelnemers: deelnemers })
         .eq("id", new_training_id);
 
-      console.log("3 done");
-
       // update orders table
       const { error: error3 } = await supabase
         .from("orders")
         .update({ training_id: new_training_id })
-        .eq("gebruiker_id", user_id);
+        .eq("gebruiker_id", user_id)
+        .eq("training_id", curr_training_id);
 
       // log change
 
@@ -144,7 +143,8 @@ export default async function edit({
       const { error: error3 } = await supabase
         .from("orders")
         .update({ status: "deleted" })
-        .eq("gebruiker_id", user_id);
+        .eq("gebruiker_id", user_id)
+        .eq("trainig_id", curr_training_id);
 
       // log change
 
