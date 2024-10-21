@@ -4,6 +4,19 @@ import { createClient } from "@/utils/supabase/server";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
+function SanitizePhoneNumber(number: string) {
+  number = number.replace(/\s+/g, "");
+
+  if (number.substring(0, 3) == "+31") {
+    number = number.slice(3);
+
+    if (number[0] == "6") {
+      number = "0" + number;
+    }
+  }
+  return number;
+}
+
 async function addPayment(
   first_name: string,
   last_name: string,
@@ -108,7 +121,6 @@ async function addPayment(
       gebruiker_id: user_id,
       betaalmethode: payment_type,
     });
-    console.log(data, error);
   } catch (error) {
     console.log(error);
     return;
@@ -157,6 +169,17 @@ export async function POST(req: NextRequest, res: NextResponse) {
         let payment_intent = response.data.object.payment_intent;
         let payment_type: null | string = null;
 
+        console.log(
+          training_id,
+          email,
+          phone,
+          amount,
+          first_name,
+          last_name,
+          payment_intent,
+          payment_type,
+        );
+
         try {
           if (payment_intent != null) {
             const paymentIntent =
@@ -175,6 +198,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
         } catch (error) {
           console.log("retrieve payment type error");
         }
+
+        phone = SanitizePhoneNumber(phone);
 
         await addPayment(
           first_name,

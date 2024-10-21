@@ -3,6 +3,61 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
+async function updateOrders(
+  supabase: any,
+  new_training_id: string,
+  curr_training_id: string,
+  user_id: string,
+) {
+  "use server";
+
+  const { data, error } = await supabase
+    .from("orders")
+    .select("changes")
+    .eq("gebruiker_id", user_id)
+    .eq("training_id", curr_training_id)
+    .single();
+
+  let changes: string = data.changes ? data.changes : "";
+  changes += `changed training_id from ${curr_training_id} to ${new_training_id} `;
+
+  const { error: error2 } = await supabase
+    .from("orders")
+    .update({ training_id: new_training_id, changes: changes })
+    .eq("gebruiker_id", user_id)
+    .eq("training_id", curr_training_id);
+
+  return error;
+}
+
+async function updateGebruikers(
+  supabase: any,
+  trainingen: any,
+  user_id: string,
+) {
+  "use server";
+  const { error } = await supabase
+    .from("gebruikers")
+    .update({ trainingen: trainingen })
+    .eq("id", user_id);
+
+  return error;
+}
+
+async function updateTraining(
+  supabase: any,
+  deelnemers: any,
+  training_id: string,
+) {
+  "use server";
+  const { error } = await supabase
+    .from("trainingen")
+    .update({ deelnemers: deelnemers })
+    .eq("id", training_id);
+
+  return error;
+}
+
 export default async function edit({
   searchParams,
 }: {
@@ -19,138 +74,153 @@ export default async function edit({
     const new_training_id = formData.get("new_training_id") as string;
 
     const supabase = createClient();
+    let curr_error: any;
+
+    // check if id name email and training is correct
+
+    const { data, error } = await supabase
+      .from("orders")
+      .select()
+      .eq("gebruiker_id", user_id)
+      .eq("training_id", curr_training_id)
+      .single();
+
+    if (data == null) {
+      return redirect(
+        "/dashboard/move?status=Error: user is not registered for that training (1)",
+      );
+    }
+
+    const { data: user_data, error: error1 } = await supabase
+      .from("gebruikers")
+      .select("trainingen")
+      .eq("id", user_id)
+      .ilike("voornaam", voornaam)
+      .ilike("achternaam", achternaam)
+      .single();
+
+    if (user_data == null) {
+      return redirect(
+        "/dashboard/move?status=Error: user does not have a registration for that training",
+      );
+    }
+
+    const { data: old_training_data, error: error4 } = await supabase
+      .from("trainingen")
+      .select("deelnemers")
+      .eq("id", curr_training_id)
+      .single();
+
+    if (old_training_data == null) {
+      return redirect(
+        "/dashboard/move?status=Error user can't be moved as he is not in the training",
+      );
+    }
 
     if (optie == "verplaats") {
-      // update gebruikers table
-      const { data: data1, error: error1 } = await supabase
-        .from("gebruikers")
-        .select("trainingen")
-        .eq("id", user_id)
-        .ilike("voornaam", voornaam)
-        .ilike("achternaam", achternaam)
-        .single();
-
-      if (data1 == null) {
-        return redirect("/dashboard/move?status=Error");
-      }
-
-      let trainings: any[] = data1.trainingen;
-      let new_trainings = trainings.filter((elem) => elem != curr_training_id);
-      new_trainings.push(new_training_id);
-
-      const { error: error2 } = await supabase
-        .from("gebruikers")
-        .update({ trainingen: new_trainings })
-        .eq("id", user_id);
-
-      // update old training
-
-      const { data: data4, error: error4 } = await supabase
-        .from("trainingen")
-        .select("deelnemers")
-        .eq("id", curr_training_id)
-        .single();
-
-      if (data4 == null) {
-        return redirect("/dashboard/move?status=Error");
-      }
-
-      let deelnemers: any[] = data4.deelnemers;
-      let new_deelnemers = deelnemers.filter((elem) => elem != user_id);
-
-      const { error: error5 } = await supabase
-        .from("trainingen")
-        .update({ deelnemers: new_deelnemers })
-        .eq("id", curr_training_id);
-
-      // update new training
-
-      const { data: data6, error: error6 } = await supabase
+      // get new training data
+      const { data: new_training_data, error: error6 } = await supabase
         .from("trainingen")
         .select("deelnemers")
         .eq("id", new_training_id)
         .single();
 
-      if (data6 == null) {
-        return redirect("/dashboard/move?status=Error");
+      if (new_training_data == null) {
+        return redirect(
+          "/dashboard/move?status=Error: new training does not exist",
+        );
       }
 
-      deelnemers = data6.deelnemers;
+      // update gebruikers table
+      let trainings: any[] = user_data.trainingen;
+      let new_trainings = trainings.filter((elem) => elem != curr_training_id);
+      new_trainings.push(new_training_id);
+
+      curr_error = await updateGebruikers(supabase, new_trainings, user_id);
+      if (curr_error) {
+        console.log(curr_error);
+        return redirect("/dashboard/move?Error: " + JSON.stringify(curr_error));
+      }
+
+      // update old training
+      let deelnemers: any[] = old_training_data.deelnemers;
+      let leftover_deelnemers = deelnemers.filter((elem) => elem != user_id);
+
+      curr_error = await updateTraining(
+        supabase,
+        leftover_deelnemers,
+        curr_training_id,
+      );
+      if (curr_error) {
+        return redirect("/dashboard/move?Error: " + JSON.stringify(curr_error));
+      }
+
+      // update new training
+      deelnemers = new_training_data.deelnemers;
       deelnemers.push(user_id);
 
-      const { error: error7 } = await supabase
-        .from("trainingen")
-        .update({ deelnemers: deelnemers })
-        .eq("id", new_training_id);
+      curr_error = await updateTraining(supabase, deelnemers, new_training_id);
+      if (curr_error) {
+        return redirect("/dashboard/move?Error: " + JSON.stringify(curr_error));
+      }
 
       // update orders table
-      const { error: error3 } = await supabase
-        .from("orders")
-        .update({ training_id: new_training_id })
-        .eq("gebruiker_id", user_id)
-        .eq("training_id", curr_training_id);
+      curr_error = await updateOrders(
+        supabase,
+        new_training_id,
+        curr_training_id,
+        user_id,
+      );
+      if (curr_error) {
+        return redirect("/dashboard/move?Error: " + JSON.stringify(curr_error));
+      }
 
       // log change
+      const info: string = `moved user_id ${user_id} with name "${voornaam} ${achternaam}" from training_id 
+      ${curr_training_id} to training_id ${new_training_id}`;
 
-      const info: string = `moved user_id ${user_id} with name "${voornaam} ${achternaam}" from training_id ${curr_training_id} to training_id ${new_training_id}`;
-
-      const { error: error8 } = await supabase
+      const { error: log_error } = await supabase
         .from("logs")
         .insert({ type: "move", info: info });
     } else if (optie == "verwijder") {
       // update gebruikers table
-      const { data: data1, error: error1 } = await supabase
-        .from("gebruikers")
-        .select("trainingen")
-        .eq("id", user_id)
-        .ilike("voornaam", voornaam)
-        .ilike("achternaam", achternaam)
-        .single();
-
-      if (data1 == null) {
-        return redirect("/dashboard/move?status=Error");
-      }
-
-      let trainings: any[] = data1.trainingen;
+      let trainings: any[] = user_data.trainingen;
       let new_trainings = trainings.filter((elem) => elem != curr_training_id);
 
-      const { error: error2 } = await supabase
-        .from("gebruikers")
-        .update({ trainingen: new_trainings })
-        .eq("id", user_id);
-
-      // update old training
-
-      const { data: data4, error: error4 } = await supabase
-        .from("trainingen")
-        .select("deelnemers")
-        .eq("id", curr_training_id)
-        .single();
-
-      if (data4 == null) {
-        return redirect("/dashboard/move?status=Error");
+      curr_error = await updateGebruikers(supabase, new_trainings, user_id);
+      if (curr_error) {
+        return redirect("/dashboard/move?Error: " + JSON.stringify(curr_error));
       }
 
-      let deelnemers: any[] = data4.deelnemers;
+      // update old training
+      let deelnemers: any[] = old_training_data.deelnemers;
       let new_deelnemers = deelnemers.filter((elem) => elem != user_id);
 
-      const { error: error5 } = await supabase
-        .from("trainingen")
-        .update({ deelnemers: new_deelnemers })
-        .eq("id", curr_training_id);
+      curr_error = await updateTraining(
+        supabase,
+        new_deelnemers,
+        curr_training_id,
+      );
+      if (curr_error) {
+        return redirect("/dashboard/move?Error: " + JSON.stringify(curr_error));
+      }
 
       // update orders table
-      const { error: error3 } = await supabase
+      const { error: orders_error } = await supabase
         .from("orders")
         .update({ status: "deleted" })
         .eq("gebruiker_id", user_id)
         .eq("trainig_id", curr_training_id);
 
+      if (orders_error) {
+        return redirect("/dashboard/move?Error: " + JSON.stringify(curr_error));
+      }
+
       // log change
+      const info: string = `deleted user_id ${user_id} with name "${voornaam} ${achternaam}" from 
+      training_id ${curr_training_id}`;
 
-      const info: string = `deleted user_id ${user_id} with name "${voornaam} ${achternaam}" from training_id ${curr_training_id}`;
-
-      const { error: error8 } = await supabase
+      const { error: log_error } = await supabase
         .from("logs")
         .insert({ type: "delete", info: info });
     }
@@ -228,7 +298,7 @@ export default async function edit({
         >
           Update
         </button>
-        <h4 className="mt-5">{searchParams.status}</h4>
+        <h5 className="mt-5">{searchParams.status}</h5>
       </form>
     </div>
   );

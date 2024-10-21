@@ -33,10 +33,9 @@ export default async function Orders() {
     let query = supabase.from("orders").select();
 
     if (optie == "id") {
-      console.log("abc");
-      query = query.eq(optie, zoekterm);
+      query = query.eq(optie, zoekterm).neq("status", "deleted");
     } else {
-      query = query.ilike(optie, zoekterm);
+      query = query.ilike(optie, zoekterm).neq("status", "deleted");
     }
 
     const { data, error } = await query;
