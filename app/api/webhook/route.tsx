@@ -48,6 +48,7 @@ async function addPayment(
     }
 
     if (data[0].prijs != amount) {
+      console.log("did not process user due to price mismatch");
       return;
     }
 
@@ -163,22 +164,19 @@ export async function POST(req: NextRequest, res: NextResponse) {
         let training_id = parseInt(response.data.object.client_reference_id);
         let email = response.data.object.customer_details.email as string;
         let phone = response.data.object.customer_details.phone as string;
-        let amount = parseFloat(response.data.object.amount_total) / 100;
+        let amount: number;
         let first_name = response.data.object.custom_fields[0]?.text.value;
         let last_name = response.data.object.custom_fields[1]?.text.value;
         let payment_intent = response.data.object.payment_intent;
         let payment_type: null | string = null;
 
-        console.log(
-          training_id,
-          email,
-          phone,
-          amount,
-          first_name,
-          last_name,
-          payment_intent,
-          payment_type,
-        );
+        if (response.data.object.currency == "eur") {
+          amount = parseFloat(response.data.object.amount_total) / 100;
+        } else {
+          amount =
+            parseFloat(response.data.object.currency_conversion.amount_total) /
+            100;
+        }
 
         try {
           if (payment_intent != null) {
@@ -200,6 +198,17 @@ export async function POST(req: NextRequest, res: NextResponse) {
         }
 
         phone = SanitizePhoneNumber(phone);
+
+        console.log(
+          training_id,
+          email,
+          phone,
+          amount,
+          first_name,
+          last_name,
+          payment_intent,
+          payment_type,
+        );
 
         await addPayment(
           first_name,
